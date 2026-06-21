@@ -1,0 +1,18 @@
+{
+  "validCategoryOrderTests": [
+    {
+      "category": "Smartphones",
+      "productName": "iPhone 6",
+      "expectedStatus": "Confirmed"
+    }
+  ],
+  "invalidMixedCategoryOrderTests": [
+    {
+      "firstCategory": "Groceries",
+      "firstProductName": "Beef Steak",
+      "secondCategory": "Furniture",
+      "secondProductName": "Annibale Colombo Bed",
+      "expectedErrorMessage": "Products from \"furniture\" and \"groceries\" cannot be ordered together."
+    }
+  ]
+}
