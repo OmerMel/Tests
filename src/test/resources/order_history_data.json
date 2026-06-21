@@ -1,0 +1,16 @@
+{
+  "orderHistoryTests": [
+    {
+      "category": "Groceries",
+      "productName": "Beef Steak",
+      "expectedStatus": "Confirmed",
+      "shouldAppearInHistory": true
+    }
+  ],
+  "emptyOrderHistoryTests": [
+    {
+      "expectedCounterText": "0 orders this session",
+      "expectedMessage": "No orders yet"
+    }
+  ]
+}

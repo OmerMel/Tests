@@ -56,6 +56,18 @@ public class NewOrderPage {
     @FindBy(css = "button[id^='select-product-']")
     private List<WebElement> addToOrderButtons;
 
+    @FindBy(tagName = "body")
+    private WebElement body;
+
+    @FindBy(id = "validation-error-0")
+    private WebElement validationErrorMessage;
+
+    @FindBy(id = "order-total")
+    private WebElement orderTotal;
+
+    @FindBy(css = "input[id^='quantity-input-']")
+    private List<WebElement> quantityInputs;
+
     public NewOrderPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -150,7 +162,8 @@ public class NewOrderPage {
                         "slider.dispatchEvent(new Event('input', { bubbles: true }));" +
                         "slider.dispatchEvent(new Event('change', { bubbles: true }));";
 
-        js.executeScript(reactWorkaroundScript, priceSlider, targetPrice);
+//        js.executeScript(reactWorkaroundScript, priceSlider, targetPrice); // Comment by Tomer!!!!
+        js.executeScript(reactWorkaroundScript, priceSlider, Integer.valueOf(targetPrice));
     }
 
 //    public void submitOrder() {
@@ -161,4 +174,110 @@ public class NewOrderPage {
 //        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
 //        confirmOrderBtn.click();
 //    }
+
+//    public void submitOrder() {
+//        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
+//        submitOrderBtn.click();
+//
+//        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
+//        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
+//        confirmOrderBtn.click();
+//    }
+
+    // Function to delay action for display only
+    private void pauseForDemo() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public void submitOrder() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
+
+        pauseForDemo();
+
+        js.executeScript("arguments[0].click();", submitOrderBtn);
+
+        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
+
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", confirmOrderBtn);
+
+        pauseForDemo();
+
+        js.executeScript("arguments[0].click();", confirmOrderBtn);
+    }
+
+    // Function to Create new order
+    public void createOrder(String categoryName, String productName) {
+        pauseForDemo();
+
+        selectCategoryByVisibleText(categoryName);
+        pauseForDemo();
+
+        addProductByName(productName);
+        pauseForDemo();
+
+        submitOrder();
+        pauseForDemo();
+    }
+
+    public boolean isValidationErrorDisplayed(String expectedErrorMessage) {
+        wait.until(ExpectedConditions.visibilityOf(validationErrorMessage));
+
+        return validationErrorMessage.getText()
+                .toLowerCase()
+                .contains(expectedErrorMessage.toLowerCase());
+    }
+
+    // Use when error message appear
+    public void clickSubmitOrderButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
+
+        pauseForDemo();
+
+        js.executeScript("arguments[0].click();", submitOrderBtn);
+    }
+
+    // return the price on display (what we see on screen)
+    public String getOrderTotalText() {
+        wait.until(ExpectedConditions.visibilityOf(orderTotal));
+        return orderTotal.getText();
+    }
+
+    // return the real value that we compare
+    public double getOrderTotalValue() {
+        String totalText = getOrderTotalText();
+
+        return Double.parseDouble(
+                totalText.replace("$", "").replace(",", "").trim()
+        );
+    }
+
+    public void setFirstOrderItemQuantity(int quantity) {
+        if (!quantityInputs.isEmpty()) {
+            WebElement quantityInput = quantityInputs.get(0);
+
+            wait.until(ExpectedConditions.visibilityOf(quantityInput));
+
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
+
+            quantityInput.clear();
+            quantityInput.sendKeys(String.valueOf(quantity));
+
+            return;
+        }
+
+        System.out.println("No quantity input found in order summary.");
+    }
+
 }
