@@ -12,10 +12,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
 import java.io.FileReader;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
 
@@ -27,6 +32,7 @@ public class OrderHistoryTest {
     private NewOrderPage newOrderPage;
     private OrderHistoryPage orderHistoryPage;
     private JSONObject allOrderHistoryData;
+    private String downloadPath;
 
 
     private void pauseForDemo() {
@@ -40,6 +46,25 @@ public class OrderHistoryTest {
     @Before
     public void setUp() {
         logger.info("Initializing WebDriver for Order History tests.");
+
+        downloadPath = Paths.get(System.getProperty("user.dir"), "target", "downloads").toAbsolutePath().toString();
+        File downloadDir = new File(downloadPath);
+        if (!downloadDir.exists()) {
+            downloadDir.mkdirs(); // יוצר את התיקייה אם היא לא קיימת
+        }
+
+        logger.info("Configured download path: " + downloadPath);
+
+        // הגדרת ChromeOptions כדי שיוריד לתיקייה שלנו בכוח
+        HashMap<String, Object> chromePrefs = new HashMap<>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadPath);
+        chromePrefs.put("download.prompt_for_download", false); // מונע חלון קופץ של "שמור בשם"
+        chromePrefs.put("download.directory_upgrade", true); // מכריח שימוש בתיקייה שהגדרנו
+        chromePrefs.put("safebrowsing.enabled", true); // מונע מ-Chrome לחסום את ה-CSV בטענה שהוא מסוכן
+
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", chromePrefs);
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -179,6 +204,129 @@ public class OrderHistoryTest {
         logger.info("Validating Export CSV button is displayed.");
         assertTrue("Export CSV button is not displayed.",
                 orderHistoryPage.isExportCsvButtonDisplayed());
+    }
+
+    @Test
+    public void testExportOrderHistoryToCsvDataDriven() throws Exception {
+        logger.info("Starting Data-Driven test: Export Order History to CSV with multiple items.");
+
+        // נניח שטענת את הקובץ לתוך allHistoryData ב-setUp()
+        JSONArray exportTests = (JSONArray) allOrderHistoryData.get("exportCsvTests");
+
+        for (int i = 0; i < exportTests.size(); i++) {
+            JSONObject testCase = (JSONObject) exportTests.get(i);
+            JSONArray itemsToOrder = (JSONArray) testCase.get("items");
+            String expectedStatus = (String) testCase.get("expectedStatus");
+
+            executeCsvExportVerification(itemsToOrder, expectedStatus);
+        }
+    }
+
+    private void executeCsvExportVerification(JSONArray items, String expectedStatus) throws Exception {
+        try {
+            // 1. התחלה נקייה ויצירת ההזמנה עם כל המוצרים
+            driver.get("https://nano-flow-order-direct.base44.app/order");
+            NewOrderPage orderPage = new NewOrderPage(driver);
+            Thread.sleep(1500);
+
+            logger.info("Adding {} items to the order.", items.size());
+            for (int j = 0; j < items.size(); j++) {
+                JSONObject item = (JSONObject) items.get(j);
+                String category = (String) item.get("category");
+                String productName = (String) item.get("productName");
+                int quantity = ((Long) item.get("quantity")).intValue();
+
+                logger.debug("Adding product: {}", productName);
+                orderPage.selectCategoryByVisibleText(category);
+                Thread.sleep(1000); // המתנה לטעינת מוצרים
+
+                orderPage.addProductByName(productName);
+
+                // j מייצג את האינדקס של המוצר בתוך ה-Order Summary!
+                orderPage.setOrderItemQuantity(j, quantity);
+            }
+
+            logger.info("Submitting order with multiple items.");
+            orderPage.submitOrder();
+            Thread.sleep(2000); // המתנה שההזמנה תירשם
+
+            // 2. מעבר להיסטוריית הזמנות
+            orderPage.header().clickOrderHistory();
+            OrderHistoryPage historyPage = new OrderHistoryPage(driver);
+            Thread.sleep(1500);
+
+            // 3. ניקוי תיקיית ההורדות מקבצי CSV קודמים
+            File dir = new File(downloadPath);
+            File[] files = dir.listFiles((d, name) -> name.endsWith(".csv"));
+            if (files != null) {
+                for (File file : files) {
+                    file.delete();
+                }
+            }
+
+            // 4. לחיצה על ייצוא
+            logger.info("Clicking export to CSV button.");
+            historyPage.clickExportToCsv();
+
+            // 5. המתנה להורדת הקובץ (עד 15 שניות)
+            File downloadedFile = null;
+            boolean fileDownloaded = false;
+            String targetFileName = "order_history.csv";
+
+            // נתיב לתיקיית ההורדות הסטנדרטית של מערכת ההפעלה כגיבוי
+            String userDownloads = System.getProperty("user.home") + File.separator + "Downloads";
+
+            for (int i = 0; i < 15; i++) {
+                dir = new File(downloadPath); // התיקייה בפרויקט
+                File userDir = new File(userDownloads); // התיקייה במחשב
+
+                File targetInProject = new File(dir, targetFileName);
+                File targetInUser = new File(userDir, targetFileName);
+
+                if (targetInProject.exists()) {
+                    downloadedFile = targetInProject;
+                    fileDownloaded = true; break;
+                } else if (targetInUser.exists()) {
+                    downloadedFile = targetInUser;
+                    fileDownloaded = true; break;
+                }
+
+                Thread.sleep(1000); // המתנה של שנייה בין בדיקה לבדיקה
+            }
+
+            assertTrue("Validation failed: CSV file was not downloaded within the timeout.", fileDownloaded);
+            logger.info("Success: CSV file downloaded successfully at: " + downloadedFile.getAbsolutePath());
+
+            // 6. קריאת תוכן הקובץ ואימות הנתונים - מוודאים ש*כל* המוצרים נמצאים בפנים
+            String csvContent = new String(Files.readAllBytes(downloadedFile.toPath()));
+            logger.debug("CSV Content:\n" + csvContent);
+
+            for (int j = 0; j < items.size(); j++) {
+                JSONObject item = (JSONObject) items.get(j);
+                String productName = (String) item.get("productName");
+                int quantity = ((Long) item.get("quantity")).intValue();
+
+                assertTrue("CSV does not contain the product name: " + productName,
+                        csvContent.contains(productName));
+
+                // מוודאים שהכמות מופיעה איפשהו בקובץ. בבדיקה מחמירה יותר אפשר לחפש באותה שורה.
+                assertTrue("CSV does not contain the quantity " + quantity + " for product " + productName,
+                        csvContent.contains(String.valueOf(quantity)));
+            }
+
+            // אימות הסטטוס
+            assertTrue("CSV does not contain the expected status: " + expectedStatus,
+                    csvContent.contains(expectedStatus));
+
+            logger.info("Success: CSV file accurately contains all {} items ordered.", items.size());
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed during CSV export test: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("An unexpected error occurred during CSV export test: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @After

@@ -4,87 +4,105 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReturnsPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
+
+    @FindBy(id = "return-product-select")
+    private WebElement productSelectDropdown;
 
     @FindBy(id = "return-quantity-input")
     private WebElement quantityInput;
 
-    @FindBy(id = "submit-return-button")
-    private WebElement submitButton;
+    @FindBy(id = "btn-submit-return")
+    private WebElement submitReturnButton;
 
-    @FindBy(id = "return-product-select")
-    private WebElement productDropdown;
+    @FindBy(css = ".destructive .font-semibold")
+    private WebElement toastErrorMessage;
 
     public ReturnsPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
     /**
-     * בדיקה האם תיבת בחירת המוצרים קיימת על המסך
-     */
-    public boolean isProductSelectAvailable() {
-        try {
-            return productDropdown.isDisplayed();
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    /**
-     * בוחר מוצר להחזרה לפי השם שלו בתיבת הבחירה
+     * בוחר מוצר מהדרופדאון על בסיס חיפוש חלקי של השם (כי יש תוספת של כמות בטקסט)
      */
     public void selectProductToReturn(String productName) {
-        Select dropdown = new Select(productDropdown);
-        dropdown.selectByVisibleText(productName);
-    }
+        wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
+        Select select = new Select(productSelectDropdown);
 
-    /**
-     * מחזירה את כמות המוצרים הזמינים בתיבת הבחירה
-     */
-    public int getProductCount() {
-        Select dropdown = new Select(productDropdown);
-        // getOptions מחזירה רשימה (List) של כל האופציות בתיבה
-        return dropdown.getOptions().size();
-    }
-
-    /**
-     * מחזירה רשימה של שמות כל המוצרים הקיימים בתיבת הבחירה
-     */
-    public List<String> getAllProductNames() {
-        Select dropdown = new Select(productDropdown);
-        List<String> productNames = new ArrayList<>();
-
-        // עוברים בלולאה על כל האופציות ושולפים את הטקסט שלהן
-        for (WebElement option : dropdown.getOptions()) {
-            // מסננים את האופציה הראשונה אם היא טקסט ברירת מחדל כמו "-- Select a product --"
-            if (!option.getText().contains("--")) {
-                productNames.add(option.getText());
+        for (WebElement option : select.getOptions()) {
+            if (option.getText().contains(productName)) {
+                select.selectByVisibleText(option.getText());
+                return;
             }
         }
-        return productNames;
+        throw new RuntimeException("Product '" + productName + "' was not found in the returns dropdown.");
+    }
+
+    public void setReturnQuantity(int quantity) {
+        wait.until(ExpectedConditions.visibilityOf(quantityInput));
+        quantityInput.clear();
+        quantityInput.sendKeys(String.valueOf(quantity));
+    }
+
+    public void submitReturn() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitReturnButton));
+        submitReturnButton.click();
     }
 
     /**
-     * בדיקה האם יש הודעת שגיאה (כמו "Exceeds ordered quantity")
-     * שימושית מאוד לבדיקות שליליות
+     * בודק אם מוצר מופיע כרגע ברשימת האפשרויות להחזרה
      */
-    public boolean isToastMessageDisplayed(String messagePart) {
-        // כאן ניתן להוסיף לוגיקה שמחפשת הודעות שגיאה שקופצות ב-DOM
-        return driver.getPageSource().contains(messagePart);
+    public boolean isProductAvailableForReturn(String productName) {
+        wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
+        Select select = new Select(productSelectDropdown);
+
+        for (WebElement option : select.getOptions()) {
+            String optionText = option.getText();
+
+            if (optionText.contains(productName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void performReturn(String productName, int quantity) {
-        selectProductToReturn(productName);
-        quantityInput.clear();
-        quantityInput.sendKeys(String.valueOf(quantity));
-        submitButton.click();
+    /**
+     * קוראת את הטקסט מהדרופדאון (למשל "Apple Airpods (ordered: 2)")
+     * ומחלצת רק את המספר שבתוך הסוגריים.
+     */
+    public int getRemainingQuantityFromDropdown(String productName) {
+        wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
+        Select select = new Select(productSelectDropdown);
+
+        for (WebElement option : select.getOptions()) {
+            String text = option.getText();
+            if (text.contains(productName)) {
+                // חותכים את הטקסט כדי למצוא את המספר שאחרי המילה "ordered: "
+                int startIndex = text.indexOf("ordered: ") + 9;
+                int endIndex = text.indexOf(")", startIndex);
+                String numberStr = text.substring(startIndex, endIndex).trim();
+
+                return Integer.parseInt(numberStr);
+            }
+        }
+        throw new RuntimeException("Product '" + productName + "' was not found in the dropdown to check quantity.");
+    }
+
+    public String getErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOf(toastErrorMessage));
+        return toastErrorMessage.getText();
     }
 }

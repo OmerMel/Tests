@@ -1,18 +1,55 @@
 {
-  "belowLimitOrderTests": [
+  "priceLimitOrderTests": [
     {
-      "category": "Mobile Accessories",
-      "productName": "Apple MagSafe Battery Pack",
-      "maxAllowedTotal": 10000,
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple MagSafe Battery Pack",
+          "quantity": 1
+        },
+        {
+          "category": "Laptops",
+          "productName": "iPad Mini 2021 Starlight",
+          "quantity": 2
+        }
+      ],
+      "maxPriceAllowed": 10000,
       "expectedStatus": "Confirmed"
     }
   ],
   "aboveLimitOrderTests": [
     {
-      "category": "Laptops",
-      "productName": "iPad Mini 2021 Starlight",
-      "quantity": 21,
-      "limit": 10000,
-      "expectedErrorMessage": "exceeds the maximum allowed"    }
+      "items": [
+        {
+          "category": "Laptops",
+          "productName": "iPad Mini 2021 Starlight",
+          "quantity": 20
+        },
+        {
+          "category": "Groceries",
+          "productName": "Beef Steak",
+          "quantity": 10
+        }
+      ],
+      "expectedErrorMessage": "exceeds available stock",
+      "maxPriceAllowed": 10000
+    }
+  ],
+  "itemRemovalTests": [
+    {
+      "itemsToAdd": [
+        {
+          "category": "Groceries",
+          "productName": "Beef Steak",
+          "quantity": 1
+        },
+        {
+          "category": "Groceries",
+          "productName": "Dog Food",
+          "quantity": 2
+        }
+      ],
+      "itemToRemove": "Beef Steak"
+    }
   ]
 }

@@ -12,5 +12,22 @@
       "expectedCounterText": "0 orders this session",
       "expectedMessage": "No orders yet"
     }
+  ],
+  "exportCsvTests": [
+    {
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple Airpods",
+          "quantity": 2
+        },
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple iPhone Charger",
+          "quantity": 1
+        }
+      ],
+      "expectedStatus": "Confirmed"
+    }
   ]
 }

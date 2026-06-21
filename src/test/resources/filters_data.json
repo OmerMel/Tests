@@ -28,5 +28,34 @@
       "category": "Laptops",
       "shouldExpectInStock": true
     }
+  ],
+  "addToCartTests": [
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple Airpods"
+    }
+  ],
+  "categorySelectionTests": [
+    {
+      "category": "Laptops",
+      "urlSlug": "laptops"
+    },
+    {
+      "category": "Mobile Accessories",
+      "urlSlug": "mobile-accessories"
+    }
+  ],
+  "categorySwitchTests": [
+    {
+      "initialCategory": "Furniture",
+      "newCategory": "Smartphones",
+      "newUrlSlug": "smartphones"
+    }
+  ],
+  "stockFilterTests": [
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple Airpower Wireless Charger"
+    }
   ]
 }

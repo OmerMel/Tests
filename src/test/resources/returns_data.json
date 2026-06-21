@@ -1,14 +1,27 @@
 {
-  "returnTests": [
+  "validReturnTests": [
     {
-      "productName": "Apple",
-      "quantity": 1,
-      "shouldSucceed": true
-    },
+      "category": "Mobile Accessories",
+      "productName": "Apple Airpods",
+      "orderQuantity": 2,
+      "returnQuantity": 1
+    }
+  ],
+  "invalidReturnTests": [
     {
-      "productName": "Apple",
-      "quantity": 999,
-      "shouldSucceed": false
+      "category": "Mobile Accessories",
+      "productName": "Apple iPhone Charger",
+      "orderQuantity": 1,
+      "returnQuantity": 2,
+      "expectedErrorMessage": "Exceeds ordered quantity"
+    }
+  ],
+  "partialReturnTests": [
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple Airpods",
+      "orderQuantity": 2,
+      "returnQuantity": 1
     }
   ]
 }

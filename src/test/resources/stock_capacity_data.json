@@ -1,0 +1,58 @@
+{
+  "withinStockTests": [
+    {
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple Airpods",
+          "quantity": 2
+        }
+      ],
+      "expectedStatus": "Confirmed"
+    },
+    {
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple HomePod Mini Cosmic Grey",
+          "quantity": 1
+        },
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple iPhone Charger",
+          "quantity": 3
+        }
+      ],
+      "expectedStatus": "Confirmed"
+    }
+  ],
+  "exceedsStockTests": [
+    {
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Apple Airpower Wireless Charger",
+          "quantity": 2
+        }
+      ],
+      "expectedErrorMessage": "exceeds available stock"
+    },
+    {
+      "items": [
+        {
+          "category": "Mobile Accessories",
+          "productName": "Amazon Echo Plus",
+          "quantity": 62
+        }
+      ],
+      "expectedErrorMessage": "exceeds available stock"
+    }
+  ],
+  "outOfStockTests": [
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple MagSafe Battery Pack",
+      "stockQuantity": 0
+    }
+  ]
+}

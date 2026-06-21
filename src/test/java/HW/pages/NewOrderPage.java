@@ -48,6 +48,9 @@ public class NewOrderPage {
     @FindBy(id = "product-grid")
     private WebElement productGridContainer;
 
+    @FindBy(css = "#product-grid img")
+    private List<WebElement> productImages;
+
     // All products name
     @FindBy(css = "#product-grid h3")
     private List<WebElement> productsName;
@@ -59,14 +62,17 @@ public class NewOrderPage {
     @FindBy(tagName = "body")
     private WebElement body;
 
-    @FindBy(id = "validation-error-0")
-    private WebElement validationErrorMessage;
+    @FindBy(css = "[id^='validation-error-']")
+    private List<WebElement> validationErrorMessages;
 
     @FindBy(id = "order-total")
     private WebElement orderTotal;
 
     @FindBy(css = "input[id^='quantity-input-']")
     private List<WebElement> quantityInputs;
+
+    @FindBy(css = "[id^='stock-']")
+    private List<WebElement> stockElements;
 
     public NewOrderPage(WebDriver driver) {
         this.driver = driver;
@@ -111,6 +117,20 @@ public class NewOrderPage {
         return productsName.size();
     }
 
+    /**
+     * מחזירה רשימה של כל כתובות ה-URL (src) של התמונות המוצגות כרגע בגריד
+     */
+    public List<String> getDisplayedProductImageUrls() {
+        // ממתינים שהתמונות יופיעו כדי לא לקרוא מערך ריק
+        wait.until(ExpectedConditions.visibilityOfAllElements(productImages));
+
+        List<String> urls = new ArrayList<>();
+        for (WebElement img : productImages) {
+            urls.add(img.getAttribute("src"));
+        }
+        return urls;
+    }
+
     public List<String> getDisplayedProductNames() {
         List<String> names = new ArrayList<>();
         // מעבר על רשימת ה-WebElements של השמות וחילול הטקסט שלהם
@@ -118,6 +138,18 @@ public class NewOrderPage {
             names.add(element.getText());
         }
         return names;
+    }
+
+    public boolean isProductAddButtonDisabled(String name) {
+        wait.until(ExpectedConditions.visibilityOf(productGridContainer));
+        for (int i = 0; i < productsName.size(); i++) {
+            if (productsName.get(i).getText().equalsIgnoreCase(name)) {
+                WebElement button = addToOrderButtons.get(i);
+                // סלניום בודק אוטומטית אם קיים המאפיין disabled ב-HTML
+                return !button.isEnabled() || button.getAttribute("disabled") != null;
+            }
+        }
+        throw new RuntimeException("Product not found in grid: " + name);
     }
 
     // לחיצה על "הוסף להזמנה" של המוצר הראשון ברשימה
@@ -166,24 +198,6 @@ public class NewOrderPage {
         js.executeScript(reactWorkaroundScript, priceSlider, Integer.valueOf(targetPrice));
     }
 
-//    public void submitOrder() {
-//        addFirstProductToOrder();
-//        submitOrderBtn.click();
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
-//        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
-//        confirmOrderBtn.click();
-//    }
-
-//    public void submitOrder() {
-//        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
-//        submitOrderBtn.click();
-//
-//        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
-//        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
-//        confirmOrderBtn.click();
-//    }
-
     // Function to delay action for display only
     private void pauseForDemo() {
         try {
@@ -228,11 +242,38 @@ public class NewOrderPage {
     }
 
     public boolean isValidationErrorDisplayed(String expectedErrorMessage) {
-        wait.until(ExpectedConditions.visibilityOf(validationErrorMessage));
+        wait.until(ExpectedConditions.visibilityOfAllElements(validationErrorMessages));
 
-        return validationErrorMessage.getText()
-                .toLowerCase()
-                .contains(expectedErrorMessage.toLowerCase());
+        for (WebElement errorMessage : validationErrorMessages) {
+            String actualMessage = errorMessage.getText();
+
+            if (actualMessage.toLowerCase().contains(expectedErrorMessage.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * מחזירה את המלאי הנוכחי של מוצר מסוים לפי השם שלו
+     */
+    public int getProductStock(String productName) {
+        wait.until(ExpectedConditions.visibilityOf(productGridContainer));
+
+        for (int i = 0; i < productsName.size(); i++) {
+            if (productsName.get(i).getText().equalsIgnoreCase(productName)) {
+
+                String stockText = stockElements.get(i).getText();
+
+                if (stockText.equalsIgnoreCase("Out of stock")) {
+                    return 0;
+                }
+
+                String onlyNumbers = stockText.replaceAll("[^0-9]", "");
+                return Integer.parseInt(onlyNumbers);
+            }
+        }
+        throw new RuntimeException("Product not found to check stock: " + productName);
     }
 
     // Use when error message appear
@@ -264,7 +305,7 @@ public class NewOrderPage {
 
     public void setFirstOrderItemQuantity(int quantity) {
         if (!quantityInputs.isEmpty()) {
-            WebElement quantityInput = quantityInputs.get(0);
+            WebElement quantityInput = quantityInputs.getFirst();
 
             wait.until(ExpectedConditions.visibilityOf(quantityInput));
 
@@ -280,4 +321,37 @@ public class NewOrderPage {
         System.out.println("No quantity input found in order summary.");
     }
 
+    public void setOrderItemQuantity(int index, int quantity) {
+        if (quantityInputs.size() > index) {
+            WebElement quantityInput = quantityInputs.get(index);
+
+            wait.until(ExpectedConditions.visibilityOf(quantityInput));
+
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
+
+            quantityInput.clear();
+            quantityInput.sendKeys(String.valueOf(quantity));
+        } else {
+            System.out.println("Quantity input at index " + index + " was not found.");
+        }
+    }
+
+    /**
+     * לוחצת על כפתור המחיקה (פח אשפה) של מוצר ספציפי ב-Order Summary
+     */
+    public void removeProductFromSummary(String productName) {
+        String xpath = String.format("//p[text()='%s']/ancestor::div[starts-with(@id, 'order-item-')]//button[starts-with(@id, 'remove-item-')]", productName);
+        WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        removeButton.click();
+    }
+
+    /**
+     * בודקת האם מוצר מסוים מופיע כרגע בטופס ה-Order Summary
+     */
+    public boolean isProductInSummary(String productName) {
+        String xpath = String.format("//div[starts-with(@id, 'order-item-')]//p[text()='%s']", productName);
+        // משתמשים ב-findElements כדי שלא יזרוק שגיאה אם האלמנט לא קיים (מה שאנחנו מצפים שיקרה אחרי מחיקה)
+        return !driver.findElements(By.xpath(xpath)).isEmpty();
+    }
 }

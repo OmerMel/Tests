@@ -97,6 +97,11 @@ public class OrderHistoryPage {
         return exportCsvButton.isDisplayed();
     }
 
+    public void clickExportToCsv() {
+        wait.until(ExpectedConditions.elementToBeClickable(exportCsvButton));
+        exportCsvButton.click();
+    }
+
     public boolean isNoOrdersMessageDisplayed() {
         wait.until(ExpectedConditions.visibilityOf(noOrdersMessage));
         return noOrdersMessage.isDisplayed();
