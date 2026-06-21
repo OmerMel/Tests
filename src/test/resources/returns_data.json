@@ -1,0 +1,14 @@
+{
+  "returnTests": [
+    {
+      "productName": "Apple",
+      "quantity": 1,
+      "shouldSucceed": true
+    },
+    {
+      "productName": "Apple",
+      "quantity": 999,
+      "shouldSucceed": false
+    }
+  ]
+}

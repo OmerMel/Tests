@@ -1,0 +1,32 @@
+{
+  "searchTests": [
+    {
+      "category": "Smartphones",
+      "searchPhrase": "iphone",
+      "shouldExpectResults": true
+    },
+    {
+      "category": "Groceries",
+      "searchPhrase": "Tomer",
+      "shouldExpectResults": false
+    }
+  ],
+  "sliderTests": [
+    {
+      "category": "Groceries",
+      "maxPrice": 1,
+      "expectedCount": 0
+    },
+    {
+      "category": "Laptops",
+      "maxPrice": 360,
+      "expectedCount": 1
+    }
+  ],
+  "stockTests": [
+    {
+      "category": "Laptops",
+      "shouldExpectInStock": true
+    }
+  ]
+}

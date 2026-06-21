@@ -1,0 +1,9 @@
+{
+  "navItems": [
+    { "button": "newOrder", "expectedPath": "/order" },
+    { "button": "home", "expectedPath": "/" },
+    { "button": "orderHistory", "expectedPath": "/history" },
+    { "button": "returns", "expectedPath": "/returns" },
+    { "button": "returns", "expectedPath": "/returns" }
+  ]
+}

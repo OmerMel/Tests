@@ -1,0 +1,143 @@
+[INFO ] 2026-06-15 16:23:26.717 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-15 16:23:29.133 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-15 16:23:29.133 [main] NewOrderFiltersTests - Starting data-driven search filter tests.
+[DEBUG] 2026-06-15 16:23:29.133 [main] NewOrderFiltersTests - Verifying search filter for category: 'Smartphones' | Phrase: 'iphone'
+[DEBUG] 2026-06-15 16:23:30.942 [main] NewOrderFiltersTests - Success: Found 4 matching products for 'iphone'.
+[DEBUG] 2026-06-15 16:23:30.942 [main] NewOrderFiltersTests - Verifying search filter for category: 'Groceries' | Phrase: 'Tomer'
+[DEBUG] 2026-06-15 16:23:42.340 [main] NewOrderFiltersTests - Success: No products found for 'Tomer' as expected.
+[INFO ] 2026-06-15 16:23:42.340 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-15 16:23:42.576 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-15 16:23:44.626 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-15 16:23:44.627 [main] NewOrderFiltersTests - Starting data-driven price filter tests.
+[DEBUG] 2026-06-15 16:23:44.627 [main] NewOrderFiltersTests - Verifying price filter for category: 'Groceries' | Max Price: $1
+[INFO ] 2026-06-15 16:23:58.335 [main] NewOrderFiltersTests - Success: Found 0 products as expected.
+[DEBUG] 2026-06-15 16:23:58.335 [main] NewOrderFiltersTests - Verifying price filter for category: 'Laptops' | Max Price: $360
+[INFO ] 2026-06-15 16:24:03.861 [main] NewOrderFiltersTests - Success: Found 1 products as expected.
+[INFO ] 2026-06-15 16:24:03.877 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-15 16:34:14.427 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-15 16:34:17.071 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-15 16:34:17.071 [main] NewOrderFiltersTests - Starting data-driven search filter tests.
+[DEBUG] 2026-06-15 16:34:17.071 [main] NewOrderFiltersTests - Verifying search filter for category: 'Smartphones' | Phrase: 'iphone'
+[DEBUG] 2026-06-15 16:34:19.070 [main] NewOrderFiltersTests - Success: Found 4 matching products for 'iphone'.
+[DEBUG] 2026-06-15 16:34:19.070 [main] NewOrderFiltersTests - Verifying search filter for category: 'Groceries' | Phrase: 'Tomer'
+[DEBUG] 2026-06-15 16:34:30.473 [main] NewOrderFiltersTests - Success: No products found for 'Tomer' as expected.
+[INFO ] 2026-06-15 16:34:30.473 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-15 16:34:30.727 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-15 16:34:32.697 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-15 16:34:32.698 [main] NewOrderFiltersTests - Starting data-driven price filter tests.
+[DEBUG] 2026-06-15 16:34:32.698 [main] NewOrderFiltersTests - Verifying price filter for category: 'Groceries' | Max Price: $1
+[DEBUG] 2026-06-15 16:34:45.243 [main] NewOrderFiltersTests - Success: Found 0 products as expected.
+[DEBUG] 2026-06-15 16:34:45.243 [main] NewOrderFiltersTests - Verifying price filter for category: 'Laptops' | Max Price: $360
+[DEBUG] 2026-06-15 16:34:47.557 [main] NewOrderFiltersTests - Success: Found 1 products as expected.
+[INFO ] 2026-06-15 16:34:47.557 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-15 16:34:55.684 [main] HeaderNavigationTest - Initializing WebDriver and loading navigation test data.
+[ERROR] 2026-06-15 16:34:56.700 [main] HeaderNavigationTest - Failed to load navigation_data.json
+java.lang.ClassCastException: class org.json.simple.JSONArray cannot be cast to class org.json.simple.JSONObject (org.json.simple.JSONArray and org.json.simple.JSONObject are in unnamed module of loader 'app')
+	at HW.testCases.HeaderNavigationTest.setUp(HeaderNavigationTest.java:40)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[INFO ] 2026-06-15 16:34:59.018 [main] HeaderNavigationTest - Closing WebDriver.
+[INFO ] 2026-06-15 16:38:25.192 [main] HeaderNavigationTest - Initializing WebDriver and loading navigation test data.
+[INFO ] 2026-06-15 16:38:27.376 [main] HeaderNavigationTest - Testing navigation to: newOrder
+[DEBUG] 2026-06-15 16:38:28.737 [main] HeaderNavigationTest - Current URL after clicking newOrder: https://nano-flow-order-direct.base44.app/order
+[INFO ] 2026-06-15 16:38:29.169 [main] HeaderNavigationTest - Testing navigation to: home
+[DEBUG] 2026-06-15 16:38:30.580 [main] HeaderNavigationTest - Current URL after clicking home: https://nano-flow-order-direct.base44.app/
+[INFO ] 2026-06-15 16:38:30.992 [main] HeaderNavigationTest - Testing navigation to: orderHistory
+[DEBUG] 2026-06-15 16:38:32.437 [main] HeaderNavigationTest - Current URL after clicking orderHistory: https://nano-flow-order-direct.base44.app/history
+[INFO ] 2026-06-15 16:38:32.803 [main] HeaderNavigationTest - Testing navigation to: returns
+[DEBUG] 2026-06-15 16:38:34.149 [main] HeaderNavigationTest - Current URL after clicking returns: https://nano-flow-order-direct.base44.app/returns
+[INFO ] 2026-06-15 16:38:34.494 [main] HeaderNavigationTest - Closing WebDriver.
+[INFO ] 2026-06-15 16:42:57.276 [main] HeaderNavigationTest - Initializing WebDriver and loading navigation test data.
+[INFO ] 2026-06-15 16:43:00.218 [main] HeaderNavigationTest - Testing navigation to: newOrder
+[DEBUG] 2026-06-15 16:43:01.458 [main] HeaderNavigationTest - Current URL after clicking newOrder: https://nano-flow-order-direct.base44.app/order
+[INFO ] 2026-06-15 16:43:01.458 [main] HeaderNavigationTest - Testing navigation to: home
+[DEBUG] 2026-06-15 16:43:02.517 [main] HeaderNavigationTest - Current URL after clicking home: https://nano-flow-order-direct.base44.app/
+[INFO ] 2026-06-15 16:43:02.517 [main] HeaderNavigationTest - Testing navigation to: orderHistory
+[DEBUG] 2026-06-15 16:43:03.583 [main] HeaderNavigationTest - Current URL after clicking orderHistory: https://nano-flow-order-direct.base44.app/history
+[INFO ] 2026-06-15 16:43:03.583 [main] HeaderNavigationTest - Testing navigation to: returns
+[DEBUG] 2026-06-15 16:43:04.634 [main] HeaderNavigationTest - Current URL after clicking returns: https://nano-flow-order-direct.base44.app/returns
+[INFO ] 2026-06-15 16:43:04.634 [main] HeaderNavigationTest - Testing navigation to: returns
+[DEBUG] 2026-06-15 16:43:05.687 [main] HeaderNavigationTest - Current URL after clicking returns: https://nano-flow-order-direct.base44.app/returns
+[INFO ] 2026-06-15 16:43:05.687 [main] HeaderNavigationTest - Closing WebDriver.
+[INFO ] 2026-06-15 16:55:15.047 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[ERROR] 2026-06-15 16:55:16.157 [main] ReturnsTest - Failed to load returns_data.json
+java.lang.ClassCastException: class org.json.simple.JSONArray cannot be cast to class org.json.simple.JSONObject (org.json.simple.JSONArray and org.json.simple.JSONObject are in unnamed module of loader 'app')
+	at HW.testCases.ReturnsTest.setUp(ReturnsTest.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[INFO ] 2026-06-15 16:55:18.298 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 16:56:01.771 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 16:56:02.797 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 16:56:04.181 [main] ReturnsTest - Running Test: Successful Return | Product: Apple MagSafe Battery Pack | Qty: 1
+[INFO ] 2026-06-15 16:56:14.258 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:03:36.691 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:03:37.718 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:03:49.046 [main] ReturnsTest - No return products available on screen. Skipping return tests.
+[INFO ] 2026-06-15 17:03:49.046 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:17:06.477 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:17:07.516 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:17:11.017 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:18:03.402 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:18:04.540 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:18:43.016 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:21:24.433 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:21:25.605 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:22:21.137 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:22:22.143 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:22:25.068 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:23:37.651 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:23:38.648 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:23:51.084 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-15 17:25:59.726 [main] ReturnsTest - Initializing WebDriver and loading returns test data.
+[INFO ] 2026-06-15 17:26:00.756 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-15 17:26:03.793 [main] ReturnsTest - Closing WebDriver.
