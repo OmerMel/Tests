@@ -1,0 +1,18 @@
+{
+  "belowLimitOrderTests": [
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple MagSafe Battery Pack",
+      "maxAllowedTotal": 10000,
+      "expectedStatus": "Confirmed"
+    }
+  ],
+  "aboveLimitOrderTests": [
+    {
+      "category": "Laptops",
+      "productName": "iPad Mini 2021 Starlight",
+      "quantity": 21,
+      "limit": 10000,
+      "expectedErrorMessage": "exceeds the maximum allowed"    }
+  ]
+}
