@@ -1,0 +1,533 @@
+[INFO ] 2026-06-22 17:25:22.576 [main] AccessibilityJourneyTest - Initializing WebDriver for Accessibility Journey.
+[INFO ] 2026-06-22 17:25:23.685 [main] AccessibilityJourneyTest - Starting Full Accessibility (a11y) Journey using HtmlCsRunner.
+[DEBUG] 2026-06-22 17:25:23.685 [main] AccessibilityJourneyTest - Station 1: Scanning Home Page
+[DEBUG] 2026-06-22 17:25:26.877 [main] AccessibilityJourneyTest - Station 2: Scanning New Order Page (Empty State)
+[DEBUG] 2026-06-22 17:25:28.787 [main] AccessibilityJourneyTest - Station 3: Scanning Order Summary with Products
+[DEBUG] 2026-06-22 17:25:35.927 [main] AccessibilityJourneyTest - Station 4: Scanning Order History Page
+[DEBUG] 2026-06-22 17:25:37.498 [main] AccessibilityJourneyTest - Station 5: Scanning Returns Page
+[DEBUG] 2026-06-22 17:25:39.061 [main] AccessibilityJourneyTest - Station 6: Scanning Return Error Toast (Dynamic UI)
+[INFO ] 2026-06-22 17:25:39.819 [main] AccessibilityJourneyTest - Success: Accessibility scans completed for all stations.
+[INFO ] 2026-06-22 17:25:39.819 [main] AccessibilityJourneyTest - Generating consolidated HTMLCS accessibility report in target directory.
+[INFO ] 2026-06-22 17:25:40.120 [main] AccessibilityJourneyTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:25:47.150 [main] HeaderNavigationTest - Initializing WebDriver and loading navigation test data.
+[INFO ] 2026-06-22 17:25:49.200 [main] HeaderNavigationTest - Testing navigation to: newOrder
+[DEBUG] 2026-06-22 17:25:50.467 [main] HeaderNavigationTest - Current URL after clicking newOrder: https://nano-flow-order-direct.base44.app/order
+[INFO ] 2026-06-22 17:25:50.467 [main] HeaderNavigationTest - Testing navigation to: home
+[DEBUG] 2026-06-22 17:25:51.515 [main] HeaderNavigationTest - Current URL after clicking home: https://nano-flow-order-direct.base44.app/
+[INFO ] 2026-06-22 17:25:51.515 [main] HeaderNavigationTest - Testing navigation to: orderHistory
+[DEBUG] 2026-06-22 17:25:52.559 [main] HeaderNavigationTest - Current URL after clicking orderHistory: https://nano-flow-order-direct.base44.app/history
+[INFO ] 2026-06-22 17:25:52.559 [main] HeaderNavigationTest - Testing navigation to: returns
+[DEBUG] 2026-06-22 17:25:53.608 [main] HeaderNavigationTest - Current URL after clicking returns: https://nano-flow-order-direct.base44.app/returns
+[INFO ] 2026-06-22 17:25:53.608 [main] HeaderNavigationTest - Testing navigation to: returns
+[DEBUG] 2026-06-22 17:25:54.648 [main] HeaderNavigationTest - Current URL after clicking returns: https://nano-flow-order-direct.base44.app/returns
+[INFO ] 2026-06-22 17:25:54.648 [main] HeaderNavigationTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:26:02.139 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:26:04.069 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:26:04.069 [main] NewOrderFiltersTests - Starting data-driven search filter tests.
+[DEBUG] 2026-06-22 17:26:04.070 [main] NewOrderFiltersTests - Verifying search filter for category: 'Smartphones' | Phrase: 'iphone'
+[DEBUG] 2026-06-22 17:26:05.724 [main] NewOrderFiltersTests - Success: Found 4 matching products for 'iphone'.
+[DEBUG] 2026-06-22 17:26:05.724 [main] NewOrderFiltersTests - Verifying search filter for category: 'Groceries' | Phrase: 'Tomer'
+[DEBUG] 2026-06-22 17:26:17.035 [main] NewOrderFiltersTests - Success: No products found for 'Tomer' as expected.
+[DEBUG] 2026-06-22 17:26:17.035 [main] NewOrderFiltersTests - Verifying search filter for category: 'Laptops' | Phrase: 'MacBook'
+[DEBUG] 2026-06-22 17:26:28.364 [main] NewOrderFiltersTests - Success: No products found for 'MacBook' as expected.
+[DEBUG] 2026-06-22 17:26:28.364 [main] NewOrderFiltersTests - Verifying search filter for category: 'Furniture' | Phrase: 'Colombo'
+[ERROR] 2026-06-22 17:26:29.692 [main] NewOrderFiltersTests - Test Failed! Validation failed: Found unrelated product 'Bedside Table African Cherry' when searching for 'Colombo'
+[INFO ] 2026-06-22 17:26:29.692 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:26:29.922 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:26:32.796 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:26:32.796 [main] NewOrderFiltersTests - Starting data-driven explicit test: Verify product is added to Order Summary.
+[DEBUG] 2026-06-22 17:26:32.796 [main] NewOrderFiltersTests - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:26:34.252 [main] NewOrderFiltersTests - Adding product to order: Apple Airpods
+[INFO ] 2026-06-22 17:26:35.873 [main] NewOrderFiltersTests - Success: Product 'Apple Airpods' successfully added to Order Summary. Total is now: 129.99
+[DEBUG] 2026-06-22 17:26:35.873 [main] NewOrderFiltersTests - Selecting category: Smartphones
+[DEBUG] 2026-06-22 17:26:37.093 [main] NewOrderFiltersTests - Adding product to order: Realme XT
+[INFO ] 2026-06-22 17:26:38.794 [main] NewOrderFiltersTests - Success: Product 'Realme XT' successfully added to Order Summary. Total is now: 479.98
+[DEBUG] 2026-06-22 17:26:38.794 [main] NewOrderFiltersTests - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:26:40.003 [main] NewOrderFiltersTests - Adding product to order: Annibale Colombo Sofa
+[INFO ] 2026-06-22 17:26:41.636 [main] NewOrderFiltersTests - Success: Product 'Annibale Colombo Sofa' successfully added to Order Summary. Total is now: 2979.97
+[DEBUG] 2026-06-22 17:26:41.636 [main] NewOrderFiltersTests - Selecting category: Sports Accessories
+[DEBUG] 2026-06-22 17:26:44.160 [main] NewOrderFiltersTests - Adding product to order: Basketball
+[INFO ] 2026-06-22 17:26:45.915 [main] NewOrderFiltersTests - Success: Product 'Basketball' successfully added to Order Summary. Total is now: 2994.96
+[DEBUG] 2026-06-22 17:26:45.915 [main] NewOrderFiltersTests - Selecting category: Groceries
+[DEBUG] 2026-06-22 17:26:47.199 [main] NewOrderFiltersTests - Adding product to order: Beef Steak
+[INFO ] 2026-06-22 17:26:48.890 [main] NewOrderFiltersTests - Success: Product 'Beef Steak' successfully added to Order Summary. Total is now: 3007.95
+[INFO ] 2026-06-22 17:26:48.890 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:26:49.112 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:26:50.754 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:26:50.754 [main] NewOrderFiltersTests - Starting data-driven test: Verify selected category displays correct products.
+[DEBUG] 2026-06-22 17:26:50.755 [main] NewOrderFiltersTests - Testing category selection for: Laptops
+[ERROR] 2026-06-22 17:26:52.926 [main] NewOrderFiltersTests - Validation failed for category 'Laptops': Found a product that does not belong to the category! Image URL: https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp
+[INFO ] 2026-06-22 17:26:52.926 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:26:53.124 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:26:54.728 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:26:54.729 [main] NewOrderFiltersTests - Starting data-driven test: Verify category switching updates products correctly.
+[DEBUG] 2026-06-22 17:26:54.729 [main] NewOrderFiltersTests - Step 1: Selecting initial category: Furniture
+[DEBUG] 2026-06-22 17:26:56.745 [main] NewOrderFiltersTests - Step 2: Switching to new category: Smartphones
+[ERROR] 2026-06-22 17:26:58.746 [main] NewOrderFiltersTests - Validation failed after switching to category 'Smartphones': Found a product from the old category after switching! Image URL: https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp
+[INFO ] 2026-06-22 17:26:58.746 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:26:58.967 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:27:00.246 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:27:00.247 [main] NewOrderFiltersTests - Starting data-driven test: Verify 'In stock only' filter hides out-of-stock products.
+[DEBUG] 2026-06-22 17:27:02.119 [main] NewOrderFiltersTests - Phase 1: Selecting category 'Mobile Accessories' to order all stock of 'Apple Airpower Wireless Charger'
+[INFO ] 2026-06-22 17:27:03.966 [main] NewOrderFiltersTests - Current stock for 'Apple Airpower Wireless Charger' is 1. Ordering all of it.
+[DEBUG] 2026-06-22 17:27:09.777 [main] NewOrderFiltersTests - Phase 2: Navigating to Order History and back to force UI remount without losing state.
+[DEBUG] 2026-06-22 17:27:12.875 [main] NewOrderFiltersTests - Selecting category again: Mobile Accessories
+[DEBUG] 2026-06-22 17:27:14.585 [main] NewOrderFiltersTests - Toggling 'In stock only' filter.
+[INFO ] 2026-06-22 17:27:16.177 [main] NewOrderFiltersTests - Success: Out of stock product 'Apple Airpower Wireless Charger' was successfully hidden by the filter.
+[DEBUG] 2026-06-22 17:27:18.208 [main] NewOrderFiltersTests - Phase 1: Selecting category 'Mobile Accessories' to order all stock of 'Apple MagSafe Battery Pack'
+[INFO ] 2026-06-22 17:27:20.008 [main] NewOrderFiltersTests - Current stock for 'Apple MagSafe Battery Pack' is 1. Ordering all of it.
+[DEBUG] 2026-06-22 17:27:25.813 [main] NewOrderFiltersTests - Phase 2: Navigating to Order History and back to force UI remount without losing state.
+[DEBUG] 2026-06-22 17:27:28.920 [main] NewOrderFiltersTests - Selecting category again: Mobile Accessories
+[DEBUG] 2026-06-22 17:27:30.618 [main] NewOrderFiltersTests - Toggling 'In stock only' filter.
+[INFO ] 2026-06-22 17:27:32.208 [main] NewOrderFiltersTests - Success: Out of stock product 'Apple MagSafe Battery Pack' was successfully hidden by the filter.
+[DEBUG] 2026-06-22 17:27:34.044 [main] NewOrderFiltersTests - Phase 1: Selecting category 'Furniture' to order all stock of 'Wooden Bathroom Sink With Mirror'
+[INFO ] 2026-06-22 17:27:35.802 [main] NewOrderFiltersTests - Current stock for 'Wooden Bathroom Sink With Mirror' is 7. Ordering all of it.
+[DEBUG] 2026-06-22 17:27:41.572 [main] NewOrderFiltersTests - Phase 2: Navigating to Order History and back to force UI remount without losing state.
+[DEBUG] 2026-06-22 17:27:44.660 [main] NewOrderFiltersTests - Selecting category again: Furniture
+[DEBUG] 2026-06-22 17:27:46.414 [main] NewOrderFiltersTests - Toggling 'In stock only' filter.
+[ERROR] 2026-06-22 17:27:48.013 [main] NewOrderFiltersTests - Validation failed for In-Stock filter test: Validation failed: Out of stock product 'Wooden Bathroom Sink With Mirror' is still displayed after applying 'In stock only' filter.
+[INFO ] 2026-06-22 17:27:48.013 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:27:48.235 [main] NewOrderFiltersTests - Initializing WebDriver and navigating to the Order page.
+[INFO ] 2026-06-22 17:27:50.126 [main] NewOrderFiltersTests - Successfully loaded filters_data.json.
+[INFO ] 2026-06-22 17:27:50.126 [main] NewOrderFiltersTests - Starting data-driven price filter tests.
+[DEBUG] 2026-06-22 17:27:50.126 [main] NewOrderFiltersTests - Verifying price filter for category: 'Groceries' | Max Price: $1
+[DEBUG] 2026-06-22 17:28:02.727 [main] NewOrderFiltersTests - Success: Found 0 products as expected.
+[DEBUG] 2026-06-22 17:28:02.727 [main] NewOrderFiltersTests - Verifying price filter for category: 'Laptops' | Max Price: $200
+[DEBUG] 2026-06-22 17:28:15.039 [main] NewOrderFiltersTests - Success: Found 0 products as expected.
+[DEBUG] 2026-06-22 17:28:15.039 [main] NewOrderFiltersTests - Verifying price filter for category: 'Groceries' | Max Price: $5
+[DEBUG] 2026-06-22 17:28:17.317 [main] NewOrderFiltersTests - Success: Found 5 products as expected.
+[DEBUG] 2026-06-22 17:28:17.317 [main] NewOrderFiltersTests - Verifying price filter for category: 'Laptops' | Max Price: $600
+[DEBUG] 2026-06-22 17:28:19.527 [main] NewOrderFiltersTests - Success: Found 3 products as expected.
+[DEBUG] 2026-06-22 17:28:19.527 [main] NewOrderFiltersTests - Verifying price filter for category: 'Groceries' | Max Price: $15
+[DEBUG] 2026-06-22 17:28:21.747 [main] NewOrderFiltersTests - Success: Found 10 products as expected.
+[DEBUG] 2026-06-22 17:28:21.747 [main] NewOrderFiltersTests - Verifying price filter for category: 'Furniture' | Max Price: $500
+[ERROR] 2026-06-22 17:28:23.960 [main] NewOrderFiltersTests - Mismatch: Expected 2 products, but found 9.
+[INFO ] 2026-06-22 17:28:23.960 [main] NewOrderFiltersTests - Closing WebDriver.
+[INFO ] 2026-06-22 17:28:45.246 [main] OrderCategoryTest - Starting OrderCategoryTest setup.
+[INFO ] 2026-06-22 17:28:46.299 [main] OrderCategoryTest - Successfully loaded order_category_data.json.
+[INFO ] 2026-06-22 17:28:46.300 [main] OrderCategoryTest - Starting test: Order with allowed category is submitted successfully.
+[DEBUG] 2026-06-22 17:28:46.300 [main] OrderCategoryTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:28:46.975 [main] OrderCategoryTest - Creating order. Category: 'Smartphones', Product: 'iPhone 6'
+[DEBUG] 2026-06-22 17:28:57.047 [main] OrderCategoryTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:28:57.097 [main] OrderCategoryTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:28:57.126 [main] OrderCategoryTest - Verifying ordered product appears in history: 'iPhone 6'
+[DEBUG] 2026-06-22 17:28:57.158 [main] OrderCategoryTest - Verifying order status is displayed: 'Confirmed'
+[INFO ] 2026-06-22 17:28:57.186 [main] OrderCategoryTest - Success: Allowed category order verification passed for product 'iPhone 6'.
+[DEBUG] 2026-06-22 17:28:57.186 [main] OrderCategoryTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:28:57.631 [main] OrderCategoryTest - Creating order. Category: 'Sports Accessories', Product: 'Basketball'
+[DEBUG] 2026-06-22 17:29:09.264 [main] OrderCategoryTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:29:09.310 [main] OrderCategoryTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:29:09.330 [main] OrderCategoryTest - Verifying ordered product appears in history: 'Basketball'
+[DEBUG] 2026-06-22 17:29:09.361 [main] OrderCategoryTest - Verifying order status is displayed: 'Confirmed'
+[INFO ] 2026-06-22 17:29:09.390 [main] OrderCategoryTest - Success: Allowed category order verification passed for product 'Basketball'.
+[DEBUG] 2026-06-22 17:29:09.390 [main] OrderCategoryTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:29:09.743 [main] OrderCategoryTest - Creating order. Category: 'Laptops', Product: 'iPad Mini 2021 Starlight'
+[DEBUG] 2026-06-22 17:29:19.732 [main] OrderCategoryTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:29:19.772 [main] OrderCategoryTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:29:19.794 [main] OrderCategoryTest - Verifying ordered product appears in history: 'iPad Mini 2021 Starlight'
+[DEBUG] 2026-06-22 17:29:19.818 [main] OrderCategoryTest - Verifying order status is displayed: 'Confirmed'
+[INFO ] 2026-06-22 17:29:19.842 [main] OrderCategoryTest - Success: Allowed category order verification passed for product 'iPad Mini 2021 Starlight'.
+[DEBUG] 2026-06-22 17:29:19.842 [main] OrderCategoryTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:29:20.146 [main] OrderCategoryTest - Creating order. Category: 'Furniture', Product: 'Wooden Bathroom Sink With Mirror'
+[DEBUG] 2026-06-22 17:29:30.085 [main] OrderCategoryTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:29:30.122 [main] OrderCategoryTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:29:30.145 [main] OrderCategoryTest - Verifying ordered product appears in history: 'Wooden Bathroom Sink With Mirror'
+[DEBUG] 2026-06-22 17:29:30.171 [main] OrderCategoryTest - Verifying order status is displayed: 'Confirmed'
+[INFO ] 2026-06-22 17:29:30.189 [main] OrderCategoryTest - Success: Allowed category order verification passed for product 'Wooden Bathroom Sink With Mirror'.
+[INFO ] 2026-06-22 17:29:30.189 [main] OrderCategoryTest - Finished test: Order with allowed category is submitted successfully.
+[INFO ] 2026-06-22 17:29:30.189 [main] OrderCategoryTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:29:30.457 [main] OrderCategoryTest - Starting OrderCategoryTest setup.
+[INFO ] 2026-06-22 17:29:31.119 [main] OrderCategoryTest - Successfully loaded order_category_data.json.
+[INFO ] 2026-06-22 17:29:31.119 [main] OrderCategoryTest - Starting test: Order with Furniture and Groceries is blocked.
+[DEBUG] 2026-06-22 17:29:31.119 [main] OrderCategoryTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:29:31.766 [main] OrderCategoryTest - Adding first product. Category: 'Groceries', Product: 'Beef Steak'
+[DEBUG] 2026-06-22 17:29:38.892 [main] OrderCategoryTest - Adding second product. Category: 'Furniture', Product: 'Annibale Colombo Bed'
+[DEBUG] 2026-06-22 17:29:45.691 [main] OrderCategoryTest - Submitting mixed category order.
+[DEBUG] 2026-06-22 17:29:49.750 [main] OrderCategoryTest - Verifying expected error message appears: 'Products from "furniture" and "groceries" cannot be ordered together.'
+[INFO ] 2026-06-22 17:29:49.793 [main] OrderCategoryTest - Success: Blocked mixed category order verification passed.
+[INFO ] 2026-06-22 17:29:49.793 [main] OrderCategoryTest - Finished test: Order with Furniture and Groceries is blocked.
+[INFO ] 2026-06-22 17:29:49.793 [main] OrderCategoryTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:30:06.845 [main] OrderHistoryTest - Initializing WebDriver for Order History tests.
+[INFO ] 2026-06-22 17:30:06.848 [main] OrderHistoryTest - Configured download path: D:\Scripting\Tests\target\downloads
+[INFO ] 2026-06-22 17:30:07.912 [main] OrderHistoryTest - Successfully loaded order_history_data.json.
+[INFO ] 2026-06-22 17:30:07.912 [main] OrderHistoryTest - Starting Data-Driven test: Export Order History to CSV with multiple items.
+[DEBUG] 2026-06-22 17:30:10.056 [main] OrderHistoryTest - Adding 2 items to the order.
+[DEBUG] 2026-06-22 17:30:10.056 [main] OrderHistoryTest - Adding product: Annibale Colombo Bed
+[DEBUG] 2026-06-22 17:30:12.096 [main] OrderHistoryTest - Adding product: Bedside Table African Cherry
+[DEBUG] 2026-06-22 17:30:13.886 [main] OrderHistoryTest - Submitting order with multiple items.
+[DEBUG] 2026-06-22 17:30:19.601 [main] OrderHistoryTest - Clicking export to CSV button.
+[INFO ] 2026-06-22 17:30:20.670 [main] OrderHistoryTest - Success: CSV file downloaded successfully at: D:\Scripting\Tests\target\downloads\order_history.csv
+[DEBUG] 2026-06-22 17:30:20.670 [main] OrderHistoryTest - CSV Content:
+"Order ID","Date","Status","Products","Total"
+"1782138616030","2026-06-22 05:30:16","Confirmed","Annibale Colombo Bed x2; Bedside Table African Cherry x4","4999.94"
+[INFO ] 2026-06-22 17:30:20.672 [main] OrderHistoryTest - Success: CSV file accurately contains all 2 items ordered.
+[DEBUG] 2026-06-22 17:30:22.566 [main] OrderHistoryTest - Adding 2 items to the order.
+[DEBUG] 2026-06-22 17:30:22.566 [main] OrderHistoryTest - Adding product: Apple Airpods
+[DEBUG] 2026-06-22 17:30:24.555 [main] OrderHistoryTest - Adding product: Apple iPhone Charger
+[DEBUG] 2026-06-22 17:30:26.382 [main] OrderHistoryTest - Submitting order with multiple items.
+[DEBUG] 2026-06-22 17:30:32.050 [main] OrderHistoryTest - Clicking export to CSV button.
+[INFO ] 2026-06-22 17:30:33.114 [main] OrderHistoryTest - Success: CSV file downloaded successfully at: D:\Scripting\Tests\target\downloads\order_history.csv
+[DEBUG] 2026-06-22 17:30:33.114 [main] OrderHistoryTest - CSV Content:
+"Order ID","Date","Status","Products","Total"
+"1782138628496","2026-06-22 05:30:28","Confirmed","Apple Airpods x2; Apple iPhone Charger x1","279.97"
+[INFO ] 2026-06-22 17:30:33.114 [main] OrderHistoryTest - Success: CSV file accurately contains all 2 items ordered.
+[DEBUG] 2026-06-22 17:30:35.123 [main] OrderHistoryTest - Adding 2 items to the order.
+[DEBUG] 2026-06-22 17:30:35.123 [main] OrderHistoryTest - Adding product: iPad Mini 2021 Starlight
+[DEBUG] 2026-06-22 17:30:37.009 [main] OrderHistoryTest - Adding product: iPhone X
+[DEBUG] 2026-06-22 17:30:38.996 [main] OrderHistoryTest - Submitting order with multiple items.
+[DEBUG] 2026-06-22 17:30:44.657 [main] OrderHistoryTest - Clicking export to CSV button.
+[INFO ] 2026-06-22 17:30:45.713 [main] OrderHistoryTest - Success: CSV file downloaded successfully at: D:\Scripting\Tests\target\downloads\order_history.csv
+[DEBUG] 2026-06-22 17:30:45.714 [main] OrderHistoryTest - CSV Content:
+"Order ID","Date","Status","Products","Total"
+"1782138641110","2026-06-22 05:30:41","Confirmed","iPad Mini 2021 Starlight x1; iPhone X x2","2299.97"
+[INFO ] 2026-06-22 17:30:45.714 [main] OrderHistoryTest - Success: CSV file accurately contains all 2 items ordered.
+[DEBUG] 2026-06-22 17:30:48.832 [main] OrderHistoryTest - Adding 3 items to the order.
+[DEBUG] 2026-06-22 17:30:48.832 [main] OrderHistoryTest - Adding product: Baseball Glove
+[DEBUG] 2026-06-22 17:30:50.709 [main] OrderHistoryTest - Adding product: Baseball Ball
+[DEBUG] 2026-06-22 17:30:52.477 [main] OrderHistoryTest - Adding product: Eggs
+[DEBUG] 2026-06-22 17:30:54.461 [main] OrderHistoryTest - Submitting order with multiple items.
+[DEBUG] 2026-06-22 17:31:00.135 [main] OrderHistoryTest - Clicking export to CSV button.
+[INFO ] 2026-06-22 17:31:01.197 [main] OrderHistoryTest - Success: CSV file downloaded successfully at: D:\Scripting\Tests\target\downloads\order_history.csv
+[DEBUG] 2026-06-22 17:31:01.197 [main] OrderHistoryTest - CSV Content:
+"Order ID","Date","Status","Products","Total"
+"1782138656569","2026-06-22 05:30:56","Confirmed","Baseball Glove x1; Baseball Ball x3; Eggs x2","57.94"
+[INFO ] 2026-06-22 17:31:01.197 [main] OrderHistoryTest - Success: CSV file accurately contains all 3 items ordered.
+[INFO ] 2026-06-22 17:31:01.198 [main] OrderHistoryTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:31:01.437 [main] OrderHistoryTest - Initializing WebDriver for Order History tests.
+[INFO ] 2026-06-22 17:31:01.437 [main] OrderHistoryTest - Configured download path: D:\Scripting\Tests\target\downloads
+[INFO ] 2026-06-22 17:31:02.132 [main] OrderHistoryTest - Successfully loaded order_history_data.json.
+[INFO ] 2026-06-22 17:31:02.132 [main] OrderHistoryTest - Starting data-driven test: Empty Order History message is displayed.
+[INFO ] 2026-06-22 17:31:02.133 [main] OrderHistoryTest - Running Empty History Test 1: Expected Counter: '0 orders this session' | Expected Message: 'No orders yet'
+[DEBUG] 2026-06-22 17:31:04.034 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:04.083 [main] OrderHistoryTest - Orders counter text: 0 orders this session
+[DEBUG] 2026-06-22 17:31:04.083 [main] OrderHistoryTest - Validating empty Order History message.
+[INFO ] 2026-06-22 17:31:04.102 [main] OrderHistoryTest - Test passed: Empty Order History message was displayed correctly.
+[INFO ] 2026-06-22 17:31:04.102 [main] OrderHistoryTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:31:04.272 [main] OrderHistoryTest - Initializing WebDriver for Order History tests.
+[INFO ] 2026-06-22 17:31:04.272 [main] OrderHistoryTest - Configured download path: D:\Scripting\Tests\target\downloads
+[INFO ] 2026-06-22 17:31:04.944 [main] OrderHistoryTest - Successfully loaded order_history_data.json.
+[INFO ] 2026-06-22 17:31:04.944 [main] OrderHistoryTest - Starting data-driven test: Order History displays existing orders.
+[INFO ] 2026-06-22 17:31:04.944 [main] OrderHistoryTest - Running Test 1: Category: 'Groceries' | Product: 'Beef Steak' | Expected Status: 'Confirmed'
+[DEBUG] 2026-06-22 17:31:05.748 [main] OrderHistoryTest - Creating order: Category: 'Groceries' | Product: 'Beef Steak'
+[DEBUG] 2026-06-22 17:31:13.737 [main] OrderHistoryTest - Navigating to Order History using header navigation.
+[DEBUG] 2026-06-22 17:31:14.788 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:14.824 [main] OrderHistoryTest - Orders counter text: 1 order this session
+[DEBUG] 2026-06-22 17:31:14.824 [main] OrderHistoryTest - Validating order history list is displayed.
+[DEBUG] 2026-06-22 17:31:14.840 [main] OrderHistoryTest - Validating product appears in Order History: Beef Steak
+[DEBUG] 2026-06-22 17:31:14.863 [main] OrderHistoryTest - Validating order status: Confirmed
+[DEBUG] 2026-06-22 17:31:14.880 [main] OrderHistoryTest - Validating Export CSV button is displayed.
+[INFO ] 2026-06-22 17:31:14.896 [main] OrderHistoryTest - Test passed: Product 'Beef Steak' was displayed correctly in Order History.
+[INFO ] 2026-06-22 17:31:14.896 [main] OrderHistoryTest - Running Test 2: Category: 'Smartphones' | Product: 'iPhone 13 Pro' | Expected Status: 'Confirmed'
+[DEBUG] 2026-06-22 17:31:15.209 [main] OrderHistoryTest - Creating order: Category: 'Smartphones' | Product: 'iPhone 13 Pro'
+[DEBUG] 2026-06-22 17:31:23.183 [main] OrderHistoryTest - Navigating to Order History using header navigation.
+[DEBUG] 2026-06-22 17:31:24.227 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:24.258 [main] OrderHistoryTest - Orders counter text: 1 order this session
+[DEBUG] 2026-06-22 17:31:24.258 [main] OrderHistoryTest - Validating order history list is displayed.
+[DEBUG] 2026-06-22 17:31:24.272 [main] OrderHistoryTest - Validating product appears in Order History: iPhone 13 Pro
+[DEBUG] 2026-06-22 17:31:24.292 [main] OrderHistoryTest - Validating order status: Confirmed
+[DEBUG] 2026-06-22 17:31:24.308 [main] OrderHistoryTest - Validating Export CSV button is displayed.
+[INFO ] 2026-06-22 17:31:24.322 [main] OrderHistoryTest - Test passed: Product 'iPhone 13 Pro' was displayed correctly in Order History.
+[INFO ] 2026-06-22 17:31:24.322 [main] OrderHistoryTest - Running Test 3: Category: 'Furniture' | Product: 'Annibale Colombo Sofa' | Expected Status: 'Confirmed'
+[DEBUG] 2026-06-22 17:31:24.654 [main] OrderHistoryTest - Creating order: Category: 'Furniture' | Product: 'Annibale Colombo Sofa'
+[DEBUG] 2026-06-22 17:31:32.631 [main] OrderHistoryTest - Navigating to Order History using header navigation.
+[DEBUG] 2026-06-22 17:31:33.679 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:33.712 [main] OrderHistoryTest - Orders counter text: 1 order this session
+[DEBUG] 2026-06-22 17:31:33.712 [main] OrderHistoryTest - Validating order history list is displayed.
+[DEBUG] 2026-06-22 17:31:33.726 [main] OrderHistoryTest - Validating product appears in Order History: Annibale Colombo Sofa
+[DEBUG] 2026-06-22 17:31:33.746 [main] OrderHistoryTest - Validating order status: Confirmed
+[DEBUG] 2026-06-22 17:31:33.761 [main] OrderHistoryTest - Validating Export CSV button is displayed.
+[INFO ] 2026-06-22 17:31:33.776 [main] OrderHistoryTest - Test passed: Product 'Annibale Colombo Sofa' was displayed correctly in Order History.
+[INFO ] 2026-06-22 17:31:33.776 [main] OrderHistoryTest - Running Test 4: Category: 'Laptops' | Product: 'Samsung Galaxy Tab S8 Plus Grey' | Expected Status: 'Confirmed'
+[DEBUG] 2026-06-22 17:31:34.096 [main] OrderHistoryTest - Creating order: Category: 'Laptops' | Product: 'Samsung Galaxy Tab S8 Plus Grey'
+[DEBUG] 2026-06-22 17:31:42.031 [main] OrderHistoryTest - Navigating to Order History using header navigation.
+[DEBUG] 2026-06-22 17:31:43.080 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:43.112 [main] OrderHistoryTest - Orders counter text: 1 order this session
+[DEBUG] 2026-06-22 17:31:43.112 [main] OrderHistoryTest - Validating order history list is displayed.
+[DEBUG] 2026-06-22 17:31:43.126 [main] OrderHistoryTest - Validating product appears in Order History: Samsung Galaxy Tab S8 Plus Grey
+[DEBUG] 2026-06-22 17:31:43.147 [main] OrderHistoryTest - Validating order status: Confirmed
+[DEBUG] 2026-06-22 17:31:43.162 [main] OrderHistoryTest - Validating Export CSV button is displayed.
+[INFO ] 2026-06-22 17:31:43.176 [main] OrderHistoryTest - Test passed: Product 'Samsung Galaxy Tab S8 Plus Grey' was displayed correctly in Order History.
+[INFO ] 2026-06-22 17:31:43.177 [main] OrderHistoryTest - Running Test 5: Category: 'Sports Accessories' | Product: 'Basketball Rim' | Expected Status: 'Confirmed'
+[DEBUG] 2026-06-22 17:31:43.521 [main] OrderHistoryTest - Creating order: Category: 'Sports Accessories' | Product: 'Basketball Rim'
+[DEBUG] 2026-06-22 17:31:51.505 [main] OrderHistoryTest - Navigating to Order History using header navigation.
+[DEBUG] 2026-06-22 17:31:52.543 [main] OrderHistoryTest - Validating Order History page title.
+[DEBUG] 2026-06-22 17:31:52.575 [main] OrderHistoryTest - Orders counter text: 1 order this session
+[DEBUG] 2026-06-22 17:31:52.575 [main] OrderHistoryTest - Validating order history list is displayed.
+[DEBUG] 2026-06-22 17:31:52.591 [main] OrderHistoryTest - Validating product appears in Order History: Basketball Rim
+[DEBUG] 2026-06-22 17:31:52.611 [main] OrderHistoryTest - Validating order status: Confirmed
+[DEBUG] 2026-06-22 17:31:52.625 [main] OrderHistoryTest - Validating Export CSV button is displayed.
+[INFO ] 2026-06-22 17:31:52.640 [main] OrderHistoryTest - Test passed: Product 'Basketball Rim' was displayed correctly in Order History.
+[INFO ] 2026-06-22 17:31:52.640 [main] OrderHistoryTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:33:09.516 [main] OrderStockCapacityTest - Starting OrderStockCapacityTest setup.
+[INFO ] 2026-06-22 17:33:10.644 [main] OrderStockCapacityTest - Successfully loaded stock_capacity_data.json.
+[INFO ] 2026-06-22 17:33:10.644 [main] OrderStockCapacityTest - Starting test: Verify 'Add to Order' button is disabled when stock is depleted.
+[DEBUG] 2026-06-22 17:33:10.644 [main] OrderStockCapacityTest - Phase 1: Ordering the entire available stock.
+[DEBUG] 2026-06-22 17:33:11.596 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:33:15.074 [main] OrderStockCapacityTest - Adding product to order: Apple MagSafe Battery Pack
+[DEBUG] 2026-06-22 17:33:18.737 [main] OrderStockCapacityTest - Changing product quantity to max stock: 1
+[DEBUG] 2026-06-22 17:33:18.809 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:33:23.933 [main] OrderStockCapacityTest - Phase 2: Returning to Order Page to verify button state.
+[DEBUG] 2026-06-22 17:33:26.997 [main] OrderStockCapacityTest - Selecting category again: Mobile Accessories
+[DEBUG] 2026-06-22 17:33:30.090 [main] OrderStockCapacityTest - Verifying 'Add to Order' button is disabled for product: Apple MagSafe Battery Pack
+[INFO ] 2026-06-22 17:33:30.209 [main] OrderStockCapacityTest - Success: Out of stock button verification passed.
+[DEBUG] 2026-06-22 17:33:33.212 [main] OrderStockCapacityTest - Phase 1: Ordering the entire available stock.
+[DEBUG] 2026-06-22 17:33:38.462 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:33:41.954 [main] OrderStockCapacityTest - Adding product to order: Apple Airpower Wireless Charger
+[DEBUG] 2026-06-22 17:33:45.581 [main] OrderStockCapacityTest - Changing product quantity to max stock: 1
+[DEBUG] 2026-06-22 17:33:45.640 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:33:50.771 [main] OrderStockCapacityTest - Phase 2: Returning to Order Page to verify button state.
+[DEBUG] 2026-06-22 17:33:53.829 [main] OrderStockCapacityTest - Selecting category again: Mobile Accessories
+[DEBUG] 2026-06-22 17:33:56.919 [main] OrderStockCapacityTest - Verifying 'Add to Order' button is disabled for product: Apple Airpower Wireless Charger
+[INFO ] 2026-06-22 17:33:56.983 [main] OrderStockCapacityTest - Success: Out of stock button verification passed.
+[INFO ] 2026-06-22 17:33:59.998 [main] OrderStockCapacityTest - Finished test: 'Add to Order' button disabled.
+[INFO ] 2026-06-22 17:33:59.998 [main] OrderStockCapacityTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:34:00.224 [main] OrderStockCapacityTest - Starting OrderStockCapacityTest setup.
+[INFO ] 2026-06-22 17:34:00.882 [main] OrderStockCapacityTest - Successfully loaded stock_capacity_data.json.
+[INFO ] 2026-06-22 17:34:00.882 [main] OrderStockCapacityTest - Starting test: Order items exceeding available stock capacity.
+[DEBUG] 2026-06-22 17:34:00.882 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:34:01.488 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:34:05.079 [main] OrderStockCapacityTest - Adding product to order: Apple Airpower Wireless Charger
+[DEBUG] 2026-06-22 17:34:08.717 [main] OrderStockCapacityTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:34:08.802 [main] OrderStockCapacityTest - Attempting to submit order.
+[DEBUG] 2026-06-22 17:34:12.866 [main] OrderStockCapacityTest - Verifying validation error message appears.
+[INFO ] 2026-06-22 17:34:12.899 [main] OrderStockCapacityTest - Success: Exceeds stock capacity verification passed.
+[DEBUG] 2026-06-22 17:34:15.908 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:34:16.283 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:34:19.780 [main] OrderStockCapacityTest - Adding product to order: Amazon Echo Plus
+[DEBUG] 2026-06-22 17:34:23.353 [main] OrderStockCapacityTest - Changing product quantity to: 62
+[DEBUG] 2026-06-22 17:34:23.422 [main] OrderStockCapacityTest - Attempting to submit order.
+[DEBUG] 2026-06-22 17:34:27.484 [main] OrderStockCapacityTest - Verifying validation error message appears.
+[INFO ] 2026-06-22 17:34:27.512 [main] OrderStockCapacityTest - Success: Exceeds stock capacity verification passed.
+[DEBUG] 2026-06-22 17:34:30.518 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:34:30.828 [main] OrderStockCapacityTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:34:34.303 [main] OrderStockCapacityTest - Adding product to order: Wooden Bathroom Sink With Mirror
+[DEBUG] 2026-06-22 17:34:37.908 [main] OrderStockCapacityTest - Changing product quantity to: 8
+[DEBUG] 2026-06-22 17:34:37.971 [main] OrderStockCapacityTest - Attempting to submit order.
+[DEBUG] 2026-06-22 17:34:42.027 [main] OrderStockCapacityTest - Verifying validation error message appears.
+[INFO ] 2026-06-22 17:34:42.053 [main] OrderStockCapacityTest - Success: Exceeds stock capacity verification passed.
+[DEBUG] 2026-06-22 17:34:45.058 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:34:45.402 [main] OrderStockCapacityTest - Selecting category: Groceries
+[DEBUG] 2026-06-22 17:34:48.932 [main] OrderStockCapacityTest - Adding product to order: Apple
+[DEBUG] 2026-06-22 17:34:52.513 [main] OrderStockCapacityTest - Changing product quantity to: 15
+[DEBUG] 2026-06-22 17:34:52.575 [main] OrderStockCapacityTest - Attempting to submit order.
+[DEBUG] 2026-06-22 17:34:56.647 [main] OrderStockCapacityTest - Verifying validation error message appears.
+[INFO ] 2026-06-22 17:34:56.674 [main] OrderStockCapacityTest - Success: Exceeds stock capacity verification passed.
+[INFO ] 2026-06-22 17:34:59.675 [main] OrderStockCapacityTest - Finished test: Order exceeding stock capacity.
+[INFO ] 2026-06-22 17:34:59.675 [main] OrderStockCapacityTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:34:59.915 [main] OrderStockCapacityTest - Starting OrderStockCapacityTest setup.
+[INFO ] 2026-06-22 17:35:00.606 [main] OrderStockCapacityTest - Successfully loaded stock_capacity_data.json.
+[INFO ] 2026-06-22 17:35:00.607 [main] OrderStockCapacityTest - Starting test: Order items within available stock capacity.
+[DEBUG] 2026-06-22 17:35:00.607 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:35:01.485 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:35:05.115 [main] OrderStockCapacityTest - Initial stock for 'Apple Airpods': 67
+[DEBUG] 2026-06-22 17:35:05.115 [main] OrderStockCapacityTest - Adding product to order: Apple Airpods
+[DEBUG] 2026-06-22 17:35:08.719 [main] OrderStockCapacityTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:35:08.788 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:35:13.922 [main] OrderStockCapacityTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:35:13.972 [main] OrderStockCapacityTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:35:13.999 [main] OrderStockCapacityTest - Verifying ordered product appears in history: Apple Airpods
+[DEBUG] 2026-06-22 17:35:14.028 [main] OrderStockCapacityTest - Verifying order status is displayed: Confirmed
+[DEBUG] 2026-06-22 17:35:14.054 [main] OrderStockCapacityTest - Returning to Order Page to verify stock updates.
+[DEBUG] 2026-06-22 17:35:17.130 [main] OrderStockCapacityTest - Selecting category 'Mobile Accessories' to check new stock for 'Apple Airpods'
+[DEBUG] 2026-06-22 17:35:20.450 [main] OrderStockCapacityTest - Verifying stock for 'Apple Airpods'. Expected: 65, Actual: 65
+[INFO ] 2026-06-22 17:35:20.450 [main] OrderStockCapacityTest - Success: Within stock capacity and stock update verification passed.
+[DEBUG] 2026-06-22 17:35:23.459 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:35:25.559 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:35:29.080 [main] OrderStockCapacityTest - Initial stock for 'Apple HomePod Mini Cosmic Grey': 27
+[DEBUG] 2026-06-22 17:35:29.080 [main] OrderStockCapacityTest - Adding product to order: Apple HomePod Mini Cosmic Grey
+[DEBUG] 2026-06-22 17:35:32.722 [main] OrderStockCapacityTest - Changing product quantity to: 1
+[DEBUG] 2026-06-22 17:35:32.780 [main] OrderStockCapacityTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:35:35.962 [main] OrderStockCapacityTest - Initial stock for 'Apple iPhone Charger': 31
+[DEBUG] 2026-06-22 17:35:35.962 [main] OrderStockCapacityTest - Adding product to order: Apple iPhone Charger
+[DEBUG] 2026-06-22 17:35:39.598 [main] OrderStockCapacityTest - Changing product quantity to: 3
+[DEBUG] 2026-06-22 17:35:39.650 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:35:44.747 [main] OrderStockCapacityTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:35:44.785 [main] OrderStockCapacityTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:35:44.804 [main] OrderStockCapacityTest - Verifying ordered product appears in history: Apple HomePod Mini Cosmic Grey
+[DEBUG] 2026-06-22 17:35:44.827 [main] OrderStockCapacityTest - Verifying ordered product appears in history: Apple iPhone Charger
+[DEBUG] 2026-06-22 17:35:44.850 [main] OrderStockCapacityTest - Verifying order status is displayed: Confirmed
+[DEBUG] 2026-06-22 17:35:44.871 [main] OrderStockCapacityTest - Returning to Order Page to verify stock updates.
+[DEBUG] 2026-06-22 17:35:47.932 [main] OrderStockCapacityTest - Selecting category 'Mobile Accessories' to check new stock for 'Apple HomePod Mini Cosmic Grey'
+[DEBUG] 2026-06-22 17:35:51.225 [main] OrderStockCapacityTest - Verifying stock for 'Apple HomePod Mini Cosmic Grey'. Expected: 26, Actual: 26
+[DEBUG] 2026-06-22 17:35:51.225 [main] OrderStockCapacityTest - Selecting category 'Mobile Accessories' to check new stock for 'Apple iPhone Charger'
+[DEBUG] 2026-06-22 17:35:54.410 [main] OrderStockCapacityTest - Verifying stock for 'Apple iPhone Charger'. Expected: 28, Actual: 28
+[INFO ] 2026-06-22 17:35:54.411 [main] OrderStockCapacityTest - Success: Within stock capacity and stock update verification passed.
+[DEBUG] 2026-06-22 17:35:57.415 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:35:57.786 [main] OrderStockCapacityTest - Selecting category: Smartphones
+[DEBUG] 2026-06-22 17:36:01.310 [main] OrderStockCapacityTest - Initial stock for 'iPhone 13 Pro': 56
+[DEBUG] 2026-06-22 17:36:01.310 [main] OrderStockCapacityTest - Adding product to order: iPhone 13 Pro
+[DEBUG] 2026-06-22 17:36:04.909 [main] OrderStockCapacityTest - Changing product quantity to: 5
+[DEBUG] 2026-06-22 17:36:04.970 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:36:10.073 [main] OrderStockCapacityTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:36:10.113 [main] OrderStockCapacityTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:36:10.133 [main] OrderStockCapacityTest - Verifying ordered product appears in history: iPhone 13 Pro
+[DEBUG] 2026-06-22 17:36:10.153 [main] OrderStockCapacityTest - Verifying order status is displayed: Confirmed
+[DEBUG] 2026-06-22 17:36:10.171 [main] OrderStockCapacityTest - Returning to Order Page to verify stock updates.
+[DEBUG] 2026-06-22 17:36:13.233 [main] OrderStockCapacityTest - Selecting category 'Smartphones' to check new stock for 'iPhone 13 Pro'
+[DEBUG] 2026-06-22 17:36:16.597 [main] OrderStockCapacityTest - Verifying stock for 'iPhone 13 Pro'. Expected: 51, Actual: 51
+[INFO ] 2026-06-22 17:36:16.597 [main] OrderStockCapacityTest - Success: Within stock capacity and stock update verification passed.
+[DEBUG] 2026-06-22 17:36:19.609 [main] OrderStockCapacityTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:36:19.911 [main] OrderStockCapacityTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:36:23.514 [main] OrderStockCapacityTest - Initial stock for 'Bedside Table African Cherry': 64
+[DEBUG] 2026-06-22 17:36:23.514 [main] OrderStockCapacityTest - Adding product to order: Bedside Table African Cherry
+[DEBUG] 2026-06-22 17:36:27.082 [main] OrderStockCapacityTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:36:27.137 [main] OrderStockCapacityTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:36:30.303 [main] OrderStockCapacityTest - Initial stock for 'Annibale Colombo Sofa': 60
+[DEBUG] 2026-06-22 17:36:30.303 [main] OrderStockCapacityTest - Adding product to order: Annibale Colombo Sofa
+[DEBUG] 2026-06-22 17:36:33.933 [main] OrderStockCapacityTest - Changing product quantity to: 1
+[DEBUG] 2026-06-22 17:36:33.989 [main] OrderStockCapacityTest - Submitting order.
+[DEBUG] 2026-06-22 17:36:39.101 [main] OrderStockCapacityTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:36:39.139 [main] OrderStockCapacityTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:36:39.159 [main] OrderStockCapacityTest - Verifying ordered product appears in history: Bedside Table African Cherry
+[DEBUG] 2026-06-22 17:36:39.181 [main] OrderStockCapacityTest - Verifying ordered product appears in history: Annibale Colombo Sofa
+[DEBUG] 2026-06-22 17:36:39.207 [main] OrderStockCapacityTest - Verifying order status is displayed: Confirmed
+[DEBUG] 2026-06-22 17:36:39.224 [main] OrderStockCapacityTest - Returning to Order Page to verify stock updates.
+[DEBUG] 2026-06-22 17:36:42.289 [main] OrderStockCapacityTest - Selecting category 'Furniture' to check new stock for 'Bedside Table African Cherry'
+[DEBUG] 2026-06-22 17:36:45.663 [main] OrderStockCapacityTest - Verifying stock for 'Bedside Table African Cherry'. Expected: 62, Actual: 62
+[DEBUG] 2026-06-22 17:36:45.663 [main] OrderStockCapacityTest - Selecting category 'Furniture' to check new stock for 'Annibale Colombo Sofa'
+[DEBUG] 2026-06-22 17:36:48.810 [main] OrderStockCapacityTest - Verifying stock for 'Annibale Colombo Sofa'. Expected: 59, Actual: 59
+[INFO ] 2026-06-22 17:36:48.811 [main] OrderStockCapacityTest - Success: Within stock capacity and stock update verification passed.
+[INFO ] 2026-06-22 17:36:51.819 [main] OrderStockCapacityTest - Finished test: Order within stock capacity.
+[INFO ] 2026-06-22 17:36:51.819 [main] OrderStockCapacityTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:37:37.130 [main] OrderTotalPriceTest - Starting OrderTotalTest setup.
+[INFO ] 2026-06-22 17:37:38.163 [main] OrderTotalPriceTest - Successfully loaded order_total_data.json.
+[INFO ] 2026-06-22 17:37:38.163 [main] OrderTotalPriceTest - Starting test: Order above total limit is blocked with an error message.
+[DEBUG] 2026-06-22 17:37:38.163 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:37:39.144 [main] OrderTotalPriceTest - Selecting category: Laptops
+[DEBUG] 2026-06-22 17:37:42.728 [main] OrderTotalPriceTest - Adding product to order: iPad Mini 2021 Starlight
+[DEBUG] 2026-06-22 17:37:46.324 [main] OrderTotalPriceTest - Changing product quantity to: 20
+[DEBUG] 2026-06-22 17:37:46.391 [main] OrderTotalPriceTest - Selecting category: Groceries
+[DEBUG] 2026-06-22 17:37:49.622 [main] OrderTotalPriceTest - Adding product to order: Beef Steak
+[DEBUG] 2026-06-22 17:37:53.221 [main] OrderTotalPriceTest - Changing product quantity to: 10
+[DEBUG] 2026-06-22 17:37:53.313 [main] OrderTotalPriceTest - Verifying total price order is above limit. Actual total: 10129.7, Limit: 10000.0
+[DEBUG] 2026-06-22 17:37:53.313 [main] OrderTotalPriceTest - Submitting order above limit.
+[DEBUG] 2026-06-22 17:37:57.393 [main] OrderTotalPriceTest - Verifying validation error message appears
+[INFO ] 2026-06-22 17:37:57.424 [main] OrderTotalPriceTest - Success: Above total limit order verification passed.
+[DEBUG] 2026-06-22 17:38:00.427 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:38:00.736 [main] OrderTotalPriceTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:38:04.250 [main] OrderTotalPriceTest - Adding product to order: Annibale Colombo Sofa
+[DEBUG] 2026-06-22 17:38:07.902 [main] OrderTotalPriceTest - Changing product quantity to: 10
+[DEBUG] 2026-06-22 17:38:07.984 [main] OrderTotalPriceTest - Verifying total price order is above limit. Actual total: 24999.9, Limit: 10000.0
+[DEBUG] 2026-06-22 17:38:07.984 [main] OrderTotalPriceTest - Submitting order above limit.
+[DEBUG] 2026-06-22 17:38:12.040 [main] OrderTotalPriceTest - Verifying validation error message appears
+[INFO ] 2026-06-22 17:38:12.071 [main] OrderTotalPriceTest - Success: Above total limit order verification passed.
+[INFO ] 2026-06-22 17:38:15.076 [main] OrderTotalPriceTest - Finished test: Order above total limit is blocked.
+[INFO ] 2026-06-22 17:38:15.076 [main] OrderTotalPriceTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:38:15.322 [main] OrderTotalPriceTest - Starting OrderTotalTest setup.
+[INFO ] 2026-06-22 17:38:15.965 [main] OrderTotalPriceTest - Successfully loaded order_total_data.json.
+[INFO ] 2026-06-22 17:38:15.966 [main] OrderTotalPriceTest - Starting test: Verify removing an item updates the total price.
+[DEBUG] 2026-06-22 17:38:15.966 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:38:16.571 [main] OrderTotalPriceTest - Adding product: Beef Steak from category: Groceries
+[DEBUG] 2026-06-22 17:38:23.821 [main] OrderTotalPriceTest - Adding product: Dog Food from category: Groceries
+[DEBUG] 2026-06-22 17:38:30.667 [main] OrderTotalPriceTest - Initial total before removal: 34.97
+[DEBUG] 2026-06-22 17:38:30.667 [main] OrderTotalPriceTest - Removing product: Beef Steak
+[INFO ] 2026-06-22 17:38:38.793 [main] OrderTotalPriceTest - Success: Product 'Beef Steak' was successfully removed from the UI.
+[DEBUG] 2026-06-22 17:38:38.810 [main] OrderTotalPriceTest - New total after removal: 21.98
+[INFO ] 2026-06-22 17:38:38.810 [main] OrderTotalPriceTest - Success: Total price updated correctly after removal.
+[DEBUG] 2026-06-22 17:38:38.811 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:38:39.217 [main] OrderTotalPriceTest - Adding product: Annibale Colombo Bed from category: Furniture
+[DEBUG] 2026-06-22 17:38:49.370 [main] OrderTotalPriceTest - Adding product: Samsung Galaxy Tab White from category: Laptops
+[DEBUG] 2026-06-22 17:38:56.377 [main] OrderTotalPriceTest - Initial total before removal: 4149.97
+[DEBUG] 2026-06-22 17:38:56.377 [main] OrderTotalPriceTest - Removing product: Annibale Colombo Bed
+[INFO ] 2026-06-22 17:39:04.463 [main] OrderTotalPriceTest - Success: Product 'Annibale Colombo Bed' was successfully removed from the UI.
+[DEBUG] 2026-06-22 17:39:04.483 [main] OrderTotalPriceTest - New total after removal: 349.99
+[INFO ] 2026-06-22 17:39:04.483 [main] OrderTotalPriceTest - Success: Total price updated correctly after removal.
+[INFO ] 2026-06-22 17:39:04.483 [main] OrderTotalPriceTest - Finished test: Item removal updates total.
+[INFO ] 2026-06-22 17:39:04.483 [main] OrderTotalPriceTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:39:04.739 [main] OrderTotalPriceTest - Starting OrderTotalTest setup.
+[INFO ] 2026-06-22 17:39:05.371 [main] OrderTotalPriceTest - Successfully loaded order_total_data.json.
+[INFO ] 2026-06-22 17:39:05.371 [main] OrderTotalPriceTest - Starting test: Order below total limit is submitted successfully.
+[DEBUG] 2026-06-22 17:39:05.371 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:39:06.261 [main] OrderTotalPriceTest - Selecting category: Mobile Accessories
+[DEBUG] 2026-06-22 17:39:09.733 [main] OrderTotalPriceTest - Adding product to order: Apple MagSafe Battery Pack
+[DEBUG] 2026-06-22 17:39:13.424 [main] OrderTotalPriceTest - Changing product quantity to: 1
+[DEBUG] 2026-06-22 17:39:13.492 [main] OrderTotalPriceTest - Selecting category: Laptops
+[DEBUG] 2026-06-22 17:39:16.723 [main] OrderTotalPriceTest - Adding product to order: iPad Mini 2021 Starlight
+[DEBUG] 2026-06-22 17:39:20.294 [main] OrderTotalPriceTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:39:20.365 [main] OrderTotalPriceTest - Verifying total price order is below limit. Actual total: 1099.97, Max allowed: 10000.0
+[DEBUG] 2026-06-22 17:39:20.365 [main] OrderTotalPriceTest - Submitting order.
+[DEBUG] 2026-06-22 17:39:25.485 [main] OrderTotalPriceTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:39:25.532 [main] OrderTotalPriceTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:39:25.571 [main] OrderTotalPriceTest - Verifying ordered product appears in history: Apple MagSafe Battery Pack
+[DEBUG] 2026-06-22 17:39:25.598 [main] OrderTotalPriceTest - Verifying ordered product appears in history: iPad Mini 2021 Starlight
+[DEBUG] 2026-06-22 17:39:25.622 [main] OrderTotalPriceTest - Verifying order status is displayed: Confirmed
+[INFO ] 2026-06-22 17:39:25.648 [main] OrderTotalPriceTest - Success: Below total limit order verification passed.
+[DEBUG] 2026-06-22 17:39:28.654 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:39:28.963 [main] OrderTotalPriceTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:39:32.454 [main] OrderTotalPriceTest - Adding product to order: Bedside Table African Cherry
+[DEBUG] 2026-06-22 17:39:36.040 [main] OrderTotalPriceTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:39:36.096 [main] OrderTotalPriceTest - Selecting category: Furniture
+[DEBUG] 2026-06-22 17:39:39.194 [main] OrderTotalPriceTest - Adding product to order: Annibale Colombo Bed
+[DEBUG] 2026-06-22 17:39:42.804 [main] OrderTotalPriceTest - Changing product quantity to: 4
+[DEBUG] 2026-06-22 17:39:42.874 [main] OrderTotalPriceTest - Verifying total price order is below limit. Actual total: 8199.94, Max allowed: 10000.0
+[DEBUG] 2026-06-22 17:39:42.874 [main] OrderTotalPriceTest - Submitting order.
+[DEBUG] 2026-06-22 17:39:47.985 [main] OrderTotalPriceTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:39:48.024 [main] OrderTotalPriceTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:39:48.044 [main] OrderTotalPriceTest - Verifying ordered product appears in history: Bedside Table African Cherry
+[DEBUG] 2026-06-22 17:39:48.073 [main] OrderTotalPriceTest - Verifying ordered product appears in history: Annibale Colombo Bed
+[DEBUG] 2026-06-22 17:39:48.095 [main] OrderTotalPriceTest - Verifying order status is displayed: Confirmed
+[INFO ] 2026-06-22 17:39:48.112 [main] OrderTotalPriceTest - Success: Below total limit order verification passed.
+[DEBUG] 2026-06-22 17:39:51.115 [main] OrderTotalPriceTest - Opening New Order page.
+[DEBUG] 2026-06-22 17:39:51.423 [main] OrderTotalPriceTest - Selecting category: Smartphones
+[DEBUG] 2026-06-22 17:39:54.902 [main] OrderTotalPriceTest - Adding product to order: iPhone 13 Pro
+[DEBUG] 2026-06-22 17:39:58.506 [main] OrderTotalPriceTest - Changing product quantity to: 1
+[DEBUG] 2026-06-22 17:39:58.561 [main] OrderTotalPriceTest - Selecting category: Sports Accessories
+[DEBUG] 2026-06-22 17:40:01.788 [main] OrderTotalPriceTest - Adding product to order: Basketball
+[DEBUG] 2026-06-22 17:40:05.398 [main] OrderTotalPriceTest - Changing product quantity to: 2
+[DEBUG] 2026-06-22 17:40:05.473 [main] OrderTotalPriceTest - Verifying total price order is below limit. Actual total: 1129.97, Max allowed: 10000.0
+[DEBUG] 2026-06-22 17:40:05.473 [main] OrderTotalPriceTest - Submitting order.
+[DEBUG] 2026-06-22 17:40:10.587 [main] OrderTotalPriceTest - Navigating to Order History using Header.
+[DEBUG] 2026-06-22 17:40:10.625 [main] OrderTotalPriceTest - Verifying Order History page.
+[DEBUG] 2026-06-22 17:40:10.645 [main] OrderTotalPriceTest - Verifying ordered product appears in history: iPhone 13 Pro
+[DEBUG] 2026-06-22 17:40:10.670 [main] OrderTotalPriceTest - Verifying ordered product appears in history: Basketball
+[DEBUG] 2026-06-22 17:40:10.694 [main] OrderTotalPriceTest - Verifying order status is displayed: Confirmed
+[INFO ] 2026-06-22 17:40:10.710 [main] OrderTotalPriceTest - Success: Below total limit order verification passed.
+[INFO ] 2026-06-22 17:40:13.718 [main] OrderTotalPriceTest - Finished test: Order below total price limit is submitted successfully.
+[INFO ] 2026-06-22 17:40:13.718 [main] OrderTotalPriceTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:40:19.340 [main] ReturnsTest - Starting ReturnsTest setup.
+[INFO ] 2026-06-22 17:40:21.305 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-22 17:40:21.305 [main] ReturnsTest - Starting data-driven test: Valid return updates stock and removes from list.
+[DEBUG] 2026-06-22 17:40:21.307 [main] ReturnsTest - Phase 1: Ordering 2 units of 'Apple Airpods' from category 'Mobile Accessories'
+[DEBUG] 2026-06-22 17:40:22.874 [main] ReturnsTest - Initial stock for 'Apple Airpods' is 67
+[DEBUG] 2026-06-22 17:40:27.734 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:40:29.290 [main] ReturnsTest - Returning 1 units of 'Apple Airpods'
+[DEBUG] 2026-06-22 17:40:31.534 [main] ReturnsTest - Phase 3: Navigating back to Order page to verify stock update.
+[INFO ] 2026-06-22 17:40:34.856 [main] ReturnsTest - Success: Stock updated correctly for 'Apple Airpods'. Final stock is 66
+[DEBUG] 2026-06-22 17:40:34.856 [main] ReturnsTest - Phase 1: Ordering 3 units of 'Realme XT' from category 'Smartphones'
+[DEBUG] 2026-06-22 17:40:36.331 [main] ReturnsTest - Initial stock for 'Realme XT' is 80
+[DEBUG] 2026-06-22 17:40:41.183 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:40:42.720 [main] ReturnsTest - Returning 3 units of 'Realme XT'
+[ERROR] 2026-06-22 17:40:44.977 [main] ReturnsTest - Validation failed for valid return test: Validation failed: Product is still in returns list after full return.
+[INFO ] 2026-06-22 17:40:44.977 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:40:45.219 [main] ReturnsTest - Starting ReturnsTest setup.
+[INFO ] 2026-06-22 17:40:46.736 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-22 17:40:46.736 [main] ReturnsTest - Starting data-driven test: Partial return updates dropdown quantity.
+[DEBUG] 2026-06-22 17:40:46.736 [main] ReturnsTest - Phase 1: Ordering 2 units of Apple Airpods
+[DEBUG] 2026-06-22 17:40:52.961 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:40:54.534 [main] ReturnsTest - Verified initial dropdown quantity is: 2
+[DEBUG] 2026-06-22 17:40:54.534 [main] ReturnsTest - Phase 3: Performing partial return of 1 units.
+[ERROR] 2026-06-22 17:40:56.823 [main] ReturnsTest - Validation failed for partial return test: Validation failed: Dropdown quantity did not update correctly after partial return. expected:<1> but was:<2>
+[INFO ] 2026-06-22 17:40:56.823 [main] ReturnsTest - Closing WebDriver.
+[INFO ] 2026-06-22 17:40:57.048 [main] ReturnsTest - Starting ReturnsTest setup.
+[INFO ] 2026-06-22 17:40:58.356 [main] ReturnsTest - Successfully loaded returns_data.json.
+[INFO ] 2026-06-22 17:40:58.356 [main] ReturnsTest - Starting data-driven test: Invalid return shows error and keeps stock.
+[DEBUG] 2026-06-22 17:40:58.356 [main] ReturnsTest - Phase 1: Ordering 1 units of 'Apple iPhone Charger'
+[DEBUG] 2026-06-22 17:41:04.748 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:41:06.299 [main] ReturnsTest - Attempting to return 2 units (ordered only 1).
+[DEBUG] 2026-06-22 17:41:06.541 [main] ReturnsTest - Verified: Expected error message displayed: 'Exceeds ordered quantity'
+[DEBUG] 2026-06-22 17:41:06.541 [main] ReturnsTest - Phase 3: Navigating back to Order page to verify stock remained untouched.
+[INFO ] 2026-06-22 17:41:09.903 [main] ReturnsTest - Success: Invalid return blocked and stock remained untouched for 'Apple iPhone Charger'.
+[DEBUG] 2026-06-22 17:41:09.903 [main] ReturnsTest - Phase 1: Ordering 2 units of 'Cucumber'
+[DEBUG] 2026-06-22 17:41:16.003 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:41:17.550 [main] ReturnsTest - Attempting to return 5 units (ordered only 2).
+[DEBUG] 2026-06-22 17:41:17.768 [main] ReturnsTest - Verified: Expected error message displayed: 'Exceeds ordered quantity'
+[DEBUG] 2026-06-22 17:41:17.768 [main] ReturnsTest - Phase 3: Navigating back to Order page to verify stock remained untouched.
+[INFO ] 2026-06-22 17:41:21.113 [main] ReturnsTest - Success: Invalid return blocked and stock remained untouched for 'Cucumber'.
+[DEBUG] 2026-06-22 17:41:21.113 [main] ReturnsTest - Phase 1: Ordering 1 units of 'Baseball Ball'
+[DEBUG] 2026-06-22 17:41:27.153 [main] ReturnsTest - Phase 2: Navigating to Returns page.
+[DEBUG] 2026-06-22 17:41:28.691 [main] ReturnsTest - Attempting to return 3 units (ordered only 1).
+[DEBUG] 2026-06-22 17:41:28.911 [main] ReturnsTest - Verified: Expected error message displayed: 'Exceeds ordered quantity'
+[DEBUG] 2026-06-22 17:41:28.911 [main] ReturnsTest - Phase 3: Navigating back to Order page to verify stock remained untouched.
+[INFO ] 2026-06-22 17:41:32.202 [main] ReturnsTest - Success: Invalid return blocked and stock remained untouched for 'Baseball Ball'.
+[INFO ] 2026-06-22 17:41:32.202 [main] ReturnsTest - Finished test: Invalid return shows error.
+[INFO ] 2026-06-22 17:41:32.202 [main] ReturnsTest - Closing WebDriver.
