@@ -121,8 +121,18 @@ public class NewOrderPage {
         logger.debug("Looking for product '{}' to add to order", name);
         for (int i = 0; i < productsName.size(); i++) {
             if (productsName.get(i).getText().equalsIgnoreCase(name)) {
-                wait.until(ExpectedConditions.elementToBeClickable(addToOrderButtons.get(i)));
-                addToOrderButtons.get(i).click();
+                WebElement button = addToOrderButtons.get(i);
+
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", button);
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                wait.until(ExpectedConditions.elementToBeClickable(button));
+                button.click();
                 return;
             }
         }
