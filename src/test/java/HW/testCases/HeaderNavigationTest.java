@@ -32,7 +32,7 @@ public class HeaderNavigationTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // Loading test data from JSON
+        // Load test data from JSON
         try {
             JSONParser jsonParser = new JSONParser();
             FileReader reader = new FileReader("src/test/resources/navigation_data.json");
@@ -47,7 +47,7 @@ public class HeaderNavigationTest {
 
     @Test
     public void testHeaderNavigationDataDriven() throws InterruptedException {
-        JSONArray navArray = (JSONArray) navData.get("navItems"); // נניח שהגדרנו מערך בשם navItems ב-JSON
+        JSONArray navArray = (JSONArray) navData.get("navItems");
 
         for (int i = 0; i < navArray.size(); i++) {
             JSONObject obj = (JSONObject) navArray.get(i);
@@ -58,11 +58,20 @@ public class HeaderNavigationTest {
 
             try {
                 switch (buttonName) {
-                    case "newOrder": homePage.header().clickNewOrder(); break;
-                    case "orderHistory": homePage.header().clickOrderHistory(); break;
-                    case "returns": homePage.header().clickReturns(); break;
-                    case "home" : homePage.header().clickHome(); break;
-                    default: logger.error("Button '{}' not found in switch case", buttonName);
+                    case "newOrder":
+                        homePage.header().clickNewOrder();
+                        break;
+                    case "orderHistory":
+                        homePage.header().clickOrderHistory();
+                        break;
+                    case "returns":
+                        homePage.header().clickReturns();
+                        break;
+                    case "home":
+                        homePage.header().clickHome();
+                        break;
+                    default:
+                        logger.warn("Button '{}' not found in switch case", buttonName);
                 }
 
                 Thread.sleep(1000);

@@ -1,6 +1,8 @@
 package HW.pages;
 
 import HW.components.HeaderComponent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -17,9 +19,13 @@ import java.util.List;
 
 public class NewOrderPage {
 
-    private WebDriver driver;
-    private HeaderComponent header;
-    private WebDriverWait wait;
+    private static final Logger logger = LogManager.getLogger(NewOrderPage.class);
+
+    private final WebDriver driver;
+    private final HeaderComponent header;
+    private final WebDriverWait wait;
+
+    // ==================== WEB ELEMENTS ====================
 
     @FindBy(xpath = "//h1[text()='New Order']")
     private WebElement pageTitle;
@@ -32,9 +38,6 @@ public class NewOrderPage {
 
     @FindBy(id = "category-select")
     private WebElement categoryDropdown;
-
-    @FindBy(id = "products-empty")
-    private WebElement emptyProductsMessage;
 
     @FindBy(id = "product-search")
     private WebElement searchInput;
@@ -51,16 +54,11 @@ public class NewOrderPage {
     @FindBy(css = "#product-grid img")
     private List<WebElement> productImages;
 
-    // All products name
     @FindBy(css = "#product-grid h3")
     private List<WebElement> productsName;
 
-    // All "Add To Order" buttons
     @FindBy(css = "button[id^='select-product-']")
     private List<WebElement> addToOrderButtons;
-
-    @FindBy(tagName = "body")
-    private WebElement body;
 
     @FindBy(css = "[id^='validation-error-']")
     private List<WebElement> validationErrorMessages;
@@ -74,11 +72,12 @@ public class NewOrderPage {
     @FindBy(css = "[id^='stock-']")
     private List<WebElement> stockElements;
 
+    // ==================== CONSTRUCTOR ====================
+
     public NewOrderPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         this.header = new HeaderComponent(driver);
-
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -86,44 +85,158 @@ public class NewOrderPage {
         return this.header;
     }
 
-    public String getPageTitle() {
-        return pageTitle.getText();
-    }
+    // ==================== ACTIONS & INTERACTIONS ====================
 
-    // בחירת קטגוריה מתוך התפריט הנפתח לפי הטקסט (למשל: "Laptops")
     public void selectCategoryByVisibleText(String categoryName) {
+        logger.debug("Selecting category: {}", categoryName);
         Select dropdown = new Select(categoryDropdown);
         dropdown.selectByVisibleText(categoryName);
-
         wait.until(ExpectedConditions.visibilityOf(productGridContainer));
     }
 
     public void searchProduct(String productName) {
-        // נוודא ששדה החיפוש גלוי לפני שמקלידים
+        logger.debug("Searching for product: {}", productName);
         wait.until(ExpectedConditions.visibilityOf(searchInput));
         searchInput.clear();
         searchInput.sendKeys(productName);
     }
 
     public void toggleInStockOnly() {
+        logger.debug("Toggling 'In Stock Only' filter");
         wait.until(ExpectedConditions.elementToBeClickable(inStockToggle));
         inStockToggle.click();
     }
 
-    // --- מתודות לעבודה עם רשימת המוצרים ---
+    public void addFirstProductToOrder() {
+        if (!addToOrderButtons.isEmpty()) {
+            logger.debug("Adding the first available product to order");
+            wait.until(ExpectedConditions.elementToBeClickable(addToOrderButtons.get(0)));
+            addToOrderButtons.get(0).click();
+        } else {
+            logger.warn("Attempted to add the first product, but no products were found.");
+        }
+    }
 
-    // קבלת כמות המוצרים המוצגת כרגע
+    public void addProductByName(String name) {
+        logger.debug("Looking for product '{}' to add to order", name);
+        for (int i = 0; i < productsName.size(); i++) {
+            if (productsName.get(i).getText().equalsIgnoreCase(name)) {
+                wait.until(ExpectedConditions.elementToBeClickable(addToOrderButtons.get(i)));
+                addToOrderButtons.get(i).click();
+                return;
+            }
+        }
+        logger.warn("Product not found in grid: {}", name);
+    }
+
+    public void setPriceSliderValue(int targetPrice) {
+        logger.debug("Setting price slider value to: {}", targetPrice);
+        wait.until(ExpectedConditions.visibilityOf(priceSlider));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Simulate React slider input and change events
+        String reactWorkaroundScript =
+                "var slider = arguments[0];" +
+                        "var value = arguments[1];" +
+                        "var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
+                        "nativeInputValueSetter.call(slider, value);" +
+                        "slider.dispatchEvent(new Event('input', { bubbles: true }));" +
+                        "slider.dispatchEvent(new Event('change', { bubbles: true }));";
+
+        js.executeScript(reactWorkaroundScript, priceSlider, Integer.valueOf(targetPrice));
+    }
+
+    public void submitOrder() {
+        logger.debug("Clicking submit order button");
+        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
+        pauseForDemo();
+        js.executeScript("arguments[0].click();", submitOrderBtn);
+
+        logger.debug("Clicking confirm order button");
+        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
+
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", confirmOrderBtn);
+        pauseForDemo();
+        js.executeScript("arguments[0].click();", confirmOrderBtn);
+    }
+
+    public void clickSubmitOrderButton() {
+        logger.debug("Clicking submit order button (without confirmation step)");
+        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
+        pauseForDemo();
+        js.executeScript("arguments[0].click();", submitOrderBtn);
+    }
+
+    public void createOrder(String categoryName, String productName) {
+        logger.info("Creating a full order flow for category: '{}', product: '{}'", categoryName, productName);
+        pauseForDemo();
+        selectCategoryByVisibleText(categoryName);
+        pauseForDemo();
+        addProductByName(productName);
+        pauseForDemo();
+        submitOrder();
+        pauseForDemo();
+    }
+
+    public void setFirstOrderItemQuantity(int quantity) {
+        if (!quantityInputs.isEmpty()) {
+            logger.debug("Setting first order item quantity to: {}", quantity);
+            WebElement quantityInput = quantityInputs.getFirst();
+            wait.until(ExpectedConditions.visibilityOf(quantityInput));
+
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
+
+            quantityInput.clear();
+            quantityInput.sendKeys(String.valueOf(quantity));
+        } else {
+            logger.warn("No quantity input found in order summary.");
+        }
+    }
+
+    public void setOrderItemQuantity(int index, int quantity) {
+        if (quantityInputs.size() > index) {
+            logger.debug("Setting order item at index {} quantity to: {}", index, quantity);
+            WebElement quantityInput = quantityInputs.get(index);
+            wait.until(ExpectedConditions.visibilityOf(quantityInput));
+
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
+
+            quantityInput.clear();
+            quantityInput.sendKeys(String.valueOf(quantity));
+        } else {
+            logger.warn("Quantity input at index {} was not found.", index);
+        }
+    }
+
+    /**
+     * Clicks the remove (trash bin) button for a specific product in the Order Summary
+     */
+    public void removeProductFromSummary(String productName) {
+        logger.debug("Removing product '{}' from order summary", productName);
+        String xpath = String.format("//p[text()='%s']/ancestor::div[starts-with(@id, 'order-item-')]//button[starts-with(@id, 'remove-item-')]", productName);
+        WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        removeButton.click();
+    }
+
+    // ==================== GETTERS & VALIDATIONS ====================
+
     public int getDisplayedProductsCount() {
         return productsName.size();
     }
 
-    /**
-     * מחזירה רשימה של כל כתובות ה-URL (src) של התמונות המוצגות כרגע בגריד
-     */
     public List<String> getDisplayedProductImageUrls() {
-        // ממתינים שהתמונות יופיעו כדי לא לקרוא מערך ריק
+        // Wait for images to load to prevent returning an empty list
         wait.until(ExpectedConditions.visibilityOfAllElements(productImages));
-
         List<String> urls = new ArrayList<>();
         for (WebElement img : productImages) {
             urls.add(img.getAttribute("src"));
@@ -133,7 +246,6 @@ public class NewOrderPage {
 
     public List<String> getDisplayedProductNames() {
         List<String> names = new ArrayList<>();
-        // מעבר על רשימת ה-WebElements של השמות וחילול הטקסט שלהם
         for (WebElement element : productsName) {
             names.add(element.getText());
         }
@@ -145,108 +257,16 @@ public class NewOrderPage {
         for (int i = 0; i < productsName.size(); i++) {
             if (productsName.get(i).getText().equalsIgnoreCase(name)) {
                 WebElement button = addToOrderButtons.get(i);
-                // סלניום בודק אוטומטית אם קיים המאפיין disabled ב-HTML
                 return !button.isEnabled() || button.getAttribute("disabled") != null;
             }
         }
         throw new RuntimeException("Product not found in grid: " + name);
     }
 
-    // לחיצה על "הוסף להזמנה" של המוצר הראשון ברשימה
-    public void addFirstProductToOrder() {
-        // נוודא שיש לפחות כפתור אחד
-        if (!addToOrderButtons.isEmpty()) {
-            wait.until(ExpectedConditions.elementToBeClickable(addToOrderButtons.get(0)));
-            addToOrderButtons.get(0).click();
-        } else {
-            System.out.println("No products found to add.");
-        }
-    }
-
-    // פונקציה חכמה: הוספת מוצר לפי השם שלו (עוברת על כל הרשימה)
-    public void addProductByName(String name) {
-        // לולאה שעוברת על כל שמות המוצרים
-        for (int i = 0; i < productsName.size(); i++) {
-            if (productsName.get(i).getText().equalsIgnoreCase(name)) {
-                // אם מצאנו את השם, נלחץ על הכפתור שנמצא באותו אינדקס (i)
-                wait.until(ExpectedConditions.elementToBeClickable(addToOrderButtons.get(i)));
-                addToOrderButtons.get(i).click();
-                return; // יוצאים מהפונקציה אחרי שמצאנו
-            }
-        }
-        System.out.println("Product not found: " + name);
-    }
-
-    public void setPriceSliderValue(int targetPrice) {
-        // נוודא שהסליידר אכן נטען ומוצג על המסך
-        wait.until(ExpectedConditions.visibilityOf(priceSlider));
-
-        // יצירת אובייקט מסוג JavascriptExecutor מתוך הדרייבר
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        // 1. משנים את הערך (value) של הסליידר למחיר המבוקש
-        // 2. מפעילים אירועי 'input' ו-'change' כדי שקוד ה-React/JS של האתר יזהה שהזזנו את הסליידר ויסנן את המוצרים
-        String reactWorkaroundScript =
-                "var slider = arguments[0];" +
-                        "var value = arguments[1];" +
-                        "var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
-                        "nativeInputValueSetter.call(slider, value);" +
-                        "slider.dispatchEvent(new Event('input', { bubbles: true }));" +
-                        "slider.dispatchEvent(new Event('change', { bubbles: true }));";
-
-//        js.executeScript(reactWorkaroundScript, priceSlider, targetPrice); // Comment by Tomer!!!!
-        js.executeScript(reactWorkaroundScript, priceSlider, Integer.valueOf(targetPrice));
-    }
-
-    // Function to delay action for display only
-    private void pauseForDemo() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
-    public void submitOrder() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
-
-        pauseForDemo();
-
-        js.executeScript("arguments[0].click();", submitOrderBtn);
-
-        wait.until(ExpectedConditions.visibilityOf(confirmOrderBtn));
-        wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
-
-        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", confirmOrderBtn);
-
-        pauseForDemo();
-
-        js.executeScript("arguments[0].click();", confirmOrderBtn);
-    }
-
-    // Function to Create new order
-    public void createOrder(String categoryName, String productName) {
-        pauseForDemo();
-
-        selectCategoryByVisibleText(categoryName);
-        pauseForDemo();
-
-        addProductByName(productName);
-        pauseForDemo();
-
-        submitOrder();
-        pauseForDemo();
-    }
-
     public boolean isValidationErrorDisplayed(String expectedErrorMessage) {
         wait.until(ExpectedConditions.visibilityOfAllElements(validationErrorMessages));
-
         for (WebElement errorMessage : validationErrorMessages) {
             String actualMessage = errorMessage.getText();
-
             if (actualMessage.toLowerCase().contains(expectedErrorMessage.toLowerCase())) {
                 return true;
             }
@@ -255,20 +275,16 @@ public class NewOrderPage {
     }
 
     /**
-     * מחזירה את המלאי הנוכחי של מוצר מסוים לפי השם שלו
+     * Returns the current stock quantity for a specific product by name
      */
     public int getProductStock(String productName) {
         wait.until(ExpectedConditions.visibilityOf(productGridContainer));
-
         for (int i = 0; i < productsName.size(); i++) {
             if (productsName.get(i).getText().equalsIgnoreCase(productName)) {
-
                 String stockText = stockElements.get(i).getText();
-
                 if (stockText.equalsIgnoreCase("Out of stock")) {
                     return 0;
                 }
-
                 String onlyNumbers = stockText.replaceAll("[^0-9]", "");
                 return Integer.parseInt(onlyNumbers);
             }
@@ -276,82 +292,32 @@ public class NewOrderPage {
         throw new RuntimeException("Product not found to check stock: " + productName);
     }
 
-    // Use when error message appear
-    public void clickSubmitOrderButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitOrderBtn));
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitOrderBtn);
-
-        pauseForDemo();
-
-        js.executeScript("arguments[0].click();", submitOrderBtn);
-    }
-
-    // return the price on display (what we see on screen)
     public String getOrderTotalText() {
         wait.until(ExpectedConditions.visibilityOf(orderTotal));
         return orderTotal.getText();
     }
 
-    // return the real value that we compare
     public double getOrderTotalValue() {
         String totalText = getOrderTotalText();
-
-        return Double.parseDouble(
-                totalText.replace("$", "").replace(",", "").trim()
-        );
-    }
-
-    public void setFirstOrderItemQuantity(int quantity) {
-        if (!quantityInputs.isEmpty()) {
-            WebElement quantityInput = quantityInputs.getFirst();
-
-            wait.until(ExpectedConditions.visibilityOf(quantityInput));
-
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
-
-            quantityInput.clear();
-            quantityInput.sendKeys(String.valueOf(quantity));
-
-            return;
-        }
-
-        System.out.println("No quantity input found in order summary.");
-    }
-
-    public void setOrderItemQuantity(int index, int quantity) {
-        if (quantityInputs.size() > index) {
-            WebElement quantityInput = quantityInputs.get(index);
-
-            wait.until(ExpectedConditions.visibilityOf(quantityInput));
-
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", quantityInput);
-
-            quantityInput.clear();
-            quantityInput.sendKeys(String.valueOf(quantity));
-        } else {
-            System.out.println("Quantity input at index " + index + " was not found.");
-        }
+        return Double.parseDouble(totalText.replace("$", "").replace(",", "").trim());
     }
 
     /**
-     * לוחצת על כפתור המחיקה (פח אשפה) של מוצר ספציפי ב-Order Summary
-     */
-    public void removeProductFromSummary(String productName) {
-        String xpath = String.format("//p[text()='%s']/ancestor::div[starts-with(@id, 'order-item-')]//button[starts-with(@id, 'remove-item-')]", productName);
-        WebElement removeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-        removeButton.click();
-    }
-
-    /**
-     * בודקת האם מוצר מסוים מופיע כרגע בטופס ה-Order Summary
+     * Checks if a specific product is currently displayed in the Order Summary form
      */
     public boolean isProductInSummary(String productName) {
         String xpath = String.format("//div[starts-with(@id, 'order-item-')]//p[text()='%s']", productName);
-        // משתמשים ב-findElements כדי שלא יזרוק שגיאה אם האלמנט לא קיים (מה שאנחנו מצפים שיקרה אחרי מחיקה)
+        // Using findElements to avoid throwing an exception if the element does not exist (expected after removal)
         return !driver.findElements(By.xpath(xpath)).isEmpty();
+    }
+
+    // ==================== HELPER METHODS ====================
+
+    private void pauseForDemo() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }

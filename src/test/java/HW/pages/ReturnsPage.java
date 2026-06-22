@@ -1,5 +1,7 @@
 package HW.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,13 +11,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReturnsPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private static final Logger logger = LogManager.getLogger(ReturnsPage.class);
+
+    private final WebDriverWait wait;
+
+    // ==================== WEB ELEMENTS ====================
 
     @FindBy(id = "return-product-select")
     private WebElement productSelectDropdown;
@@ -29,16 +32,21 @@ public class ReturnsPage {
     @FindBy(css = ".destructive .font-semibold")
     private WebElement toastErrorMessage;
 
+    // ==================== CONSTRUCTOR ====================
+
     public ReturnsPage(WebDriver driver) {
-        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
+    // ==================== ACTIONS & INTERACTIONS ====================
+
     /**
-     * בוחר מוצר מהדרופדאון על בסיס חיפוש חלקי של השם (כי יש תוספת של כמות בטקסט)
+     * Selects a product from the dropdown based on a partial name match
+     * (since the text includes the quantity).
      */
     public void selectProductToReturn(String productName) {
+        logger.debug("Selecting product to return: '{}'", productName);
         wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
         Select select = new Select(productSelectDropdown);
 
@@ -48,31 +56,37 @@ public class ReturnsPage {
                 return;
             }
         }
-        throw new RuntimeException("Product '" + productName + "' was not found in the returns dropdown.");
+
+        String errorMsg = "Product '" + productName + "' was not found in the returns dropdown.";
+        logger.error(errorMsg);
+        throw new RuntimeException(errorMsg);
     }
 
     public void setReturnQuantity(int quantity) {
+        logger.debug("Setting return quantity to: {}", quantity);
         wait.until(ExpectedConditions.visibilityOf(quantityInput));
         quantityInput.clear();
         quantityInput.sendKeys(String.valueOf(quantity));
     }
 
     public void submitReturn() {
+        logger.debug("Clicking submit return button");
         wait.until(ExpectedConditions.elementToBeClickable(submitReturnButton));
         submitReturnButton.click();
     }
 
+    // ==================== GETTERS & VALIDATIONS ====================
+
     /**
-     * בודק אם מוצר מופיע כרגע ברשימת האפשרויות להחזרה
+     * Checks if a product is currently available in the return options list.
      */
     public boolean isProductAvailableForReturn(String productName) {
+        logger.debug("Checking if product '{}' is available for return", productName);
         wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
         Select select = new Select(productSelectDropdown);
 
         for (WebElement option : select.getOptions()) {
-            String optionText = option.getText();
-
-            if (optionText.contains(productName)) {
+            if (option.getText().contains(productName)) {
                 return true;
             }
         }
@@ -80,29 +94,37 @@ public class ReturnsPage {
     }
 
     /**
-     * קוראת את הטקסט מהדרופדאון (למשל "Apple Airpods (ordered: 2)")
-     * ומחלצת רק את המספר שבתוך הסוגריים.
+     * Extracts the ordered quantity number from the dropdown text
+     * (e.g., "Apple Airpods (ordered: 2)").
      */
     public int getRemainingQuantityFromDropdown(String productName) {
+        logger.debug("Extracting remaining quantity for product: '{}'", productName);
         wait.until(ExpectedConditions.visibilityOf(productSelectDropdown));
         Select select = new Select(productSelectDropdown);
 
         for (WebElement option : select.getOptions()) {
             String text = option.getText();
             if (text.contains(productName)) {
-                // חותכים את הטקסט כדי למצוא את המספר שאחרי המילה "ordered: "
+                // Substring to find the number after "ordered: "
                 int startIndex = text.indexOf("ordered: ") + 9;
                 int endIndex = text.indexOf(")", startIndex);
                 String numberStr = text.substring(startIndex, endIndex).trim();
 
-                return Integer.parseInt(numberStr);
+                int quantity = Integer.parseInt(numberStr);
+                logger.debug("Found remaining quantity: {}", quantity);
+                return quantity;
             }
         }
-        throw new RuntimeException("Product '" + productName + "' was not found in the dropdown to check quantity.");
+
+        String errorMsg = "Product '" + productName + "' was not found in the dropdown to check quantity.";
+        logger.error(errorMsg);
+        throw new RuntimeException(errorMsg);
     }
 
     public String getErrorMessage() {
         wait.until(ExpectedConditions.visibilityOf(toastErrorMessage));
-        return toastErrorMessage.getText();
+        String error = toastErrorMessage.getText();
+        logger.debug("Retrieved toast error message: '{}'", error);
+        return error;
     }
 }

@@ -1,6 +1,8 @@
 package HW.pages;
 
 import HW.components.HeaderComponent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,63 +10,43 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
-    private WebDriver driver;
-    private HeaderComponent header;
+    private static final Logger logger = LogManager.getLogger(HomePage.class);
 
-    // כותרת ההודעה הראשית
-    @FindBy(xpath = "//section[@data-testid='welcome-section']//h1")
-    private WebElement welcomeHeading;
+    private final HeaderComponent header;
 
-    // כרטיסיות הניווט המהיר (Quick Navigation)
-    @FindBy(id = "nav-card-new-order")
-    private WebElement quickNavNewOrderCard;
+    // ==================== WEB ELEMENTS ====================
 
-    @FindBy(id = "nav-card-order-history")
-    private WebElement quickNavOrderHistoryCard;
-
-    @FindBy(id = "nav-card-returns")
-    private WebElement quickNavReturnsCard;
-
-    // נתוני מערכת (System Overview)
+    // System Overview stats
     @FindBy(xpath = "//div[@data-testid='stat-total-products']//span[contains(@class, 'text-2xl')]")
     private WebElement statTotalProductsValue;
 
     @FindBy(xpath = "//div[@data-testid='stat-orders-processed']//span[contains(@class, 'text-2xl')]")
     private WebElement statOrdersProcessedValue;
 
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    // ==================== CONSTRUCTOR ====================
 
-        header = new HeaderComponent(driver);
+    public HomePage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.header = new HeaderComponent(driver);
     }
 
-    // To be able to access header component methods from test classes
+    // ==================== COMPONENTS ====================
+
     public HeaderComponent header() {
         return this.header;
     }
 
-    public String getWelcomeMessageText() {
-        return welcomeHeading.getText();
-    }
-
-    public void clickQuickNavNewOrder() {
-        quickNavNewOrderCard.click();
-    }
-
-    public void clickQuickNavOrderHistory() {
-        quickNavOrderHistoryCard.click();
-    }
-
-    public void clickQuickNavReturns() {
-        quickNavReturnsCard.click();
-    }
+    // ==================== GETTERS & VALIDATIONS ====================
 
     public String getTotalProductsCount() {
-        return statTotalProductsValue.getText();
+        String count = statTotalProductsValue.getText();
+        logger.debug("Retrieved total products count: {}", count);
+        return count;
     }
 
     public String getOrdersProcessedCount() {
-        return statOrdersProcessedValue.getText();
+        String count = statOrdersProcessedValue.getText();
+        logger.debug("Retrieved orders processed count: {}", count);
+        return count;
     }
 }

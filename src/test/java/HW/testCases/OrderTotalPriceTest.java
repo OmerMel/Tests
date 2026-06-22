@@ -48,9 +48,11 @@ public class OrderTotalPriceTest {
         }
     }
 
+    // ==================== TESTS ====================
+
     @Test
     public void testPriceOrderTotalLimit() {
-        logger.info("Starting test: order below total limit is submitted successfully.");
+        logger.info("Starting test: Order below total limit is submitted successfully.");
 
         JSONArray testDataArray = (JSONArray) allOrderTotalData.get("priceLimitOrderTests");
 
@@ -61,90 +63,14 @@ public class OrderTotalPriceTest {
             double maxPriceAllowed = ((Number) testData.get("maxPriceAllowed")).doubleValue();
             String expectedStatus = (String) testData.get("expectedStatus");
 
-            executePriceOrderTotalLimit(
-                    items,
-                    maxPriceAllowed,
-                    expectedStatus
-            );
+            executePriceOrderTotalLimit(items, maxPriceAllowed, expectedStatus);
         }
-
-        logger.info("Finished test: order below total price limit is submitted successfully.");
-    }
-
-    private void executePriceOrderTotalLimit(JSONArray items,
-                                             double maxPriceAllowed,
-                                             String expectedStatus) {
-        List<String> productNames = new ArrayList<>();
-        try {
-            logger.info("Opening New Order page.");
-            driver.get("https://nano-flow-order-direct.base44.app/order");
-
-            newOrderPage = new NewOrderPage(driver);
-
-            for (int i = 0; i < items.size(); i++) {
-                JSONObject item = (JSONObject) items.get(i);
-                String categoryName = (String) item.get("category");
-                String productName = (String) item.get("productName");
-                int quantity = ((Number) item.get("quantity")).intValue();
-
-                productNames.add(productName);
-
-                logger.info("Selecting category: {}", categoryName);
-                newOrderPage.selectCategoryByVisibleText(categoryName);
-                pauseForDemo();
-
-                logger.info("Adding product to order: {}", productName);
-                newOrderPage.addProductByName(productName);
-                pauseForDemo();
-
-                logger.info("Changing product quantity to: {}", quantity);
-                newOrderPage.setOrderItemQuantity(i, quantity);
-            }
-
-            double actualTotal = newOrderPage.getOrderTotalValue();
-            logger.info("Verifying total price order is below limit. Actual total: {}, Max allowed: {}",
-                    String.valueOf(actualTotal), String.valueOf(maxPriceAllowed));
-
-            assertTrue("Total price order is not below the allowed limit. Actual total: " + actualTotal,
-                    actualTotal < maxPriceAllowed);
-
-            logger.info("Submitting order.");
-            newOrderPage.submitOrder();
-            pauseForDemo();
-
-            logger.info("Navigating to Order History using Header.");
-            newOrderPage.header().clickOrderHistory();
-
-            orderHistoryPage = new OrderHistoryPage(driver);
-
-            logger.info("Verifying Order History page.");
-            assertEquals("Order History", orderHistoryPage.getPageTitle());
-
-            for (String productName : productNames) {
-                logger.info("Verifying ordered product appears in history: {}", productName);
-                assertTrue("The ordered product was not found in order history: " + productName,
-                        orderHistoryPage.isOrderDisplayed(productName));
-            }
-
-            logger.info("Verifying order status is displayed: {}", expectedStatus);
-            assertTrue("Expected order status was not displayed: " + expectedStatus,
-                    orderHistoryPage.isStatusDisplayed(expectedStatus));
-
-            logger.info("Below total limit order verification passed.");
-            pauseForDemo();
-
-        } catch (AssertionError e) {
-            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
-            throw e;
-        }
+        logger.info("Finished test: Order below total price limit is submitted successfully.");
     }
 
     @Test
     public void testPriceOrderTotalLimitExceeded() {
-        logger.info("Starting test: order above total limit is blocked with an error message.");
+        logger.info("Starting test: Order above total limit is blocked with an error message.");
 
         JSONArray testDataArray = (JSONArray) allOrderTotalData.get("aboveLimitOrderTests");
 
@@ -155,76 +81,14 @@ public class OrderTotalPriceTest {
             double maxPriceAllowed = ((Number) testData.get("maxPriceAllowed")).doubleValue();
             String expectedErrorMessage = (String) testData.get("expectedErrorMessage");
 
-            executePriceOrderTotalLimitExceeded(
-                    items,
-                    maxPriceAllowed,
-                    expectedErrorMessage
-            );
+            executePriceOrderTotalLimitExceeded(items, maxPriceAllowed, expectedErrorMessage);
         }
-
-        logger.info("Finished test: order above total limit is blocked.");
-    }
-
-    private void executePriceOrderTotalLimitExceeded(JSONArray items,
-                                                     double maxPriceAllowed,
-                                                     String expectedErrorMessage) {
-        List<String> productNames = new ArrayList<>();
-        try {
-            logger.info("Opening New Order page.");
-            driver.get("https://nano-flow-order-direct.base44.app/order");
-
-            newOrderPage = new NewOrderPage(driver);
-
-            for (int i = 0; i < items.size(); i++) {
-                JSONObject item = (JSONObject) items.get(i);
-                String categoryName = (String) item.get("category");
-                String productName = (String) item.get("productName");
-                int quantity = ((Number) item.get("quantity")).intValue();
-
-                productNames.add(productName);
-
-                logger.info("Selecting category: {}", categoryName);
-                newOrderPage.selectCategoryByVisibleText(categoryName);
-                pauseForDemo();
-
-                logger.info("Adding product to order: {}", productName);
-                newOrderPage.addProductByName(productName);
-                pauseForDemo();
-
-                logger.info("Changing product quantity to: {}", quantity);
-                newOrderPage.setOrderItemQuantity(i, quantity);
-            }
-
-            double actualTotal = newOrderPage.getOrderTotalValue();
-            logger.info("Verifying total price order is above limit. Actual total: {}, Limit: {}",
-                    String.valueOf(actualTotal), String.valueOf(maxPriceAllowed));
-
-            assertTrue("Total price order should be above the allowed limit. Actual total: " + actualTotal,
-                    actualTotal > maxPriceAllowed);
-
-            logger.info("Submitting order above limit.");
-            newOrderPage.clickSubmitOrderButton();
-            pauseForDemo();
-
-            logger.info("Verifying validation error message appears");
-            assertTrue("Expected validation error message was not displayed.",
-                    newOrderPage.isValidationErrorDisplayed(expectedErrorMessage));
-
-            logger.info("Above total limit order verification passed.");
-            pauseForDemo();
-
-        } catch (AssertionError e) {
-            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
-            throw e;
-        }
+        logger.info("Finished test: Order above total limit is blocked.");
     }
 
     @Test
     public void testItemRemovalUpdatesTotal() {
-        logger.info("Starting test: verify removing an item updates the total price.");
+        logger.info("Starting test: Verify removing an item updates the total price.");
 
         JSONArray testDataArray = (JSONArray) allOrderTotalData.get("itemRemovalTests");
 
@@ -236,18 +100,139 @@ public class OrderTotalPriceTest {
 
             executeItemRemovalVerification(itemsToAdd, itemToRemove);
         }
+        logger.info("Finished test: Item removal updates total.");
+    }
 
-        logger.info("Finished test: item removal updates total.");
+    // ==================== HELPER METHODS ====================
+
+    private void executePriceOrderTotalLimit(JSONArray items, double maxPriceAllowed, String expectedStatus) {
+        List<String> productNames = new ArrayList<>();
+        try {
+            logger.debug("Opening New Order page.");
+            driver.get("https://nano-flow-order-direct.base44.app/order");
+            newOrderPage = new NewOrderPage(driver);
+
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+                String categoryName = (String) item.get("category");
+                String productName = (String) item.get("productName");
+                int quantity = ((Number) item.get("quantity")).intValue();
+
+                productNames.add(productName);
+
+                logger.debug("Selecting category: {}", categoryName);
+                newOrderPage.selectCategoryByVisibleText(categoryName);
+                pauseForDemo();
+
+                logger.debug("Adding product to order: {}", productName);
+                newOrderPage.addProductByName(productName);
+                pauseForDemo();
+
+                logger.debug("Changing product quantity to: {}", quantity);
+                newOrderPage.setOrderItemQuantity(i, quantity);
+            }
+
+            double actualTotal = newOrderPage.getOrderTotalValue();
+
+            // Removed redundant String.valueOf() - Log4j handles double natively
+            logger.debug("Verifying total price order is below limit. Actual total: {}, Max allowed: {}", actualTotal, maxPriceAllowed);
+
+            assertTrue("Total price order is not below the allowed limit. Actual total: " + actualTotal, actualTotal < maxPriceAllowed);
+
+            logger.debug("Submitting order.");
+            newOrderPage.submitOrder();
+            pauseForDemo();
+
+            logger.debug("Navigating to Order History using Header.");
+            newOrderPage.header().clickOrderHistory();
+            orderHistoryPage = new OrderHistoryPage(driver);
+
+            logger.debug("Verifying Order History page.");
+            assertEquals("Order History", orderHistoryPage.getPageTitle());
+
+            for (String productName : productNames) {
+                logger.debug("Verifying ordered product appears in history: {}", productName);
+                assertTrue("The ordered product was not found in order history: " + productName,
+                        orderHistoryPage.isOrderDisplayed(productName));
+            }
+
+            logger.debug("Verifying order status is displayed: {}", expectedStatus);
+            assertTrue("Expected order status was not displayed: " + expectedStatus,
+                    orderHistoryPage.isStatusDisplayed(expectedStatus));
+
+            logger.info("Success: Below total limit order verification passed.");
+            pauseForDemo();
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void executePriceOrderTotalLimitExceeded(JSONArray items, double maxPriceAllowed, String expectedErrorMessage) {
+        List<String> productNames = new ArrayList<>();
+        try {
+            logger.debug("Opening New Order page.");
+            driver.get("https://nano-flow-order-direct.base44.app/order");
+            newOrderPage = new NewOrderPage(driver);
+
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+                String categoryName = (String) item.get("category");
+                String productName = (String) item.get("productName");
+                int quantity = ((Number) item.get("quantity")).intValue();
+
+                productNames.add(productName);
+
+                logger.debug("Selecting category: {}", categoryName);
+                newOrderPage.selectCategoryByVisibleText(categoryName);
+                pauseForDemo();
+
+                logger.debug("Adding product to order: {}", productName);
+                newOrderPage.addProductByName(productName);
+                pauseForDemo();
+
+                logger.debug("Changing product quantity to: {}", quantity);
+                newOrderPage.setOrderItemQuantity(i, quantity);
+            }
+
+            double actualTotal = newOrderPage.getOrderTotalValue();
+
+            // Removed redundant String.valueOf() here as well
+            logger.debug("Verifying total price order is above limit. Actual total: {}, Limit: {}", actualTotal, maxPriceAllowed);
+
+            assertTrue("Total price order should be above the allowed limit. Actual total: " + actualTotal, actualTotal > maxPriceAllowed);
+
+            logger.debug("Submitting order above limit.");
+            newOrderPage.clickSubmitOrderButton();
+            pauseForDemo();
+
+            logger.debug("Verifying validation error message appears");
+            assertTrue("Expected validation error message was not displayed.",
+                    newOrderPage.isValidationErrorDisplayed(expectedErrorMessage));
+
+            logger.info("Success: Above total limit order verification passed.");
+            pauseForDemo();
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
+            throw e;
+        }
     }
 
     private void executeItemRemovalVerification(JSONArray itemsToAdd, String itemToRemove) {
         try {
-            logger.info("Opening New Order page.");
+            logger.debug("Opening New Order page.");
             driver.get("https://nano-flow-order-direct.base44.app/order");
-
             newOrderPage = new NewOrderPage(driver);
 
-            // 1. הוספת המוצרים
+            // 1. Add the products
             for (int i = 0; i < itemsToAdd.size(); i++) {
                 JSONObject item = (JSONObject) itemsToAdd.get(i);
                 String categoryName = (String) item.get("category");
@@ -264,23 +249,23 @@ public class OrderTotalPriceTest {
                 newOrderPage.setOrderItemQuantity(i, quantity);
             }
 
-            // 2. שמירת המחיר הכולל לפני המחיקה
+            // 2. Save the total price before removal
             double initialTotal = newOrderPage.getOrderTotalValue();
-            logger.info("Initial total before removal: {}", initialTotal);
+            logger.debug("Initial total before removal: {}", initialTotal);
 
-            // 3. מחיקת המוצר
-            logger.info("Removing product: {}", itemToRemove);
+            // 3. Remove the product
+            logger.debug("Removing product: {}", itemToRemove);
             newOrderPage.removeProductFromSummary(itemToRemove);
             pauseForDemo();
 
-            // 4. אימות: המוצר לא קיים יותר ברשימה
+            // 4. Verify: Product is no longer in the list
             boolean isStillThere = newOrderPage.isProductInSummary(itemToRemove);
             assertTrue("Validation failed: Product '" + itemToRemove + "' is still visible after removal.", !isStillThere);
             logger.info("Success: Product '{}' was successfully removed from the UI.", itemToRemove);
 
-            // 5. אימות: המחיר התעדכן (קטן יותר מהמחיר המקורי)
+            // 5. Verify: Total price updated (decreased compared to initial total)
             double newTotal = newOrderPage.getOrderTotalValue();
-            logger.info("New total after removal: {}", newTotal);
+            logger.debug("New total after removal: {}", newTotal);
 
             assertTrue("Validation failed: Total price did not decrease after item removal. Initial: " + initialTotal + ", New: " + newTotal,
                     newTotal < initialTotal);
@@ -299,6 +284,7 @@ public class OrderTotalPriceTest {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
+            logger.warn("Thread sleep was interrupted during demo pause.", e);
             Thread.currentThread().interrupt();
         }
     }

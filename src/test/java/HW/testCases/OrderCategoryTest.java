@@ -47,10 +47,11 @@ public class OrderCategoryTest {
         }
     }
 
+    // ==================== TESTS ====================
+
     @Test
     public void testOrderWithAllowedCategoryIsSubmittedSuccessfully() {
-        logger.info("Starting test: order with allowed category is submitted successfully.");
-
+        logger.info("Starting test: Order with allowed category is submitted successfully.");
         JSONArray testDataArray = (JSONArray) allOrderCategoryData.get("validCategoryOrderTests");
 
         for (Object testDataObject : testDataArray) {
@@ -62,14 +63,12 @@ public class OrderCategoryTest {
 
             executeAllowedCategoryOrderVerification(categoryName, productName, expectedStatus);
         }
-
-        logger.info("Finished test: order with allowed category is submitted successfully.");
+        logger.info("Finished test: Order with allowed category is submitted successfully.");
     }
 
     @Test
     public void testOrderWithFurnitureAndGroceriesIsBlocked() {
-        logger.info("Starting test: order with Furniture and Groceries is blocked.");
-
+        logger.info("Starting test: Order with Furniture and Groceries is blocked.");
         JSONArray testDataArray = (JSONArray) allOrderCategoryData.get("invalidMixedCategoryOrderTests");
 
         for (Object testDataObject : testDataArray) {
@@ -82,86 +81,76 @@ public class OrderCategoryTest {
             String expectedErrorMessage = (String) testData.get("expectedErrorMessage");
 
             executeBlockedMixedCategoryOrderVerification(
-                    firstCategory,
-                    firstProductName,
-                    secondCategory,
-                    secondProductName,
-                    expectedErrorMessage
+                    firstCategory, firstProductName, secondCategory, secondProductName, expectedErrorMessage
             );
         }
-
-        logger.info("Finished test: order with Furniture and Groceries is blocked.");
+        logger.info("Finished test: Order with Furniture and Groceries is blocked.");
     }
 
-    private void executeAllowedCategoryOrderVerification(String categoryName,
-                                                         String productName,
-                                                         String expectedStatus) {
-        logger.info("Opening New Order page.");
-        driver.get("https://nano-flow-order-direct.base44.app/order");
+    // ==================== HELPER METHODS ====================
 
+    private void executeAllowedCategoryOrderVerification(String categoryName, String productName, String expectedStatus) {
+        logger.debug("Opening New Order page.");
+        driver.get("https://nano-flow-order-direct.base44.app/order");
         newOrderPage = new NewOrderPage(driver);
 
-        logger.info("Creating order. Category: {}, Product: {}", categoryName, productName);
+        logger.debug("Creating order. Category: '{}', Product: '{}'", categoryName, productName);
         newOrderPage.createOrder(categoryName, productName);
-
         pauseForDemo();
 
-        logger.info("Navigating to Order History using Header.");
+        logger.debug("Navigating to Order History using Header.");
         newOrderPage.header().clickOrderHistory();
-
         orderHistoryPage = new OrderHistoryPage(driver);
 
-        logger.info("Verifying Order History page.");
+        logger.debug("Verifying Order History page.");
         assertEquals("Order History", orderHistoryPage.getPageTitle());
 
-        logger.info("Verifying ordered product appears in history: {}", productName);
+        logger.debug("Verifying ordered product appears in history: '{}'", productName);
         assertTrue("The ordered product was not found in order history: " + productName,
                 orderHistoryPage.isOrderDisplayed(productName));
 
-        logger.info("Verifying order status is displayed: {}", expectedStatus);
+        logger.debug("Verifying order status is displayed: '{}'", expectedStatus);
         assertTrue("Expected order status was not displayed: " + expectedStatus,
                 orderHistoryPage.isStatusDisplayed(expectedStatus));
 
-        logger.info("Allowed category order verification passed.");
+        logger.info("Success: Allowed category order verification passed for product '{}'.", productName);
     }
 
-    private void executeBlockedMixedCategoryOrderVerification(String firstCategory,
-                                                              String firstProductName,
-                                                              String secondCategory,
-                                                              String secondProductName,
+    private void executeBlockedMixedCategoryOrderVerification(String firstCategory, String firstProductName,
+                                                              String secondCategory, String secondProductName,
                                                               String expectedErrorMessage) {
-        logger.info("Opening New Order page.");
+        logger.debug("Opening New Order page.");
         driver.get("https://nano-flow-order-direct.base44.app/order");
-
         newOrderPage = new NewOrderPage(driver);
 
-        logger.info("Adding first product. Category: {}, Product: {}", firstCategory, firstProductName);
+        logger.debug("Adding first product. Category: '{}', Product: '{}'", firstCategory, firstProductName);
         newOrderPage.selectCategoryByVisibleText(firstCategory);
         pauseForDemo();
         newOrderPage.addProductByName(firstProductName);
         pauseForDemo();
 
-        logger.info("Adding second product. Category: {}, Product: {}", secondCategory, secondProductName);
+        logger.debug("Adding second product. Category: '{}', Product: '{}'", secondCategory, secondProductName);
         newOrderPage.selectCategoryByVisibleText(secondCategory);
         pauseForDemo();
         newOrderPage.addProductByName(secondProductName);
         pauseForDemo();
 
-        logger.info("Submitting mixed category order.");
+        logger.debug("Submitting mixed category order.");
         newOrderPage.clickSubmitOrderButton();
         pauseForDemo();
 
-        logger.info("Verifying expected error message appears: {}", expectedErrorMessage);
+        logger.debug("Verifying expected error message appears: '{}'", expectedErrorMessage);
         assertTrue("Expected validation error message was not displayed: " + expectedErrorMessage,
                 newOrderPage.isValidationErrorDisplayed(expectedErrorMessage));
 
-        logger.info("Blocked mixed category order verification passed.");
+        logger.info("Success: Blocked mixed category order verification passed.");
     }
 
     private void pauseForDemo() {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
+            logger.warn("Thread sleep was interrupted during demo pause.", e);
             Thread.currentThread().interrupt();
         }
     }

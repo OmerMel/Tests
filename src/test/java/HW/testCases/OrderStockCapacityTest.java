@@ -50,9 +50,11 @@ public class OrderStockCapacityTest {
         }
     }
 
+    // ==================== TESTS ====================
+
     @Test
     public void testOrderWithinStockCapacity() {
-        logger.info("Starting test: order items within available stock capacity.");
+        logger.info("Starting test: Order items within available stock capacity.");
 
         JSONArray testDataArray = (JSONArray) allStockCapacityData.get("withinStockTests");
 
@@ -64,106 +66,12 @@ public class OrderStockCapacityTest {
 
             executeOrderWithinStockCapacity(items, expectedStatus);
         }
-
-        logger.info("Finished test: order within stock capacity.");
-    }
-
-    private void executeOrderWithinStockCapacity(JSONArray items, String expectedStatus) {
-        List<String> productNames = new ArrayList<>();
-
-        // מפות לשמירת נתונים לטובת בדיקת המלאי בסוף הטסט
-        Map<String, Integer> initialStocks = new HashMap<>();
-        Map<String, Integer> orderedQuantities = new HashMap<>();
-        Map<String, String> productCategories = new HashMap<>();
-
-        try {
-            logger.info("Opening New Order page.");
-            driver.get("https://nano-flow-order-direct.base44.app/order");
-
-            newOrderPage = new NewOrderPage(driver);
-
-            for (int i = 0; i < items.size(); i++) {
-                JSONObject item = (JSONObject) items.get(i);
-                String categoryName = (String) item.get("category");
-                String productName = (String) item.get("productName");
-                int quantity = ((Number) item.get("quantity")).intValue();
-
-                productNames.add(productName);
-                orderedQuantities.put(productName, quantity);
-                productCategories.put(productName, categoryName);
-
-                logger.info("Selecting category: {}", categoryName);
-                newOrderPage.selectCategoryByVisibleText(categoryName);
-                pauseForDemo();
-
-                // *** קריאת המלאי הנוכחי ושמירתו לפני ההוספה לעגלה ***
-                int stock = newOrderPage.getProductStock(productName);
-                initialStocks.put(productName, stock);
-                logger.info("Initial stock for '{}': {}", productName, stock);
-
-                logger.info("Adding product to order: {}", productName);
-                newOrderPage.addProductByName(productName);
-                pauseForDemo();
-
-                logger.info("Changing product quantity to: {}", quantity);
-                newOrderPage.setOrderItemQuantity(i, quantity);
-            }
-
-            logger.info("Submitting order.");
-            newOrderPage.submitOrder();
-            pauseForDemo();
-
-            logger.info("Navigating to Order History using Header.");
-            newOrderPage.header().clickOrderHistory();
-            orderHistoryPage = new OrderHistoryPage(driver);
-
-            logger.info("Verifying Order History page.");
-            assertEquals("Order History", orderHistoryPage.getPageTitle());
-
-            for (String productName : productNames) {
-                logger.info("Verifying ordered product appears in history: {}", productName);
-                assertTrue("The ordered product was not found in order history: " + productName,
-                        orderHistoryPage.isOrderDisplayed(productName));
-            }
-
-            logger.info("Verifying order status is displayed: {}", expectedStatus);
-            assertTrue("Expected order status was not displayed: " + expectedStatus,
-                    orderHistoryPage.isStatusDisplayed(expectedStatus));
-
-            // *** השלב החדש: חזרה לדף ההזמנות ובדיקה שהמלאי ירד ***
-            logger.info("Returning to Order Page to verify stock updates.");
-            newOrderPage.header().clickNewOrder();
-            pauseForDemo();
-
-            for (String productName : productNames) {
-                String category = productCategories.get(productName);
-
-                logger.info("Selecting category '{}' to check new stock for '{}'", category, productName);
-                newOrderPage.selectCategoryByVisibleText(category);
-                pauseForDemo();
-
-                int newStock = newOrderPage.getProductStock(productName);
-                int expectedStock = initialStocks.get(productName) - orderedQuantities.get(productName);
-
-                logger.info("Verifying stock for '{}'. Expected: {}, Actual: {}", productName, expectedStock, newStock);
-                assertEquals("Stock did not decrease correctly for " + productName, expectedStock, newStock);
-            }
-
-            logger.info("Within stock capacity (and stock update) verification passed.");
-            pauseForDemo();
-
-        } catch (AssertionError e) {
-            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
-            throw e;
-        }
+        logger.info("Finished test: Order within stock capacity.");
     }
 
     @Test
     public void testOrderExceedsStockCapacity() {
-        logger.info("Starting test: order items exceeding available stock capacity.");
+        logger.info("Starting test: Order items exceeding available stock capacity.");
 
         JSONArray testDataArray = (JSONArray) allStockCapacityData.get("exceedsStockTests");
 
@@ -175,61 +83,12 @@ public class OrderStockCapacityTest {
 
             executeOrderExceedsStockCapacity(items, expectedErrorMessage);
         }
-
-        logger.info("Finished test: order exceeding stock capacity.");
-    }
-
-    private void executeOrderExceedsStockCapacity(JSONArray items, String expectedErrorMessage) {
-        List<String> productNames = new ArrayList<>();
-        try {
-            logger.info("Opening New Order page.");
-            driver.get("https://nano-flow-order-direct.base44.app/order");
-
-            newOrderPage = new NewOrderPage(driver);
-
-            for (int i = 0; i < items.size(); i++) {
-                JSONObject item = (JSONObject) items.get(i);
-                String categoryName = (String) item.get("category");
-                String productName = (String) item.get("productName");
-                int quantity = ((Number) item.get("quantity")).intValue();
-
-                productNames.add(productName);
-
-                logger.info("Selecting category: {}", categoryName);
-                newOrderPage.selectCategoryByVisibleText(categoryName);
-                pauseForDemo();
-
-                logger.info("Adding product to order: {}", productName);
-                newOrderPage.addProductByName(productName);
-                pauseForDemo();
-
-                logger.info("Changing product quantity to: {}", quantity);
-                newOrderPage.setOrderItemQuantity(i, quantity);
-            }
-
-            logger.info("Attempting to submit order.");
-            newOrderPage.clickSubmitOrderButton();
-            pauseForDemo();
-
-            logger.info("Verifying validation error message appears.");
-            assertTrue("Expected validation error message was not displayed.",
-                    newOrderPage.isValidationErrorDisplayed(expectedErrorMessage));
-
-            logger.info("Exceeds stock capacity verification passed.");
-            pauseForDemo();
-
-        } catch (AssertionError e) {
-            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
-            throw e;
-        }
+        logger.info("Finished test: Order exceeding stock capacity.");
     }
 
     @Test
     public void testOutOfStockButtonDisabled() {
-        logger.info("Starting test: verify Add to Order button is disabled when stock is depleted.");
+        logger.info("Starting test: Verify 'Add to Order' button is disabled when stock is depleted.");
 
         JSONArray testDataArray = (JSONArray) allStockCapacityData.get("outOfStockTests");
 
@@ -242,45 +101,184 @@ public class OrderStockCapacityTest {
 
             executeOutOfStockButtonDisabled(categoryName, productName, stockQuantity);
         }
+        logger.info("Finished test: 'Add to Order' button disabled.");
+    }
 
-        logger.info("Finished test: Add to Order button disabled.");
+    // ==================== HELPER METHODS ====================
+
+    private void executeOrderWithinStockCapacity(JSONArray items, String expectedStatus) {
+        List<String> productNames = new ArrayList<>();
+
+        // Maps to store data for stock verification at the end of the test
+        Map<String, Integer> initialStocks = new HashMap<>();
+        Map<String, Integer> orderedQuantities = new HashMap<>();
+        Map<String, String> productCategories = new HashMap<>();
+
+        try {
+            logger.debug("Opening New Order page.");
+            driver.get("https://nano-flow-order-direct.base44.app/order");
+            newOrderPage = new NewOrderPage(driver);
+
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+                String categoryName = (String) item.get("category");
+                String productName = (String) item.get("productName");
+                int quantity = ((Number) item.get("quantity")).intValue();
+
+                productNames.add(productName);
+                orderedQuantities.put(productName, quantity);
+                productCategories.put(productName, categoryName);
+
+                logger.debug("Selecting category: {}", categoryName);
+                newOrderPage.selectCategoryByVisibleText(categoryName);
+                pauseForDemo();
+
+                // Read and store current stock before adding to cart
+                int stock = newOrderPage.getProductStock(productName);
+                initialStocks.put(productName, stock);
+                logger.debug("Initial stock for '{}': {}", productName, stock);
+
+                logger.debug("Adding product to order: {}", productName);
+                newOrderPage.addProductByName(productName);
+                pauseForDemo();
+
+                logger.debug("Changing product quantity to: {}", quantity);
+                newOrderPage.setOrderItemQuantity(i, quantity);
+            }
+
+            logger.debug("Submitting order.");
+            newOrderPage.submitOrder();
+            pauseForDemo();
+
+            logger.debug("Navigating to Order History using Header.");
+            newOrderPage.header().clickOrderHistory();
+            orderHistoryPage = new OrderHistoryPage(driver);
+
+            logger.debug("Verifying Order History page.");
+            assertEquals("Order History", orderHistoryPage.getPageTitle());
+
+            for (String productName : productNames) {
+                logger.debug("Verifying ordered product appears in history: {}", productName);
+                assertTrue("The ordered product was not found in order history: " + productName,
+                        orderHistoryPage.isOrderDisplayed(productName));
+            }
+
+            logger.debug("Verifying order status is displayed: {}", expectedStatus);
+            assertTrue("Expected order status was not displayed: " + expectedStatus,
+                    orderHistoryPage.isStatusDisplayed(expectedStatus));
+
+            // Navigate back to the Order Page and verify stock decreased
+            logger.debug("Returning to Order Page to verify stock updates.");
+            newOrderPage.header().clickNewOrder();
+            pauseForDemo();
+
+            for (String productName : productNames) {
+                String category = productCategories.get(productName);
+
+                logger.debug("Selecting category '{}' to check new stock for '{}'", category, productName);
+                newOrderPage.selectCategoryByVisibleText(category);
+                pauseForDemo();
+
+                int newStock = newOrderPage.getProductStock(productName);
+                int expectedStock = initialStocks.get(productName) - orderedQuantities.get(productName);
+
+                logger.debug("Verifying stock for '{}'. Expected: {}, Actual: {}", productName, expectedStock, newStock);
+                assertEquals("Stock did not decrease correctly for " + productName, expectedStock, newStock);
+            }
+
+            logger.info("Success: Within stock capacity and stock update verification passed.");
+            pauseForDemo();
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void executeOrderExceedsStockCapacity(JSONArray items, String expectedErrorMessage) {
+        List<String> productNames = new ArrayList<>();
+        try {
+            logger.debug("Opening New Order page.");
+            driver.get("https://nano-flow-order-direct.base44.app/order");
+            newOrderPage = new NewOrderPage(driver);
+
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+                String categoryName = (String) item.get("category");
+                String productName = (String) item.get("productName");
+                int quantity = ((Number) item.get("quantity")).intValue();
+
+                productNames.add(productName);
+
+                logger.debug("Selecting category: {}", categoryName);
+                newOrderPage.selectCategoryByVisibleText(categoryName);
+                pauseForDemo();
+
+                logger.debug("Adding product to order: {}", productName);
+                newOrderPage.addProductByName(productName);
+                pauseForDemo();
+
+                logger.debug("Changing product quantity to: {}", quantity);
+                newOrderPage.setOrderItemQuantity(i, quantity);
+            }
+
+            logger.debug("Attempting to submit order.");
+            newOrderPage.clickSubmitOrderButton();
+            pauseForDemo();
+
+            logger.debug("Verifying validation error message appears.");
+            assertTrue("Expected validation error message was not displayed.",
+                    newOrderPage.isValidationErrorDisplayed(expectedErrorMessage));
+
+            logger.info("Success: Exceeds stock capacity verification passed.");
+            pauseForDemo();
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for products {}: {}", productNames, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("An unexpected error occurred while processing products {}: {}", productNames, e.getMessage(), e);
+            throw e;
+        }
     }
 
     private void executeOutOfStockButtonDisabled(String categoryName, String productName, int stockQuantity) {
         try {
-            logger.info("Phase 1: Ordering the entire available stock.");
+            logger.debug("Phase 1: Ordering the entire available stock.");
             driver.get("https://nano-flow-order-direct.base44.app/order");
-
             newOrderPage = new NewOrderPage(driver);
 
-            logger.info("Selecting category: {}", categoryName);
+            logger.debug("Selecting category: {}", categoryName);
             newOrderPage.selectCategoryByVisibleText(categoryName);
             pauseForDemo();
 
-            logger.info("Adding product to order: {}", productName);
+            logger.debug("Adding product to order: {}", productName);
             newOrderPage.addProductByName(productName);
             pauseForDemo();
 
-            logger.info("Changing product quantity to max stock: {}", stockQuantity);
+            logger.debug("Changing product quantity to max stock: {}", stockQuantity);
             newOrderPage.setFirstOrderItemQuantity(stockQuantity);
 
-            logger.info("Submitting order.");
+            logger.debug("Submitting order.");
             newOrderPage.submitOrder();
             pauseForDemo();
 
-            logger.info("Phase 2: Returning to Order Page to verify button state.");
+            logger.debug("Phase 2: Returning to Order Page to verify button state.");
             newOrderPage.header().clickNewOrder();
             pauseForDemo();
 
-            logger.info("Selecting category again: {}", categoryName);
+            logger.debug("Selecting category again: {}", categoryName);
             newOrderPage.selectCategoryByVisibleText(categoryName);
             pauseForDemo();
 
-            logger.info("Verifying 'Add to Order' button is disabled for product: {}", productName);
+            logger.debug("Verifying 'Add to Order' button is disabled for product: {}", productName);
             assertTrue("Expected 'Add to Order' button to be disabled for out of stock product: " + productName,
                     newOrderPage.isProductAddButtonDisabled(productName));
 
-            logger.info("Out of stock button verification passed.");
+            logger.info("Success: Out of stock button verification passed.");
             pauseForDemo();
 
         } catch (AssertionError e) {
@@ -296,6 +294,7 @@ public class OrderStockCapacityTest {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
+            logger.warn("Thread sleep was interrupted during demo pause.", e);
             Thread.currentThread().interrupt();
         }
     }

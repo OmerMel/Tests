@@ -30,11 +30,12 @@ public class ReturnsTest {
 
     @Before
     public void setUp() {
+        logger.info("Starting ReturnsTest setup.");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // אנחנו תמיד מתחילים מדף ההזמנות כי חייבים לקנות משהו לפני שמחזירים
+        // Always start from the Order page since a purchase is required before returning
         driver.get("https://nano-flow-order-direct.base44.app/order");
         orderPage = new NewOrderPage(driver);
         returnsPage = new ReturnsPage(driver);
@@ -43,173 +44,233 @@ public class ReturnsTest {
             JSONParser jsonParser = new JSONParser();
             FileReader reader = new FileReader("src/test/resources/returns_data.json");
             returnsData = (JSONObject) jsonParser.parse(reader);
+            logger.info("Successfully loaded returns_data.json.");
         } catch (Exception e) {
             logger.error("Failed to load JSON data file.", e);
         }
     }
 
+    // ==================== TESTS ====================
+
     @Test
     public void testValidReturnUpdatesStockAndRemovesFromList() throws InterruptedException {
-        logger.info("Starting valid return test.");
+        logger.info("Starting data-driven test: Valid return updates stock and removes from list.");
         JSONArray validTests = (JSONArray) returnsData.get("validReturnTests");
-        JSONObject testCase = (JSONObject) validTests.get(0);
 
-        String category = (String) testCase.get("category");
-        String productName = (String) testCase.get("productName");
-        int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
-        int returnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
+        for (int i = 0; i < validTests.size(); i++) {
+            JSONObject testCase = (JSONObject) validTests.get(i);
+            String category = (String) testCase.get("category");
+            String productName = (String) testCase.get("productName");
+            int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
+            int returnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
 
-        // 1. קניית המוצר
-        orderPage.selectCategoryByVisibleText(category);
-        Thread.sleep(1000);
-        int initialStock = orderPage.getProductStock(productName);
-        logger.info("Initial stock for '{}' is {}", productName, initialStock);
-
-        orderPage.addProductByName(productName);
-        orderPage.setOrderItemQuantity(0, orderQuantity);
-        orderPage.submitOrder();
-        Thread.sleep(2000); // המתנה שההזמנה תירשם
-
-        // 2. מעבר לדף ההחזרות
-        logger.debug("Navigating to Returns page.");
-        orderPage.header().clickReturns(); // מניח שיש לך פונקציה כזו ב-Header!
-        Thread.sleep(1500);
-
-        // 3. ביצוע ההחזרה
-        logger.info("Returning {} units of '{}'", returnQuantity, productName);
-        returnsPage.selectProductToReturn(productName);
-        returnsPage.setReturnQuantity(returnQuantity);
-        returnsPage.submitReturn();
-        Thread.sleep(2000);
-
-        // אימות 1: אם החזרנו את כל הכמות, המוצר אמור להיעלם מרשימת ההחזרות
-        if (orderQuantity == returnQuantity) {
-            boolean isStillAvailable = returnsPage.isProductAvailableForReturn(productName);
-            assertTrue("Validation failed: Product is still in returns list after full return.", !isStillAvailable);
-            logger.info("Success: Product removed from returns list.");
+            executeValidReturnVerification(category, productName, orderQuantity, returnQuantity);
         }
-
-        // 4. ניווט חזרה לדף ההזמנות לוודא שהמלאי התעדכן
-        orderPage.header().clickNewOrder();
-        Thread.sleep(1500);
-        orderPage.selectCategoryByVisibleText(category);
-        Thread.sleep(1500);
-
-        // אימות 2: המלאי עלה חזרה
-        int finalStock = orderPage.getProductStock(productName);
-        int expectedFinalStock = initialStock - orderQuantity + returnQuantity;
-
-        assertEquals("Validation failed: Stock was not updated correctly after return.", expectedFinalStock, finalStock);
-        logger.info("Success: Stock updated correctly. Final stock is {}", finalStock);
+        logger.info("Finished test: Valid return updates stock.");
     }
 
     @Test
     public void testInvalidReturnShowsErrorAndKeepsStock() throws InterruptedException {
-        logger.info("Starting invalid return test.");
+        logger.info("Starting data-driven test: Invalid return shows error and keeps stock.");
         JSONArray invalidTests = (JSONArray) returnsData.get("invalidReturnTests");
-        JSONObject testCase = (JSONObject) invalidTests.get(0);
 
-        String category = (String) testCase.get("category");
-        String productName = (String) testCase.get("productName");
-        int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
-        int invalidReturnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
-        String expectedError = (String) testCase.get("expectedErrorMessage");
+        for (int i = 0; i < invalidTests.size(); i++) {
+            JSONObject testCase = (JSONObject) invalidTests.get(i);
+            String category = (String) testCase.get("category");
+            String productName = (String) testCase.get("productName");
+            int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
+            int invalidReturnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
+            String expectedError = (String) testCase.get("expectedErrorMessage");
 
-        // 1. קניית המוצר
-        orderPage.selectCategoryByVisibleText(category);
-        Thread.sleep(1000);
-        int initialStock = orderPage.getProductStock(productName);
-
-        orderPage.addProductByName(productName);
-        orderPage.setOrderItemQuantity(0, orderQuantity);
-        orderPage.submitOrder();
-        Thread.sleep(2000);
-
-        int expectedStockAfterOrder = initialStock - orderQuantity;
-
-        // 2. מעבר לדף ההחזרות
-        orderPage.header().clickReturns();
-        Thread.sleep(1500);
-
-        // 3. ניסיון החזרה חורג
-        logger.info("Attempting to return {} units (ordered only {}).", invalidReturnQuantity, orderQuantity);
-        returnsPage.selectProductToReturn(productName);
-        returnsPage.setReturnQuantity(invalidReturnQuantity);
-        returnsPage.submitReturn();
-
-        // אימות 1: הודעת שגיאה קופצת
-        String actualError = returnsPage.getErrorMessage();
-        assertTrue("Validation failed: Expected error message not found.", actualError.contains(expectedError));
-        logger.info("Success: Expected error message displayed: '{}'", actualError);
-
-        // 4. ניווט חזרה לדף ההזמנות לוודא שהמלאי *לא* השתנה
-        orderPage.header().clickNewOrder();
-        Thread.sleep(1500);
-        orderPage.selectCategoryByVisibleText(category);
-        Thread.sleep(1500);
-
-        // אימות 2: המלאי נשאר כפי שהיה אחרי ההזמנה (לא חזר למלאי)
-        int finalStock = orderPage.getProductStock(productName);
-        assertEquals("Validation failed: Stock changed despite invalid return attempt.", expectedStockAfterOrder, finalStock);
-        logger.info("Success: Stock remained untouched.");
+            executeInvalidReturnVerification(category, productName, orderQuantity, invalidReturnQuantity, expectedError);
+        }
+        logger.info("Finished test: Invalid return shows error.");
     }
 
     @Test
     public void testPartialReturnUpdatesDropdownQuantity() throws InterruptedException {
-        logger.info("Starting partial return test.");
-
-        // טעינת הנתונים מה-JSON
+        logger.info("Starting data-driven test: Partial return updates dropdown quantity.");
         JSONArray partialTests = (JSONArray) returnsData.get("partialReturnTests");
-        JSONObject testCase = (JSONObject) partialTests.get(0);
 
-        String category = (String) testCase.get("category");
-        String productName = (String) testCase.get("productName");
-        int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
-        int returnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
+        for (int i = 0; i < partialTests.size(); i++) {
+            JSONObject testCase = (JSONObject) partialTests.get(i);
+            String category = (String) testCase.get("category");
+            String productName = (String) testCase.get("productName");
+            int orderQuantity = ((Long) testCase.get("orderQuantity")).intValue();
+            int returnQuantity = ((Long) testCase.get("returnQuantity")).intValue();
 
-        // 1. קניית המוצר (קונים 2)
-        logger.info("Ordering {} units of {}", orderQuantity, productName);
-        orderPage.selectCategoryByVisibleText(category);
-        Thread.sleep(1000);
-        orderPage.addProductByName(productName);
-        orderPage.setOrderItemQuantity(0, orderQuantity);
-        orderPage.submitOrder();
-        Thread.sleep(2000);
+            executePartialReturnVerification(category, productName, orderQuantity, returnQuantity);
+        }
+        logger.info("Finished test: Partial return updates dropdown.");
+    }
 
-        // 2. מעבר לדף ההחזרות
-        orderPage.header().clickReturns();
-        Thread.sleep(1500);
+    // ==================== HELPER METHODS ====================
 
-        // 3. אימות ראשוני: מוודאים שהדרופדאון מציג את הכמות המלאה שקנינו
-        int initialQuantityInDropdown = returnsPage.getRemainingQuantityFromDropdown(productName);
-        assertEquals("Validation failed: Dropdown does not show the correct initial ordered quantity.",
-                orderQuantity, initialQuantityInDropdown);
-        logger.info("Verified initial dropdown quantity is: {}", initialQuantityInDropdown);
+    private void executeValidReturnVerification(String category, String productName, int orderQuantity, int returnQuantity) throws InterruptedException {
+        try {
+            // Step 1: Purchase the product
+            logger.debug("Phase 1: Ordering {} units of '{}' from category '{}'", orderQuantity, productName, category);
+            orderPage.selectCategoryByVisibleText(category);
+            Thread.sleep(1000);
 
-        // 4. ביצוע החזרה חלקית (מחזירים 1)
-        logger.info("Performing partial return of {} units.", returnQuantity);
-        returnsPage.selectProductToReturn(productName);
-        returnsPage.setReturnQuantity(returnQuantity);
-        returnsPage.submitReturn();
-        Thread.sleep(2000);
+            int initialStock = orderPage.getProductStock(productName);
+            logger.debug("Initial stock for '{}' is {}", productName, initialStock);
 
-        // 5. אימות סופי: מוודאים שהמוצר עדיין ברשימה, אבל הכמות שלו ירדה
-        boolean isStillAvailable = returnsPage.isProductAvailableForReturn(productName);
-        assertTrue("Validation failed: Product completely disappeared from list after partial return.", isStillAvailable);
+            orderPage.addProductByName(productName);
+            orderPage.setOrderItemQuantity(0, orderQuantity);
+            orderPage.submitOrder();
+            Thread.sleep(2000); // Wait for order registration
 
-        int updatedQuantityInDropdown = returnsPage.getRemainingQuantityFromDropdown(productName);
-        int expectedRemainingQuantity = orderQuantity - returnQuantity;
+            // Step 2: Navigate to returns page
+            logger.debug("Phase 2: Navigating to Returns page.");
+            orderPage.header().clickReturns();
+            Thread.sleep(1500);
 
-        assertEquals("Validation failed: Dropdown quantity did not update correctly after partial return.",
-                expectedRemainingQuantity, updatedQuantityInDropdown);
+            // Step 3: Execute return
+            logger.debug("Returning {} units of '{}'", returnQuantity, productName);
+            returnsPage.selectProductToReturn(productName);
+            returnsPage.setReturnQuantity(returnQuantity);
+            returnsPage.submitReturn();
+            Thread.sleep(2000);
 
-        logger.info("Success: Dropdown quantity successfully updated from {} to {}.",
-                initialQuantityInDropdown, updatedQuantityInDropdown);
+            // Verification 1: If full quantity is returned, product should disappear from returns list
+            if (orderQuantity == returnQuantity) {
+                boolean isStillAvailable = returnsPage.isProductAvailableForReturn(productName);
+                assertTrue("Validation failed: Product is still in returns list after full return.", !isStillAvailable);
+                logger.debug("Verified: Product removed from returns list.");
+            }
+
+            // Step 4: Navigate back to Order page to verify stock update
+            logger.debug("Phase 3: Navigating back to Order page to verify stock update.");
+            orderPage.header().clickNewOrder();
+            Thread.sleep(1500);
+            orderPage.selectCategoryByVisibleText(category);
+            Thread.sleep(1500);
+
+            // Verification 2: Stock is restored
+            int finalStock = orderPage.getProductStock(productName);
+            int expectedFinalStock = initialStock - orderQuantity + returnQuantity;
+
+            assertEquals("Validation failed: Stock was not updated correctly after return.", expectedFinalStock, finalStock);
+            logger.info("Success: Stock updated correctly for '{}'. Final stock is {}", productName, finalStock);
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for valid return test: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error during valid return test: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void executeInvalidReturnVerification(String category, String productName, int orderQuantity, int invalidReturnQuantity, String expectedError) throws InterruptedException {
+        try {
+            // Step 1: Purchase the product
+            logger.debug("Phase 1: Ordering {} units of '{}'", orderQuantity, productName);
+            orderPage.selectCategoryByVisibleText(category);
+            Thread.sleep(1000);
+
+            int initialStock = orderPage.getProductStock(productName);
+
+            orderPage.addProductByName(productName);
+            orderPage.setOrderItemQuantity(0, orderQuantity);
+            orderPage.submitOrder();
+            Thread.sleep(2000);
+
+            int expectedStockAfterOrder = initialStock - orderQuantity;
+
+            // Step 2: Navigate to returns page
+            logger.debug("Phase 2: Navigating to Returns page.");
+            orderPage.header().clickReturns();
+            Thread.sleep(1500);
+
+            // Step 3: Attempt exceeding return
+            logger.debug("Attempting to return {} units (ordered only {}).", invalidReturnQuantity, orderQuantity);
+            returnsPage.selectProductToReturn(productName);
+            returnsPage.setReturnQuantity(invalidReturnQuantity);
+            returnsPage.submitReturn();
+
+            // Verification 1: Error message pops up
+            String actualError = returnsPage.getErrorMessage();
+            assertTrue("Validation failed: Expected error message not found.", actualError.contains(expectedError));
+            logger.debug("Verified: Expected error message displayed: '{}'", actualError);
+
+            // Step 4: Navigate back to Order page to verify stock did not change
+            logger.debug("Phase 3: Navigating back to Order page to verify stock remained untouched.");
+            orderPage.header().clickNewOrder();
+            Thread.sleep(1500);
+            orderPage.selectCategoryByVisibleText(category);
+            Thread.sleep(1500);
+
+            // Verification 2: Stock remains as it was after the order
+            int finalStock = orderPage.getProductStock(productName);
+            assertEquals("Validation failed: Stock changed despite invalid return attempt.", expectedStockAfterOrder, finalStock);
+            logger.info("Success: Invalid return blocked and stock remained untouched for '{}'.", productName);
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for invalid return test: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error during invalid return test: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private void executePartialReturnVerification(String category, String productName, int orderQuantity, int returnQuantity) throws InterruptedException {
+        try {
+            // Step 1: Purchase the product
+            logger.debug("Phase 1: Ordering {} units of {}", orderQuantity, productName);
+            orderPage.selectCategoryByVisibleText(category);
+            Thread.sleep(1000);
+            orderPage.addProductByName(productName);
+            orderPage.setOrderItemQuantity(0, orderQuantity);
+            orderPage.submitOrder();
+            Thread.sleep(2000);
+
+            // Step 2: Navigate to returns page
+            logger.debug("Phase 2: Navigating to Returns page.");
+            orderPage.header().clickReturns();
+            Thread.sleep(1500);
+
+            // Verification 1: Ensure dropdown shows the full ordered quantity
+            int initialQuantityInDropdown = returnsPage.getRemainingQuantityFromDropdown(productName);
+            assertEquals("Validation failed: Dropdown does not show the correct initial ordered quantity.",
+                    orderQuantity, initialQuantityInDropdown);
+            logger.debug("Verified initial dropdown quantity is: {}", initialQuantityInDropdown);
+
+            // Step 3: Execute partial return
+            logger.debug("Phase 3: Performing partial return of {} units.", returnQuantity);
+            returnsPage.selectProductToReturn(productName);
+            returnsPage.setReturnQuantity(returnQuantity);
+            returnsPage.submitReturn();
+            Thread.sleep(2000);
+
+            // Verification 2: Product is still in the list, but quantity decreased
+            boolean isStillAvailable = returnsPage.isProductAvailableForReturn(productName);
+            assertTrue("Validation failed: Product completely disappeared from list after partial return.", isStillAvailable);
+
+            int updatedQuantityInDropdown = returnsPage.getRemainingQuantityFromDropdown(productName);
+            int expectedRemainingQuantity = orderQuantity - returnQuantity;
+
+            assertEquals("Validation failed: Dropdown quantity did not update correctly after partial return.",
+                    expectedRemainingQuantity, updatedQuantityInDropdown);
+
+            logger.info("Success: Dropdown quantity successfully updated from {} to {} for '{}'.",
+                    initialQuantityInDropdown, updatedQuantityInDropdown, productName);
+
+        } catch (AssertionError e) {
+            logger.error("Validation failed for partial return test: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error during partial return test: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @After
     public void tearDown() {
         if (driver != null) {
+            logger.info("Closing WebDriver.");
             driver.quit();
         }
     }
