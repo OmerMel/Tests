@@ -1,0 +1,392 @@
+{
+  "browser" : "Chrome 149.0.0.0",
+  "date" : "22/6/2026 17:25:39",
+  "device" : "Laptop/Desktop",
+  "dimension" : "2560 X 1249",
+  "errors" : 3,
+  "id" : "id_mqpb5jom31gt9",
+  "notices" : 40,
+  "results" : [ {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_2.H25.2",
+    "element" : "<title>...</title>",
+    "msg" : "Check that the title element describes the document.",
+    "tag" : "title",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H25" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<span class=\"text-lg font-semibold text-foreground tracking-tight\">...</span>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "span",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_4.H77,H78,H79,H80,H81",
+    "element" : "<a id=\"nav-home\" class=\"flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200\n                      text-muted-foreground hover:text-foreground hover:bg-muted\" href=\"/\">...</a>",
+    "msg" : "Check that the link text combined with programmatically determined link context identifies the purpose of the link.",
+    "tag" : "a",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H77", "https://www.w3.org/WAI/WCAG21/Techniques/html/H78", "https://www.w3.org/WAI/WCAG21/Techniques/html/H79", "https://www.w3.org/WAI/WCAG21/Techniques/html/H80", "https://www.w3.org/WAI/WCAG21/Techniques/html/H81" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<span class=\"hidden sm:inline\">...</span>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "span",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_4.H77,H78,H79,H80,H81",
+    "element" : "<a id=\"nav-new-order\" class=\"flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200\n                      text-muted-foreground hover:text-foreground hover:bg-muted\" href=\"/order\">...</a>",
+    "msg" : "Check that the link text combined with programmatically determined link context identifies the purpose of the link.",
+    "tag" : "a",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H77", "https://www.w3.org/WAI/WCAG21/Techniques/html/H78", "https://www.w3.org/WAI/WCAG21/Techniques/html/H79", "https://www.w3.org/WAI/WCAG21/Techniques/html/H80", "https://www.w3.org/WAI/WCAG21/Techniques/html/H81" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<span class=\"hidden sm:inline\">...</span>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "span",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_4.H77,H78,H79,H80,H81",
+    "element" : "<a id=\"nav-order-history\" class=\"flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200\n                      text-muted-foreground hover:text-foreground hover:bg-muted\" href=\"/history\">...</a>",
+    "msg" : "Check that the link text combined with programmatically determined link context identifies the purpose of the link.",
+    "tag" : "a",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H77", "https://www.w3.org/WAI/WCAG21/Techniques/html/H78", "https://www.w3.org/WAI/WCAG21/Techniques/html/H79", "https://www.w3.org/WAI/WCAG21/Techniques/html/H80", "https://www.w3.org/WAI/WCAG21/Techniques/html/H81" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<span class=\"hidden sm:inline\">...</span>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "span",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_4.H77,H78,H79,H80,H81",
+    "element" : "<a id=\"nav-returns\" class=\"flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200\n                      bg-primary text-primary-foreground shadow-md shadow-primary/25\" href=\"/returns\">...</a>",
+    "msg" : "Check that the link text combined with programmatically determined link context identifies the purpose of the link.",
+    "tag" : "a",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H77", "https://www.w3.org/WAI/WCAG21/Techniques/html/H78", "https://www.w3.org/WAI/WCAG21/Techniques/html/H79", "https://www.w3.org/WAI/WCAG21/Techniques/html/H80", "https://www.w3.org/WAI/WCAG21/Techniques/html/H81" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Select.Value",
+    "element" : "<select id=\"return-product-select\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\">...</select>",
+    "msg" : "This select element does not have a value available to an accessibility API.",
+    "tag" : "select",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H91" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_1.H85.2",
+    "element" : "<select id=\"return-product-select\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\">...</select>",
+    "msg" : "If this selection list contains groups of related options, they should be grouped with optgroup.",
+    "tag" : "select",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H85" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_5.H98",
+    "element" : "<select id=\"return-product-select\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\">...</select>",
+    "msg" : "Check that the input field serves a purpose identified in the Input Purposes for User Interface Components section; and that the content is implemented using technologies with support for identifying the expected meaning for form input data.",
+    "tag" : "select",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H98" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_5.H98",
+    "element" : "<select id=\"return-product-select\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\">...</select>",
+    "msg" : "This element does not have an autocomplete attribute. If this field collects information about the user, consider adding one to comply with this Success Criterion.",
+    "tag" : "select",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H98" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_1.G107",
+    "element" : "<select id=\"return-product-select\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\">...</select>",
+    "msg" : "Check that a change of context does not occur when this input field receives focus.",
+    "tag" : "select",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G107" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_1.1_1_1.G94.Image",
+    "element" : "<img src=\"https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp\" alt=\"Apple Airpods\" class=\"w-16 h-16 rounded-lg object-cover\">",
+    "msg" : "Ensure that the img element's alt text serves the same purpose and presents the same information as the image.",
+    "tag" : "img",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G94" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_1.1_1_1.G73,G74",
+    "element" : "<img src=\"https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp\" alt=\"Apple Airpods\" class=\"w-16 h-16 rounded-lg object-cover\">",
+    "msg" : "If this image cannot be fully described in a short text alternative, ensure a long text alternative is also available, such as in the body text or through a link.",
+    "tag" : "img",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G73", "https://www.w3.org/WAI/WCAG21/Techniques/general/G74" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<p class=\"font-medium text-foreground text-sm\">...</p>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "p",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<p class=\"text-xs text-muted-foreground mt-1\">...</p>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "p",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_5.H98",
+    "element" : "<input id=\"return-quantity-input\" type=\"number\" min=\"1\" max=\"2\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\" value=\"5\">",
+    "msg" : "Check that the input field serves a purpose identified in the Input Purposes for User Interface Components section; and that the content is implemented using technologies with support for identifying the expected meaning for form input data.",
+    "tag" : "input",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H98" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_5.H98",
+    "element" : "<input id=\"return-quantity-input\" type=\"number\" min=\"1\" max=\"2\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\" value=\"5\">",
+    "msg" : "This element does not have an autocomplete attribute. If this field collects information about the user, consider adding one to comply with this Success Criterion.",
+    "tag" : "input",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H98" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_1.G107",
+    "element" : "<input id=\"return-quantity-input\" type=\"number\" min=\"1\" max=\"2\" class=\"w-full h-10 px-3 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors\" value=\"5\">",
+    "msg" : "Check that a change of context does not occur when this input field receives focus.",
+    "tag" : "input",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G107" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Alpha",
+    "element" : "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full\" id=\"btn-submit-return\">...</button>",
+    "msg" : "This element's text or background contains transparency. Ensure the contrast ratio between the text and background are at least 4.5:1.",
+    "tag" : "button",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_1.G107",
+    "element" : "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full\" id=\"btn-submit-return\">...</button>",
+    "msg" : "Check that a change of context does not occur when this input field receives focus.",
+    "tag" : "button",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G107" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_10.C32,C31,C33,C38,SCR34,G206",
+    "element" : "<div class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\">...</div>",
+    "msg" : "This element has \"position: fixed\". This may require scrolling in two dimensions, which is considered a failure of this Success Criterion.",
+    "tag" : "div",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/css/C32", "https://www.w3.org/WAI/WCAG21/Techniques/css/C31", "https://www.w3.org/WAI/WCAG21/Techniques/css/C33", "https://www.w3.org/WAI/WCAG21/Techniques/css/C38", "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR34", "https://www.w3.org/WAI/WCAG21/Techniques/general/G206" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
+    "element" : "<div class=\"text-sm font-semibold\">...</div>",
+    "msg" : "This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.62:1. Recommendation:  change background to #db2f2f.",
+    "tag" : "div",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 1
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
+    "element" : "<div class=\"text-sm opacity-90\">...</div>",
+    "msg" : "This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.62:1. Recommendation:  change background to #db2f2f.",
+    "tag" : "div",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G18" ],
+    "type" : 1
+  }, {
+    "code" : "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",
+    "element" : "<button class=\"absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600\" toast-close=\"\">...</button>",
+    "msg" : "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
+    "tag" : "button",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H91" ],
+    "type" : 1
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_1.G107",
+    "element" : "<button class=\"absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600\" toast-close=\"\">...</button>",
+    "msg" : "Check that a change of context does not occur when this input field receives focus.",
+    "tag" : "button",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G107" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_10.C32,C31,C33,C38,SCR34,G206",
+    "element" : "<div class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\">...</div>",
+    "msg" : "This element has \"position: fixed\". This may require scrolling in two dimensions, which is considered a failure of this Success Criterion.",
+    "tag" : "div",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/css/C32", "https://www.w3.org/WAI/WCAG21/Techniques/css/C31", "https://www.w3.org/WAI/WCAG21/Techniques/css/C33", "https://www.w3.org/WAI/WCAG21/Techniques/css/C38", "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR34", "https://www.w3.org/WAI/WCAG21/Techniques/general/G206" ],
+    "type" : 2
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_2.G57",
+    "element" : "",
+    "msg" : "Check that the content is ordered in a meaningful sequence when linearised, such as when style sheets are disabled.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G57" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_3.G96",
+    "element" : "",
+    "msg" : "Where instructions are provided for understanding the content, do not rely on sensory characteristics alone (such as shape, size or location) to describe objects.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G96" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_3.1_3_4.",
+    "element" : "",
+    "msg" : "Check that content does not restrict its view and operation to a single display orientation, such as portrait or landscape, unless a specific display orientation is essential.",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_1.G14,G182",
+    "element" : "",
+    "msg" : "Check that any information conveyed using colour alone is also available in text, or through other visual cues.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G14", "https://www.w3.org/WAI/WCAG21/Techniques/general/G182" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_4.G142",
+    "element" : "",
+    "msg" : "Check that text can be resized without assistive technology up to 200 percent without loss of content or functionality.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G142" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_5.G140,C22,C30.AALevel",
+    "element" : "",
+    "msg" : "If the technologies being used can achieve the visual presentation, check that text is used to convey information rather than images of text, except when the image of text is essential to the information being conveyed, or can be visually customised to the user's requirements.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G140", "https://www.w3.org/WAI/WCAG21/Techniques/css/C22", "https://www.w3.org/WAI/WCAG21/Techniques/css/C30" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_10.C32,C31,C33,C38,SCR34,G206",
+    "element" : "",
+    "msg" : "Check that content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions for:     Vertical scrolling content at a width equivalent to 320 CSS pixels;     Horizontal scrolling content at a height equivalent to 256 CSS pixels;     Except for parts of the content which require two-dimensional layout for usage or meaning.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/css/C32", "https://www.w3.org/WAI/WCAG21/Techniques/css/C31", "https://www.w3.org/WAI/WCAG21/Techniques/css/C33", "https://www.w3.org/WAI/WCAG21/Techniques/css/C38", "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR34", "https://www.w3.org/WAI/WCAG21/Techniques/general/G206" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_11.G195,G207,G18,G145,G174,F78",
+    "element" : "",
+    "msg" : "Check that the visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s):     User Interface Components: Visual information required to identify user interface components and states, except for inactive components or where the appearance of the component is determined by the user agent and not modified by the author;     Graphical Objects: Parts of graphics required to understand the content, except when a particular presentation of graphics is essential to the information being conveyed.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G195", "https://www.w3.org/WAI/WCAG21/Techniques/general/G207", "https://www.w3.org/WAI/WCAG21/Techniques/general/G18", "https://www.w3.org/WAI/WCAG21/Techniques/general/G145", "https://www.w3.org/WAI/WCAG21/Techniques/general/G174", "https://www.w3.org/WAI/WCAG21/Techniques/failures/F78" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_12.C36,C35",
+    "element" : "",
+    "msg" : "Check that no loss of content or functionality occurs by setting all of the following and by changing no other style property:              Line height (line spacing) to at least 1.5 times the font size;         Spacing following paragraphs to at least 2 times the font size;         Letter spacing (tracking) to at least 0.12 times the font size;         Word spacing to at least 0.16 times the font size.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/css/C36", "https://www.w3.org/WAI/WCAG21/Techniques/css/C35" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle1.Guideline1_4.1_4_13.F95",
+    "element" : "",
+    "msg" : "Check that where receiving and then removing pointer hover or keyboard focus triggers additional content to become visible and then hidden, the following are true:              Dismissable: A mechanism is available to dismiss the additional content without moving pointer hover or keyboard focus, unless the additional content communicates an input error or does not obscure or replace other content;         Hoverable: If pointer hover can trigger the additional content, then the pointer can be moved over the additional content without the additional content disappearing;         Persistent: The additional content remains visible until the hover or focus trigger is removed, the user dismisses it, or its information is no longer valid.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/failures/F95" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_1.2_1_4.",
+    "element" : "",
+    "msg" : "Check that if a keyboard shortcut is implemented in content using only letter (including upper- and lower-case letters), punctuation, number, or symbol characters, then at least one of the following is true:              Turn off: A mechanism is available to turn the shortcut off;         Remap: A mechanism is available to remap the shortcut to use one or more non-printable keyboard characters (e.g. Ctrl, Alt, etc);         Active only on focus: The keyboard shortcut for a user interface component is only active when that component has focus.     ",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_2.2_2_2.SCR33,SCR22,G187,G152,G186,G191",
+    "element" : "",
+    "msg" : "If any part of the content moves, scrolls or blinks for more than 5 seconds, or auto-updates, check that there is a mechanism available to pause, stop, or hide the content.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR33", "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR22", "https://www.w3.org/WAI/WCAG21/Techniques/general/G187", "https://www.w3.org/WAI/WCAG21/Techniques/general/G152", "https://www.w3.org/WAI/WCAG21/Techniques/general/G186", "https://www.w3.org/WAI/WCAG21/Techniques/general/G191" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_3.2_3_1.G19,G176",
+    "element" : "",
+    "msg" : "Check that no component of the content flashes more than three times in any 1-second period, or that the size of any flashing area is sufficiently small.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G19", "https://www.w3.org/WAI/WCAG21/Techniques/general/G176" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_1.G1,G123,G124,H69",
+    "element" : "",
+    "msg" : "Ensure that any common navigation elements can be bypassed; for instance, by use of skip links, header elements, or ARIA landmark roles.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G1", "https://www.w3.org/WAI/WCAG21/Techniques/general/G123", "https://www.w3.org/WAI/WCAG21/Techniques/general/G124", "https://www.w3.org/WAI/WCAG21/Techniques/html/H69" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_5.G125,G64,G63,G161,G126,G185",
+    "element" : "",
+    "msg" : "If this Web page is not part of a linear process, check that there is more than one way of locating this Web page within a set of Web pages.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G125", "https://www.w3.org/WAI/WCAG21/Techniques/general/G64", "https://www.w3.org/WAI/WCAG21/Techniques/general/G63", "https://www.w3.org/WAI/WCAG21/Techniques/general/G161", "https://www.w3.org/WAI/WCAG21/Techniques/general/G126", "https://www.w3.org/WAI/WCAG21/Techniques/general/G185" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_6.G130,G131",
+    "element" : "",
+    "msg" : "Check that headings and labels describe topic or purpose.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G130", "https://www.w3.org/WAI/WCAG21/Techniques/general/G131" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_4.2_4_7.G149,G165,G195,C15,SCR31",
+    "element" : "",
+    "msg" : "Check that there is at least one mode of operation where the keyboard focus indicator can be visually located on user interface controls.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G149", "https://www.w3.org/WAI/WCAG21/Techniques/general/G165", "https://www.w3.org/WAI/WCAG21/Techniques/general/G195", "https://www.w3.org/WAI/WCAG21/Techniques/css/C15", "https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR31" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_5.2_5_1.",
+    "element" : "",
+    "msg" : "Check that all functionality that uses multipoint or path-based gestures for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_5.2_5_2.",
+    "element" : "",
+    "msg" : "Check that for functionality that can be operated using a single pointer, at least one of the following is true:         No Down-Event: The down-event of the pointer is not used to execute any part of the function;         Abort or Undo: Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion;         Up Reversal: The up-event reverses any outcome of the preceding down-event;         Essential: Completing the function on the down-event is essential.",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_5.2_5_3.F96",
+    "element" : "",
+    "msg" : "Check that for user interface components with labels that include text or images of text, the name contains the text that is presented visually.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/failures/F96" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle2.Guideline2_5.2_5_4.",
+    "element" : "",
+    "msg" : "Check that functionality that can be operated by device motion or user motion can also be operated by user interface components and responding to the motion can be disabled to prevent accidental actuation, except when:              Supported Interface: The motion is used to operate functionality through an accessibility supported interface;         Essential: The motion is essential for the function and doing so would invalidate the activity.     ",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_1.3_1_2.H58",
+    "element" : "",
+    "msg" : "Ensure that any change in language is marked using the lang and/or xml:lang attribute on an element, as appropriate.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/html/H58" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_3.G61",
+    "element" : "",
+    "msg" : "Check that navigational mechanisms that are repeated on multiple Web pages occur in the same relative order each time they are repeated, unless a change is initiated by the user.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G61" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle3.Guideline3_2.3_2_4.G197",
+    "element" : "",
+    "msg" : "Check that components that have the same functionality within this Web page are identified consistently in the set of Web pages to which it belongs.",
+    "tag" : "#document",
+    "techniques" : [ "https://www.w3.org/WAI/WCAG21/Techniques/general/G197" ],
+    "type" : 3
+  }, {
+    "code" : "WCAG2AA.Principle4.Guideline4_1.4_1_3.",
+    "element" : "",
+    "msg" : "Check that status messages can be programmatically determined through role or properties such that they can be presented to the user by assistive technologies without receiving focus.",
+    "tag" : "#document",
+    "techniques" : [ ],
+    "type" : 3
+  } ],
+  "standard" : "WCAG2AA",
+  "title" : "Order Form | FlowOrder",
+  "url" : "https://nano-flow-order-direct.base44.app/returns",
+  "warnings" : 11
+}
