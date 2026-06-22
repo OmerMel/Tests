@@ -9,6 +9,36 @@
       "category": "Groceries",
       "searchPhrase": "Tomer",
       "shouldExpectResults": false
+    },
+    {
+      "category": "Laptops",
+      "searchPhrase": "MacBook",
+      "shouldExpectResults": false
+    },
+    {
+      "category": "Furniture",
+      "searchPhrase": "Colombo",
+      "shouldExpectResults": true
+    },
+    {
+      "category": "Sports Accessories",
+      "searchPhrase": "Cricket",
+      "shouldExpectResults": true
+    },
+    {
+      "category": "Mobile Accessories",
+      "searchPhrase": "Samsung",
+      "shouldExpectResults": false
+    },
+    {
+      "category": "Groceries",
+      "searchPhrase": "Chicken",
+      "shouldExpectResults": true
+    },
+    {
+      "category": "Smartphones",
+      "searchPhrase": "Realme",
+      "shouldExpectResults": true
     }
   ],
   "sliderTests": [
@@ -19,20 +49,85 @@
     },
     {
       "category": "Laptops",
-      "maxPrice": 360,
-      "expectedCount": 1
-    }
-  ],
-  "stockTests": [
+      "maxPrice": 200,
+      "expectedCount": 0
+    },
+    {
+      "category": "Groceries",
+      "maxPrice": 5,
+      "expectedCount": 5
+    },
     {
       "category": "Laptops",
-      "shouldExpectInStock": true
+      "maxPrice": 600,
+      "expectedCount": 3
+    },
+    {
+      "category": "Groceries",
+      "maxPrice": 15,
+      "expectedCount": 10
+    },
+    {
+      "category": "Furniture",
+      "maxPrice": 500,
+      "expectedCount": 2
+    },
+    {
+      "category": "Mobile Accessories",
+      "maxPrice": 30,
+      "expectedCount": 2
+    },
+    {
+      "category": "Furniture",
+      "maxPrice": 2500,
+      "expectedCount": 5
+    },
+    {
+      "category": "Mobile Accessories",
+      "maxPrice": 100,
+      "expectedCount": 7
+    },
+    {
+      "category": "Smartphones",
+      "maxPrice": 200,
+      "expectedCount": 2
+    },
+    {
+      "category": "Sports Accessories",
+      "maxPrice": 10,
+      "expectedCount": 2
+    },
+    {
+      "category": "Smartphones",
+      "maxPrice": 300,
+      "expectedCount": 6
+    },
+    {
+      "category": "Sports Accessories",
+      "maxPrice": 45,
+      "expectedCount": 10
     }
   ],
   "addToCartTests": [
     {
       "category": "Mobile Accessories",
       "productName": "Apple Airpods"
+    },
+    {
+      "category": "Smartphones",
+      "productName": "Realme XT"
+    },
+    {
+      "category": "Furniture",
+      "productName": "Annibale Colombo Sofa"
+    },
+    {
+      "category": "Sports Accessories",
+      "productName": "Basketball"
+    },
+    {
+      "category": "Groceries",
+      "productName": "Beef Steak"
     }
   ],
   "categorySelectionTests": [
@@ -43,6 +138,22 @@
     {
       "category": "Mobile Accessories",
       "urlSlug": "mobile-accessories"
+    },
+    {
+      "category": "Smartphones",
+      "urlSlug": "smartphones"
+    },
+    {
+      "category": "Furniture",
+      "urlSlug": "furniture"
+    },
+    {
+      "category": "Groceries",
+      "urlSlug": "groceries"
+    },
+    {
+      "category": "Sports Accessories",
+      "urlSlug": "sports-accessories"
     }
   ],
   "categorySwitchTests": [
@@ -50,12 +161,35 @@
       "initialCategory": "Furniture",
       "newCategory": "Smartphones",
       "newUrlSlug": "smartphones"
+    },
+    {
+      "initialCategory": "Sports Accessories",
+      "newCategory": "Mobile Accessories",
+      "newUrlSlug": "mobile-accessories"
+    },
+    {
+      "initialCategory": "Smartphones",
+      "newCategory": "Furniture",
+      "newUrlSlug": "furniture"
+    },
+    {
+      "initialCategory": "Groceries",
+      "newCategory": "Sports Accessories",
+      "newUrlSlug": "sports-accessories"
     }
   ],
   "stockFilterTests": [
     {
       "category": "Mobile Accessories",
       "productName": "Apple Airpower Wireless Charger"
+    },
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple MagSafe Battery Pack"
+    },
+    {
+      "category": "Furniture",
+      "productName": "Wooden Bathroom Sink With Mirror"
     }
   ]
 }

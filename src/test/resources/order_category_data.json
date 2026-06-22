@@ -4,6 +4,21 @@
       "category": "Smartphones",
       "productName": "iPhone 6",
       "expectedStatus": "Confirmed"
+    },
+    {
+      "category": "Sports Accessories",
+      "productName": "Basketball",
+      "expectedStatus": "Confirmed"
+    },
+    {
+      "category": "Laptops",
+      "productName": "iPad Mini 2021 Starlight",
+      "expectedStatus": "Confirmed"
+    },
+    {
+      "category": "Furniture",
+      "productName": "Wooden Bathroom Sink With Mirror",
+      "expectedStatus": "Confirmed"
     }
   ],
   "invalidMixedCategoryOrderTests": [

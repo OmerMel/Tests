@@ -24,6 +24,31 @@
         }
       ],
       "expectedStatus": "Confirmed"
+    },
+    {
+      "items": [
+        {
+          "category": "Smartphones",
+          "productName": "iPhone 13 Pro",
+          "quantity": 5
+        }
+      ],
+      "expectedStatus": "Confirmed"
+    },
+    {
+      "items": [
+        {
+          "category": "Furniture",
+          "productName": "Bedside Table African Cherry",
+          "quantity": 2
+        },
+        {
+          "category": "Furniture",
+          "productName": "Annibale Colombo Sofa",
+          "quantity": 1
+        }
+      ],
+      "expectedStatus": "Confirmed"
     }
   ],
   "exceedsStockTests": [
@@ -46,13 +71,38 @@
         }
       ],
       "expectedErrorMessage": "exceeds available stock"
+    },
+    {
+      "items": [
+        {
+          "category": "Furniture",
+          "productName": "Wooden Bathroom Sink With Mirror",
+          "quantity": 8
+        }
+      ],
+      "expectedErrorMessage": "exceeds available stock"
+    },
+    {
+      "items": [
+        {
+          "category": "Groceries",
+          "productName": "Apple",
+          "quantity": 15
+        }
+      ],
+      "expectedErrorMessage": "exceeds available stock"
     }
   ],
   "outOfStockTests": [
     {
       "category": "Mobile Accessories",
       "productName": "Apple MagSafe Battery Pack",
-      "stockQuantity": 0
+      "stockQuantity": 1
+    },
+    {
+      "category": "Mobile Accessories",
+      "productName": "Apple Airpower Wireless Charger",
+      "stockQuantity": 1
     }
   ]
 }

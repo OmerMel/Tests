@@ -15,6 +15,38 @@
       ],
       "maxPriceAllowed": 10000,
       "expectedStatus": "Confirmed"
+    },
+    {
+      "items": [
+        {
+          "category": "Furniture",
+          "productName": "Bedside Table African Cherry",
+          "quantity": 2
+        },
+        {
+          "category": "Furniture",
+          "productName": "Annibale Colombo Bed",
+          "quantity": 4
+        }
+      ],
+      "maxPriceAllowed": 10000,
+      "expectedStatus": "Confirmed"
+    },
+    {
+      "items": [
+        {
+          "category": "Smartphones",
+          "productName": "iPhone 13 Pro",
+          "quantity": 1
+        },
+        {
+          "category": "Sports Accessories",
+          "productName": "Basketball",
+          "quantity": 2
+        }
+      ],
+      "maxPriceAllowed": 10000,
+      "expectedStatus": "Confirmed"
     }
   ],
   "aboveLimitOrderTests": [
@@ -31,7 +63,18 @@
           "quantity": 10
         }
       ],
-      "expectedErrorMessage": "exceeds available stock",
+      "expectedErrorMessage": "exceeds the maximum allowed",
+      "maxPriceAllowed": 10000
+    },
+    {
+      "items": [
+        {
+          "category": "Furniture",
+          "productName": "Annibale Colombo Sofa",
+          "quantity": 10
+        }
+      ],
+      "expectedErrorMessage": "exceeds the maximum allowed",
       "maxPriceAllowed": 10000
     }
   ],
@@ -50,6 +93,21 @@
         }
       ],
       "itemToRemove": "Beef Steak"
+    },
+    {
+      "itemsToAdd": [
+        {
+          "category": "Furniture",
+          "productName": "Annibale Colombo Bed",
+          "quantity": 2
+        },
+        {
+          "category": "Laptops",
+          "productName": "Samsung Galaxy Tab White",
+          "quantity": 1
+        }
+      ],
+      "itemToRemove": "Annibale Colombo Bed"
     }
   ]
 }

@@ -5,6 +5,30 @@
       "productName": "Apple Airpods",
       "orderQuantity": 2,
       "returnQuantity": 1
+    },
+    {
+      "category": "Smartphones",
+      "productName": "Realme XT",
+      "orderQuantity": 3,
+      "returnQuantity": 3
+    },
+    {
+      "category": "Groceries",
+      "productName": "Beef Steak",
+      "orderQuantity": 3,
+      "returnQuantity": 2
+    },
+    {
+      "category": "Sports Accessories",
+      "productName": "Basketball",
+      "orderQuantity": 2,
+      "returnQuantity": 1
+    },
+    {
+      "category": "Furniture",
+      "productName": "Bedside Table African Cherry",
+      "orderQuantity": 2,
+      "returnQuantity": 1
     }
   ],
   "invalidReturnTests": [
@@ -14,6 +38,20 @@
       "orderQuantity": 1,
       "returnQuantity": 2,
       "expectedErrorMessage": "Exceeds ordered quantity"
+    },
+    {
+      "category": "Groceries",
+      "productName": "Cucumber",
+      "orderQuantity": 2,
+      "returnQuantity": 5,
+      "expectedErrorMessage": "Exceeds ordered quantity"
+    },
+    {
+      "category": "Sports Accessories",
+      "productName": "Baseball Ball",
+      "orderQuantity": 1,
+      "returnQuantity": 3,
+      "expectedErrorMessage": "Exceeds ordered quantity"
     }
   ],
   "partialReturnTests": [
@@ -22,6 +60,24 @@
       "productName": "Apple Airpods",
       "orderQuantity": 2,
       "returnQuantity": 1
+    },
+    {
+      "category": "Smartphones",
+      "productName": "iPhone 6",
+      "orderQuantity": 3,
+      "returnQuantity": 1
+    },
+    {
+      "category": "Groceries",
+      "productName": "Eggs",
+      "orderQuantity": 3,
+      "returnQuantity": 2
+    },
+    {
+      "category": "Sports Accessories",
+      "productName": "Cricket Bat",
+      "orderQuantity": 4,
+      "returnQuantity": 2
     }
   ]
 }
