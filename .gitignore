@@ -1,7 +1,7 @@
-target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+target/generated-test-sources
+target/test-classes
+target/downloads
 .kotlin
 
 ### IntelliJ IDEA ###
