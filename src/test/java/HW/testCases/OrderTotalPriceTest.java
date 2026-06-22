@@ -201,7 +201,6 @@ public class OrderTotalPriceTest {
 
             double actualTotal = newOrderPage.getOrderTotalValue();
 
-            // Removed redundant String.valueOf() here as well
             logger.debug("Verifying total price order is above limit. Actual total: {}, Limit: {}", actualTotal, maxPriceAllowed);
 
             assertTrue("Total price order should be above the allowed limit. Actual total: " + actualTotal, actualTotal > maxPriceAllowed);
